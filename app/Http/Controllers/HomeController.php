@@ -2,17 +2,34 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Http\Requests;
+use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     const API_ROOT_URL = 'http://localhost:8081/';
 
-
-    public function home(string $name)
+    /**
+     * Create a new controller instance.
+     */
+    public function __construct()
     {
-        return view('home')->with('data', [
+        $this->middleware('auth');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        return view('home');
+    }
+
+    public function podcast(string $name)
+    {
+        return view('welcome')->with('data', [
             'feed' => $this->getContentFrom(self::API_ROOT_URL . "feed/$name"),
             'episodes' => $this->getContentFrom(self::API_ROOT_URL . "episodes/$name")
         ]);
