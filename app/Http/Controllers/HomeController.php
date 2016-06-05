@@ -7,14 +7,14 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    const API_ROOT_URL = 'http://localhost:8081/';
+    const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
 
     /**
      * Create a new controller instance.
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
     }
 
     /**
@@ -24,21 +24,51 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('home')->with('data', [
+            'feeds' => $this->getLatestsFeeds(),
+            'episodes' => $this->getLatestsEpisodes()
+        ]);
     }
 
     public function podcast(string $name)
     {
+        $feed = $this->getFeed($name);
+        $episodes = $this->getEpisodes($feed['id']);
+
         return view('welcome')->with('data', [
-            'feed' => $this->getContentFrom(self::API_ROOT_URL . "feed/$name"),
-            'episodes' => $this->getContentFrom(self::API_ROOT_URL . "episodes/$name")
+            'feed' => $feed ?: [],
+            'episodes' => $episodes ?: []
         ]);
+    }
+
+    private function getLatestsFeeds()
+    {
+        return $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest');
+    }
+
+    private function getLatestsEpisodes()
+    {
+        return $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest');
+    }
+
+    private function getFeed($name)
+    {
+        $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/name/$name");
+        return reset($data);
+    }
+
+    private function getEpisodes($feedId)
+    {
+        return $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId");
     }
 
     private function getContentFrom($source)
     {
         $curl = curl_init($source);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        return json_decode(curl_exec($curl), true);
+
+        $data = curl_exec($curl);
+
+        return $data ? json_decode($data, true) : [];
     }
 }
