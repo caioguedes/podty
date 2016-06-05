@@ -8,7 +8,7 @@
                 <div class="panel-heading">
                     <h4>
                         Latest Episodes of <br><br>
-                        <img src="{{ $data['feed']['thumbnail_60'] }}" alt="">
+                            <img src="{{ $data['feed']['thumbnail_60'] }}" alt="">
                         <b>{{ explode(' - ', $data['feed']['name'])[0] }}</b>
                         ({{ $data['feed']['total_episodes'] }})
                     </h4>
@@ -17,8 +17,8 @@
                     @foreach ($data['episodes'] as $episode)
                         <div class="row text-left">
                             <b>{{ (new DateTime($episode['published_date']))->format('d/m/Y H:i') }}</b>
-                            -
-                            <a href="{{$episode['link']}}">
+                            <br>
+                            <a href="{{$episode['link']}}" target="_blank">
                                 <b>{{ $episode['title'] }}</b>
                             </a>
                             <br>
@@ -30,7 +30,7 @@
                         <hr>
                     @endforeach
                 </div>
-                <a href="">next</a>
+                <a href="#">next</a>
             </div>
         </div>
     </div>
