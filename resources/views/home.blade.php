@@ -3,45 +3,31 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-lg-8  col-md-8 col-sm-9 col-xs-12">
             <div class="panel panel-default">
-                <div class="panel-heading">Dashboard</div>
-
                 <div class="panel-body">
                     search for podcasts:
                     <input type="text">
-                    <hr>
-
-                    <div class="panel-heading">Latests Feeds</div>
-                    <ul>
-                        @foreach($data['feeds'] as $feed)
-                            <img src="{{$feed['thumbnail_30']}}">
-                            <span>
-                                <a href="/podcast/{{$feed['name']}}" target="_blank">
-                                {{$feed['name']}}
-                                </a>
-                            </span>
-                            <b>({{$feed['total_episodes']}})</b>
-                            <br>
-                            Last Episode: {{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}
-                            <hr>
-                        @endforeach
-                    </ul>
-
-                    <div class="panel-heading">Latests Episodes</div>
-                    <ul>
-                        @foreach($data['episodes'] as $episode)
-                            <img src="{{$episode['thumbnail_30']}}">
-                            <a href="{{$episode['link']}}" target="_blank">
-                                <b>{{$episode['title']}}</b>
-                            </a> -
-                            {{(new DateTime($episode['published_date']))->format('d/m/Y H:i')}} <br>
-                            <audio controls>
-                                <source src={{ $episode['media_url'] }} type={{ $episode['media_type'] }}>
-                            </audio>
-                            <hr>
-                        @endforeach
-                    </ul>
+                    <p>laura wilson <br> laura wilson <br> laura wilson <br> laura wilson <br> laura wilson <br>
+                    laura wilson <br> laura wilson <br> laura wilson <br>laura wilson <br> laura wilson <br> laura wilson <br>
+                    laura wilson <br> laura wilson <br> laura wilson <br> laura wilson <br> laura wilson <br> laura wilson <br>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-3 hidden-xs">
+            <div class="panel panel-success">
+                <div class="panel-heading"><b>Latests Feeds</b></div>
+                <div class="panel-body">
+                    @foreach($data['feeds'] as $feed)
+                        <div class="col-lg-6 col-md-5 col-sm-12">
+                            <b>{{substr($feed['name'], 0, 13)}} ({{$feed['total_episodes']}})</b><br>
+                            <small>{{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}</small>
+                            <a class="thumbnail" href="/podcast/{{$feed['id']}}" target="_blank">
+                                <img src="{{$feed['thumbnail_60']}}" class="img-thumbnail">
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
             </div>
         </div>

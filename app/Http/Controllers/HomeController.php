@@ -24,16 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $feeds = array_chunk($this->getLatestsFeeds(), 4)[0];
         return view('home')->with('data', [
-            'feeds' => $this->getLatestsFeeds(),
-            'episodes' => $this->getLatestsEpisodes()
+            'feeds' => $feeds
         ]);
     }
 
-    public function podcast(string $name)
+    public function podcast($feedId)
     {
-        $feed = $this->getFeed($name);
-        $episodes = $this->getEpisodes($feed['id']);
+        $feed = $this->getFeedById($feedId);
+        $episodes = $this->getEpisodes($feedId);
 
         return view('welcome')->with('data', [
             'feed' => $feed ?: [],
@@ -43,7 +43,7 @@ class HomeController extends Controller
 
     private function getLatestsFeeds()
     {
-        return $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest');
+        return $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=1');
     }
 
     private function getLatestsEpisodes()
@@ -54,6 +54,12 @@ class HomeController extends Controller
     private function getFeed($name)
     {
         $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/name/$name");
+        return reset($data);
+    }
+
+    private function getFeedById($id)
+    {
+        $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/id/$id");
         return reset($data);
     }
 
