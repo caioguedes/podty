@@ -24,9 +24,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $feeds = array_chunk($this->getLatestsFeeds(), 4)[0];
+        $feeds = $this->getLatestsFeeds();
+
         return view('home')->with('data', [
-            'feeds' => $feeds
+            'feeds' => empty($feeds) ? [] : array_chunk($feeds, 4)[0]
         ]);
     }
 
