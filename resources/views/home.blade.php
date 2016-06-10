@@ -6,11 +6,22 @@
 
         <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
             <div class="panel panel-default">
-                <div class="panel-body">
-                    <div class="panel-heading">What your friends are listening</div>
-                    <div class="col-lg-12 col-md-6 col-sm-12">
-                        <p>service not available.</p>
-                    </div>
+                <div class="panel-body latests-podcasts">
+                    <ul class="latests-podcasts-list">
+                        @forelse($data['episodes'] as $episode)
+                            <li>
+                                <a href="/podcast/{{$episode['feed_id']}}" target="_blank">
+                                    <img src="{{$episode['thumbnail_30']}}" class="img-circle">
+                                    {{ $episode['title'] }}
+                                </a>
+                            </li>
+                            <br>
+                        @empty
+                            <div class="col-lg-12 col-md-6 col-sm-12">
+                                <p>service not available.</p>
+                            </div>
+                        @endforelse
+                    </ul>
                 </div>
             </div>
         </div>

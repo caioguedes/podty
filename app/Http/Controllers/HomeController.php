@@ -27,7 +27,8 @@ class HomeController extends Controller
         $feeds = $this->getLatestsFeeds();
 
         return view('home')->with('data', [
-            'feeds' => empty($feeds) ? [] : array_chunk($feeds, 4)[0]
+            'feeds' => empty($feeds) ? [] : array_chunk($feeds, 4)[0],
+            'episodes' => $this->getLatestsEpisodes()
         ]);
     }
 
