@@ -92,6 +92,36 @@ body {
     background-color: #061439;
 }
 
-.home {
+.navbar-brand img {
+    float: left;
+    margin-top: -12px;
+}
+
+.panel {
     background-color: #061439;
+    border: none;
+}
+
+.find-podcast-search {
+    font-size: large;
+    color: #5677d0;
+    background-color: #0b3e6f;
+    border-style: none;
+    border-radius: 1%;
+}
+
+@media (max-width: 400px) {
+    .find-podcast-search {
+        font-size: large;
+    }
+}
+@media (min-width: 401px) {
+    .find-podcast-search {
+        font-size: x-large;
+    }
+}
+@media (min-width: 700px) {
+    .find-podcast-search {
+        font-size: xx-large;
+    }
 }
