@@ -1,9 +1,11 @@
-git clone https://github.com/brnbp/brnpod.git .
+### How to
 
-composer install
+> git clone https://github.com/brnbp/brnpod.git .
 
-mv .env.example .env
+> composer install
 
-php artisan key:generate
+> mv .env.example .env
 
-php artisan serve
+> php artisan key:generate
+
+> php artisan serve
