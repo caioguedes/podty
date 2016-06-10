@@ -36,8 +36,8 @@
                     <span class="icon-bar"></span>
                 </button>
 
-                <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    <img src="podcast-logo-red.png" id="brand-img" height="40">
                     BrnPod
                 </a>
             </div>
@@ -75,7 +75,8 @@
 
     @yield('content')
 
-    <script src="/js/jquery.js" async></script>
-    <script src="/js/bootstrap.min.js" async></script>
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
