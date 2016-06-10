@@ -94,12 +94,17 @@ body {
 
 .navbar-brand img {
     float: left;
-    margin-top: -12px;
+    margin-top: -12%;
 }
 
 .panel {
     background-color: #061439;
     border: none;
+}
+
+.find-podcasts{
+    margin-top: 5%;
+    margin-left: 15%;
 }
 
 .find-podcast-search {
@@ -108,20 +113,122 @@ body {
     background-color: #0b3e6f;
     border-style: none;
     border-radius: 1%;
+    width: 300%;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 380px) {
+    .find {
+        margin-top: 5%;
+        margin-left: -17%;
+    }
     .find-podcast-search {
-        font-size: large;
+        height: 50px;
     }
 }
-@media (min-width: 401px) {
+
+@media (min-width: 381px) and (max-width: 461px) {
+    .find {
+        margin-top: 5%;
+        margin-left: -10%;
+    }
     .find-podcast-search {
-        font-size: x-large;
+        width: 300%;
+        margin-right: 7%;
     }
 }
-@media (min-width: 700px) {
+
+@media (min-width: 460px) and (max-width: 480px) {
+    .find {
+        margin-top: 5%;
+        margin-left: -10%;
+    }
+    .find-podcast-search {
+        width: 300%;
+    }
+}
+
+@media (max-width: 481px) {
+    .find {
+        margin-right: 60%;
+    }
+    .find-podcast-search {
+        width: 300%;
+        font-size: xx-large;
+    }
+}
+
+@media (min-width: 481px) {
+    .find {
+        margin-top: 1%;
+        margin-left: -22%;
+    }
     .find-podcast-search {
         font-size: xx-large;
+        width: 100%;
+    }
+}
+
+@media (min-width: 600px) {
+    .find-podcast-search {
+        width: 100%;
+    }
+}
+
+@media (min-width: 660px) {
+    .find {
+        margin-left: -3%;
+    }
+    .find-podcast-search {
+        width: 110%;
+        height: 70px;
+        margin-left: -15%;
+    }
+}
+.find-podcast-results {
+    padding-top: 2%;
+    margin-left: -14%;
+}
+
+.find-podcast-results li{
+    list-style: none;
+    padding: 1%;
+    color: #5677d0;
+}
+
+.find-podcast-results li:hover > a:hover {
+    color: #991122;
+    text-decoration: none;
+}
+
+.latests-podcasts {
+    margin-left: -40px;
+}
+
+.latests-podcasts-list li {
+    list-style: none;
+    color: #5677d0;
+}
+
+.latests-podcasts-list li:hover > a:hover {
+    text-decoration: none;
+    color: #991122;
+}
+
+.latests-podcasts-list li > a > img {
+    float: left;
+    margin-bottom: 20%;
+    margin-left: 17%;
+}
+
+.latests-podcasts-list li > a > small {
+    float: right;
+    font-size: smaller;
+    margin-right: 30%;
+    margin-bottom: 4%;
+}
+
+@media (min-width: 977px) and (max-width: 1180px) {
+    .latests-podcasts {
+        margin-left: -70px;
     }
 }
