@@ -17,11 +17,11 @@ const handleViewRender = function(response) {
     findPodcastResults.children(this).remove();
     response.forEach(function(param){
         let url = '/podcast/' + param.id;
-        let ahref = '<a href="' + url + '" class="feed-url" target="_blank">';
+        let ahref = '<a href="' + url + '" target="_blank">';
         let name = param.name + ' (' + param.total_episodes + ')';
-        let img = '<img src="' + param.thumbnail_100 + '" class="feed-img"> ' + name + ' </a>';
+        let img = '<img src="' + param.thumbnail_100 + '"> ' + name + ' </a>';
 
-        findPodcastResults.append('<div>' + ahref + img + '</div>');
+        findPodcastResults.append('<li>' + ahref + img + '</li>');
     });
 };
 
