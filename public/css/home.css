@@ -25,8 +25,8 @@
 }
 
 .find-podcast-results {
-    padding-top: 2%;
-    margin-left: -14%;
+    padding-top: 3%;
+    margin-left: 2%;
 }
 
 .find-podcast-results li{
@@ -45,7 +45,7 @@
 }
 
 .latests-podcasts {
-    margin-left: -40px;
+    margin-left: -80px;
 }
 
 .latests-podcasts-list li {
@@ -61,7 +61,7 @@
 .latests-podcasts-list li > a > img {
     float: left;
     margin-bottom: 20%;
-    margin-left: 17%;
+    margin-left: 26%;
 }
 
 .latests-podcasts-list li > a > small {
