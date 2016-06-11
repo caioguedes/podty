@@ -6,22 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Podcast Application</title>
-    <link rel="shortcut icon" type="image/png" href="/favicon.png"/>
+    <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700">
 
     <link href="/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Lato';
-        }
 
-        .fa-btn {
-            margin-right: 6px;
-        }
-    </style>
+    @yield('head')
+
 </head>
 <body>
     <nav class="navbar navbar-default navbar-static-top">
@@ -37,7 +31,7 @@
                 </button>
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="podcast-logo-red.png" id="brand-img" height="40">
+                    <img src="/img/podcast-logo-red.png" id="brand-img" height="40">
                     BrnPod
                 </a>
             </div>

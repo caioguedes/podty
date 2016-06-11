@@ -1,4 +1,9 @@
+
 @extends('layouts.app')
+
+@section('head')
+    <link href="/css/home.css" rel="stylesheet">
+@endsection
 
 @section('content')
 <div class="container">
@@ -10,9 +15,11 @@
                     <ul class="latests-podcasts-list">
                         @forelse($data['episodes'] as $episode)
                             <li>
-                                <a href="/podcast/{{$episode['feed_id']}}" target="_blank">
+                                <a href="/podcast/{{$episode['feed_id']}}">
+                                    <small class="text-center">
+                                        {{substr($episode['title'], 0, 60)}}
+                                    </small>
                                     <img src="{{$episode['thumbnail_30']}}" class="img-circle">
-                                    {{ $episode['title'] }}
                                 </a>
                             </li>
                             <br>
@@ -31,7 +38,9 @@
             <div class="panel panel-default find">
                 <div class="panel-body find-podcasts">
                     <input type="text" class="find-podcast-search">
-                    <div class="find-podcast-results"><ul></ul></div>
+                    <div class="find-podcast-results">
+                        <ul></ul>
+                    </div>
                 </div>
             </div>
         </div>
@@ -42,7 +51,7 @@
                     <ul class="latests-podcasts-list">
                     @forelse($data['feeds'] as $feed)
                         <li>
-                            <a href="/podcast/{{$feed['id']}}" target="_blank" data-toggle="tooltip" title="{{str_replace('–', '', substr($feed['name'], 0, 13))}}">
+                            <a href="/podcast/{{$feed['id']}}">
                                 <small>
                                     {{str_replace('–', '', substr($feed['name'], 0, 13))}} <br>
                                     {{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}
@@ -61,10 +70,5 @@
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-</script>
 @endsection
 
