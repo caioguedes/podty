@@ -2,20 +2,16 @@
 
 const brandImageTag = $('#brand-img');
 $('.navbar-brand')
-    .mouseover(function() {
-        brandImageTag.attr('src', 'podcast-logo-blue.png')
-    })
-    .mouseleave(function() {
-        brandImageTag.attr('src', 'podcast-logo-red.png')
-    });
+    .mouseover(() => brandImageTag.attr('src', 'podcast-logo-blue.png'))
+    .mouseleave(() => brandImageTag.attr('src', 'podcast-logo-red.png'));
 
 const inputFindPodcast = $('.find-podcast-search');
 inputFindPodcast.val('').attr('placeholder', 'Type nerdcast . .').focus();
 
 const findPodcastResults = $('.find-podcast-results');
-const handleViewRender = function(response) {
+const handleViewRender = (response) => {
     findPodcastResults.children(this).remove();
-    response.forEach(function(param){
+    response.forEach((param) => {
         let url = '/podcast/' + param.id;
         let ahref = '<a href="' + url + '" target="_blank">';
         let name = param.name + ' (' + param.total_episodes + ')';
@@ -25,7 +21,7 @@ const handleViewRender = function(response) {
     });
 };
 
-inputFindPodcast.keypress(function(e) {
+inputFindPodcast.keypress((e) => {
     if(e.which != 13) {
         return;
     }
@@ -34,9 +30,7 @@ inputFindPodcast.keypress(function(e) {
     $.ajax({
         type: 'GET',
         url: searchUrl,
-        success: function(response) {
-            handleViewRender(response)
-        }
+        success: response => handleViewRender(response)
     })
 });
 
