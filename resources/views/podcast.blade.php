@@ -30,9 +30,6 @@
                             <br>
                             {{Faker\Provider\Lorem::sentence(60)}}
                             <br><br>
-                            <audio controls>
-                                <source src={{ $episode['media_url'] }} type={{ $episode['media_type'] }}>
-                            </audio>
                         </div>
                         <hr>
                     @endforeach
@@ -42,6 +39,12 @@
         </div>
     </div>
 </div>
+
+<footer class="audioplayer-footer">
+    <audio controls >
+        <source src={{ $episode['media_url'] }} type={{ $episode['media_type'] }}>
+    </audio>
+</footer>
 
 @endsection
 
