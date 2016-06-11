@@ -18,6 +18,10 @@
     height: 800%;
 }
 
+.find-podcast-search::-moz-selection {
+    background: #95a5a6;
+}
+
 @media (max-width: 480px) {
     .find-podcast-search {
         font-size: 250%;
