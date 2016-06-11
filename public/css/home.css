@@ -6,87 +6,24 @@
 
 .find-podcasts{
     margin-top: 5%;
-    margin-left: 15%;
 }
 
 .find-podcast-search {
-    font-size: large;
+    font-family: 'Roboto', sans-serif;
+    font-size: 400%;
     color: #3498db;
     background-color: #34495e;
-    padding-left: 1%;
     border-style: none;
-    border-radius: 1%;
-    width: 300%;
+    border-radius: 7px;
+    height: 800%;
 }
 
-@media (max-width: 380px) {
-    .find {
-        margin-top: 5%;
-        margin-left: -17%;
-    }
+@media (max-width: 480px) {
     .find-podcast-search {
-        height: 50px;
+        font-size: 250%;
     }
 }
 
-@media (min-width: 381px) and (max-width: 461px) {
-    .find {
-        margin-top: 5%;
-        margin-left: -10%;
-    }
-    .find-podcast-search {
-        width: 300%;
-        margin-right: 7%;
-    }
-}
-
-@media (min-width: 460px) and (max-width: 480px) {
-    .find {
-        margin-top: 5%;
-        margin-left: -10%;
-    }
-    .find-podcast-search {
-        width: 300%;
-    }
-}
-
-@media (max-width: 481px) {
-    .find {
-        margin-right: 60%;
-    }
-    .find-podcast-search {
-        width: 300%;
-        font-size: xx-large;
-    }
-}
-
-@media (min-width: 481px) {
-    .find {
-        margin-top: 1%;
-        margin-left: -22%;
-    }
-    .find-podcast-search {
-        font-size: xx-large;
-        width: 100%;
-    }
-}
-
-@media (min-width: 600px) {
-    .find-podcast-search {
-        width: 100%;
-    }
-}
-
-@media (min-width: 660px) {
-    .find {
-        margin-left: -3%;
-    }
-    .find-podcast-search {
-        width: 110%;
-        height: 70px;
-        margin-left: -15%;
-    }
-}
 .find-podcast-results {
     padding-top: 2%;
     margin-left: -14%;

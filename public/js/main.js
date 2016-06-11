@@ -5,8 +5,17 @@ $('.navbar-brand')
     .mouseover(() => brandImageTag.attr('src', '/img/podcast-logo-blue.png'))
     .mouseleave(() => brandImageTag.attr('src', '/img/podcast-logo-red.png'));
 
+const addPlaceholder = (e, p = '') => $(e).attr('placeholder', p);
+const placeholderDefault = 'Type nerdcast . .';
+
 const inputFindPodcast = $('.find-podcast-search');
-inputFindPodcast.val('').attr('placeholder', 'Type nerdcast . .').focus();
+
+inputFindPodcast.val('');
+addPlaceholder(inputFindPodcast, placeholderDefault);
+inputFindPodcast
+    .focus()
+    .click(function() { addPlaceholder(this)})
+    .blur(function() { addPlaceholder(this, placeholderDefault) });
 
 const findPodcastResults = $('.find-podcast-results');
 const handleViewRender = (response) => {
@@ -32,4 +41,3 @@ inputFindPodcast.keypress((e) => {
         success: response => handleViewRender(response)
     })
 });
-

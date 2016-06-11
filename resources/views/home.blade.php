@@ -2,6 +2,7 @@
 @extends('layouts.app')
 
 @section('head')
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href="/css/home.css" rel="stylesheet">
 @endsection
 
@@ -37,7 +38,7 @@
         <div class="col-lg-8  col-md-8 col-sm-9 col-xs-12">
             <div class="panel panel-default find">
                 <div class="panel-body find-podcasts">
-                    <input type="text" class="find-podcast-search">
+                    <input type="text" class="find-podcast-search form-control">
                     <div class="find-podcast-results">
                         <ul></ul>
                     </div>
