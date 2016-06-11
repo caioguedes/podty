@@ -12,8 +12,8 @@
 
         <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
             <div class="panel panel-default">
-                <div class="panel-body latests-podcasts">
-                    <ul class="latests-podcasts-list">
+                <div class="panel-body latests-episodes">
+                    <ul class="latests-episodes-list">
                         @forelse($data['episodes'] as $episode)
                             <li>
                                 <a href="/podcast/{{$episode['feed_id']}}">
@@ -73,3 +73,6 @@
 </div>
 @endsection
 
+@section('footer')
+    <script src="/js/main.js"></script>
+@endsection

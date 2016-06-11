@@ -1,7 +1,8 @@
 @extends('layouts.app')
 
 @section('head')
-    <link href="/css/podcast.css" rel="stylesheet">
+    <link href="/css/podcast.css" rel="stylesheet" />
+    <link href="/audio-player/audioplayer.css" rel="stylesheet" />
 @endsection
 
 @section('content')
@@ -42,4 +43,9 @@
     </div>
 </div>
 
+@endsection
+
+@section('footer')
+    <script src="/audio-player/audioplayer.js"></script>
+    <script src="/js/podcast.js"></script>
 @endsection

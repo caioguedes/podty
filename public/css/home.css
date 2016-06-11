@@ -64,7 +64,7 @@
 
 .latests-podcasts-list li > a > img {
     float: left;
-    margin-bottom: 20%;
+    margin-bottom: 15%;
     margin-left: 26%;
 }
 
@@ -72,11 +72,50 @@
     float: right;
     font-size: smaller;
     margin-right: 30%;
-    margin-bottom: 4%;
+    margin-bottom: 2%;
 }
 
 @media (min-width: 977px) and (max-width: 1180px) {
     .latests-podcasts {
+        margin-left: -70px;
+    }
+}
+
+.latests-episodes {
+    margin-left: -70px;
+}
+
+@media (max-width: 1120px) {
+    .latests-episodes {
+        margin-left: 2%;
+    }
+}
+
+.latests-episodes-list li {
+    list-style: none;
+    color: #2980b9;
+}
+
+.latests-episodes-list li:hover > a:hover {
+    text-decoration: none;
+    color: #e74c3c;
+}
+
+.latests-episodes-list li > a > img {
+    float: left;
+    margin-bottom: 15%;
+    margin-left: 26%;
+}
+
+.latests-episodes-list li > a > small {
+    float: left;
+    font-size: smaller;
+    margin-right: 30%;
+    margin-bottom: 2%;
+}
+
+@media (min-width: 977px) and (max-width: 1180px) {
+    .latests-episodes-list {
         margin-left: -70px;
     }
 }
