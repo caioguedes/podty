@@ -10,7 +10,6 @@ inputFindPodcast.val('').attr('placeholder', 'Type nerdcast . .').focus();
 
 const findPodcastResults = $('.find-podcast-results');
 const handleViewRender = (response) => {
-    findPodcastResults.children(this).remove();
     response.forEach((param) => {
         let url = '/podcast/' + param.id;
         let ahref = '<a href="' + url + '" target="_blank">';
@@ -26,10 +25,10 @@ inputFindPodcast.keypress((e) => {
         return;
     }
     const searchInput = e.currentTarget.value;
-    const searchUrl = 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/feeds/name/' + searchInput;
     $.ajax({
         type: 'GET',
-        url: searchUrl,
+        url: 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/feeds/name/' + searchInput,
+        beforeSend: () => findPodcastResults.children(this).remove(),
         success: response => handleViewRender(response)
     })
 });
