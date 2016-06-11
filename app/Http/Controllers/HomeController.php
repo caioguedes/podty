@@ -37,7 +37,7 @@ class HomeController extends Controller
         $feed = $this->getFeedById($feedId);
         $episodes = $this->getEpisodes($feedId);
 
-        return view('welcome')->with('data', [
+        return view('podcast')->with('data', [
             'feed' => $feed ?: [],
             'episodes' => $episodes ?: []
         ]);
