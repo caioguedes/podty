@@ -2,8 +2,8 @@
 
 const brandImageTag = $('#brand-img');
 $('.navbar-brand')
-    .mouseover(() => brandImageTag.attr('src', 'podcast-logo-blue.png'))
-    .mouseleave(() => brandImageTag.attr('src', 'podcast-logo-red.png'));
+    .mouseover(() => brandImageTag.attr('src', '/img/podcast-logo-blue.png'))
+    .mouseleave(() => brandImageTag.attr('src', '/img/podcast-logo-red.png'));
 
 const inputFindPodcast = $('.find-podcast-search');
 inputFindPodcast.val('').attr('placeholder', 'Type nerdcast . .').focus();
@@ -13,7 +13,7 @@ const handleViewRender = (response) => {
     response.forEach((param) => {
         let url = '/podcast/' + param.id;
         let ahref = '<a href="' + url + '" target="_blank">';
-        let name = param.name + ' (' + param.total_episodes + ')';
+        let name = '<span>' + param.name + ' (' + param.total_episodes + ')' + '</span>';
         let img = '<img src="' + param.thumbnail_100 + '"> ' + name + ' </a>';
 
         findPodcastResults.append('<li>' + ahref + img + '</li>');
