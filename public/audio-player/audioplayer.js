@@ -95,7 +95,7 @@
                         barLoaded.width(( theAudio.buffered.end(0) / theAudio.duration ) * 100 + '%');
                         if (theAudio.buffered.end(0) >= theAudio.duration)
                             clearInterval(updateLoadBar);
-                    }, 100);
+                    }, 10000);
 
                 var volumeTestDefault = theAudio.volume, volumeTestValue = theAudio.volume = 0.111;
                 if (Math.round(theAudio.volume * 1000) / 1000 == volumeTestValue) theAudio.volume = volumeTestDefault;
