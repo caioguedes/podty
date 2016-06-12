@@ -31,7 +31,7 @@
                 </button>
 
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    <img src="/img/podcast-logo-red.png" id="brand-img" height="40">
+                    <img src="/img/podcast-logo-blue.png" id="brand-img" height="40">
                     BrnPod
                 </a>
             </div>
@@ -41,6 +41,7 @@
                 <ul class="nav navbar-nav">
                     <li><a href="{{ url('/home') }}">Episodes</a></li>
                     <li><a href="{{ url('/home') }}">About</a></li>
+                    <li class="toggle-color"><a style="cursor: pointer;">toggle color</a></li>
                 </ul>
 
                 <!-- Right Side Of Navbar -->
@@ -71,6 +72,7 @@
 
     <script src="/js/jquery.js"></script>
     <script src="/js/bootstrap.min.js"></script>
+    <script src="/js/main.js"></script>
 
     @yield('footer')
 

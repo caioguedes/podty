@@ -1,6 +1,6 @@
 
 .panel {
-    background-color: #2c3e50;
+    background-color: #222;
     border: none;
 }
 
@@ -12,8 +12,9 @@
     font-family: 'Roboto', sans-serif;
     font-size: 400%;
     color: #3498db;
-    background-color: #34495e;
+    background-color: #222;
     border-style: none;
+    border-bottom: 1px solid #3498db;
     border-radius: 7px;
     height: 800%;
 }
@@ -43,23 +44,8 @@
     padding-left: 0.5%;
 }
 
-.find-podcast-results li:hover > a:hover {
-    color: #e74c3c;
-    text-decoration: none;
-}
-
 .latests-podcasts {
     margin-left: -80px;
-}
-
-.latests-podcasts-list li {
-    list-style: none;
-    color: #2980b9;
-}
-
-.latests-podcasts-list li:hover > a:hover {
-    text-decoration: none;
-    color: #e74c3c;
 }
 
 .latests-podcasts-list li > a > img {
@@ -91,27 +77,15 @@
     }
 }
 
-.latests-episodes-list li {
-    list-style: none;
-    color: #2980b9;
-}
-
-.latests-episodes-list li:hover > a:hover {
-    text-decoration: none;
-    color: #e74c3c;
-}
-
 .latests-episodes-list li > a > img {
-    float: left;
     margin-bottom: 15%;
-    margin-left: 26%;
+    margin-left: 40%;
 }
 
 .latests-episodes-list li > a > small {
     float: left;
     font-size: smaller;
-    margin-right: 30%;
-    margin-bottom: 2%;
+    margin-bottom: 3%;
 }
 
 @media (min-width: 977px) and (max-width: 1180px) {

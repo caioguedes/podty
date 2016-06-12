@@ -20,19 +20,24 @@
                     </h4>
                 </div>
                 <div class="panel-body">
+                    <ul>
                     @foreach ($data['episodes'] as $episode)
-                        <div class="row text-left">
+                        <li>
                             <b>{{ (new DateTime($episode['published_date']))->format('d/m/Y H:i') }}</b>
-                            <br>
-                            <a href="{{$episode['link']}}" target="_blank">
+                            <div>
                                 <b>{{ $episode['title'] }}</b>
-                            </a>
-                            <br>
+                                <button class="play" style="background: #111; border: none;">
+                                    <i class="fa fa-play-circle fa-2x play" aria-hidden="true">
+                                        <input type="text" value="{{ $episode['media_url'] }}" id="url" hidden>
+                                        <input type="text" value="{{ $episode['media_type'] }}" id="type" hidden>
+                                    </i>
+                                </button>
+                            </div>
                             {{Faker\Provider\Lorem::sentence(60)}}
-                            <br><br>
-                        </div>
+                        </li>
                         <hr>
                     @endforeach
+                    </ul>
                 </div>
                 <a href="#">next</a>
             </div>
@@ -40,10 +45,9 @@
     </div>
 </div>
 
-<footer class="audioplayer-footer">
-    <audio controls >
-        <source src={{ $episode['media_url'] }} type={{ $episode['media_type'] }}>
-    </audio>
+<footer class="audioplayer-footer" hidden>
+
+
 </footer>
 
 @endsection

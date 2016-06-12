@@ -2,42 +2,54 @@
 
 const brandImageTag = $('#brand-img');
 $('.navbar-brand')
-    .mouseover(() => brandImageTag.attr('src', '/img/podcast-logo-blue.png'))
-    .mouseleave(() => brandImageTag.attr('src', '/img/podcast-logo-red.png'));
+    .mouseover(() => brandImageTag.attr('src', '/img/podcast-logo-red.png'))
+    .mouseleave(() => brandImageTag.attr('src', '/img/podcast-logo-blue.png'));
 
-const addPlaceholder = (e, p = '') => $(e).attr('placeholder', p);
-const placeholderDefault = 'Type nerdcast . .';
 
-const inputFindPodcast = $('.find-podcast-search');
-
-inputFindPodcast.val('');
-addPlaceholder(inputFindPodcast, placeholderDefault);
-inputFindPodcast
-    .focus()
-    .click(function() { addPlaceholder(this)})
-    .blur(function() { addPlaceholder(this, placeholderDefault) });
-
-const findPodcastResults = $('.find-podcast-results');
-const handleViewRender = (response) => {
-    response.forEach((param) => {
-        let url = '/podcast/' + param.id;
-        let ahref = '<a href="' + url + '" target="_blank">';
-        let name = '<span>' + param.name + ' (' + param.total_episodes + ')' + '</span>';
-        let img = '<img src="' + param.thumbnail_100 + '"> ' + name + ' </a>';
-
-        findPodcastResults.append('<li>' + ahref + img + '</li>');
+const toggleColor = $('.toggle-color');
+toggleColor.click(function(){
+    // main nav-bar
+    $('.navbar-default').css('background-color', '#34495e');
+    $('body').css('background-color', '#2c3e50');
+    $('.panel').css('background-color', '#2c3e50');
+    $('.navbar-default .navbar-brand').css('color', '#e74c3c')
+    $('.navbar-default .navbar-brand').hover(function(){
+        $(this).css('color', '#2980b9')
+    }, function(){
+        $(this).css('color', '#e74c3c');
     });
-};
+    $('.navbar-default .navbar-nav > li > a').css('color', '#e74c3c')
+    $('.navbar-default .navbar-nav > li > a').hover(function(){
+       $(this).css('color', '#2980b9')
+    }, function(){
+        $(this).css('color', '#e74c3c');
+    });
 
-inputFindPodcast.keypress((e) => {
-    if(e.which != 13) {
-        return;
-    }
-    const searchInput = e.currentTarget.value;
-    $.ajax({
-        type: 'GET',
-        url: 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/feeds/name/' + searchInput,
-        beforeSend: () => findPodcastResults.children(this).remove(),
-        success: response => handleViewRender(response)
-    })
+    // /home    
+    $('.find-podcast-search').css('background-color', '#34495e');
+    $('.find-podcast-search').css('border-bottom:', 'none');
+    $('small').css('color', '#e74c3c');
+    $('small').hover(function(){
+        $(this).css('color', '#2980b9')
+    }, function(){
+        $(this).css('color', '#e74c3c');
+    });
+
+    // /podcast/podcastId
+    $('.audioplayer').css('color', '#95a5a6');
+    $('.audioplayer').css('background', '#34495e');
+    $('.audioplayer-time-duration').css('border-right', '1px solid #555');
+    $('.audioplayer-playpause').hover(function(){
+        $(this).css('background-color', '#2c3e50');
+    }, function(){
+        $(this).css('background-color', '#34495e');
+    });
+    $('.audioplayer-volume').hover(function(){
+        $(this).css('background-color', '#2c3e50');
+    }, function(){
+        $(this).css('background-color', '#34495e');
+    });
+    $('.audioplayer-volume-adjust').css('background-color', '#2c3e50');
+    $('.audioplayer-volume-adjust > div').css('background-color', '#2c3e50');
+    $('.audioplayer-bar').css('background-color', '#2c3e50');
 });

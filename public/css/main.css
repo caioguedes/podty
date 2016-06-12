@@ -1,29 +1,29 @@
 .navbar-default {
-    background-color: #34495e;
+    background-color: #222;
     border-color: black;
 }
 .navbar-default .navbar-brand {
-    color: #e74c3c;
+    color: #2980b9;
 }
 .navbar-default .navbar-brand:hover,
 .navbar-default .navbar-brand:focus {
-    color: #2980b9;
+    color: #e74c3c;
 }
 .navbar-default .navbar-text {
-    color: #e74c3c;
+    color: #2980b9;
 }
 .navbar-default .navbar-nav > li > a {
-    color: #e74c3c;
+    color: #2980b9;
 }
 .navbar-default .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav > li > a:focus {
-    color: #2980b9;
+    color: #e74c3c;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu {
     background-color: #2c3e50;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu > li > a {
-    color: #e74c3c;
+    color: #2980b9;
 }
 .navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
 .navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
@@ -66,10 +66,10 @@
     border-color: #2c3e50;
 }
 .navbar-default .navbar-link {
-    color: #e74c3c;
+    color: #2980b9;
 }
 .navbar-default .navbar-link:hover {
-    color: #2980b9;
+    color: #e74c3c;
 }
 
 @media (max-width: 767px) {
@@ -89,11 +89,20 @@
 }
 
 body {
-    background-color: #2c3e50;
+    background-color: #222;
     font-family: 'Lato';
 }
 
 .navbar-brand img {
     float: left;
     margin-top: -12%;
+}
+
+li {
+    list-style: none;
+}
+
+li:hover > a:hover {
+    color: #e74c3c;
+    text-decoration: none;
 }

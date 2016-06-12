@@ -16,14 +16,14 @@
                     <ul class="latests-episodes-list">
                         @forelse($data['episodes'] as $episode)
                             <li>
-                                <a href="/podcast/{{$episode['feed_id']}}">
+                                <a href="/podcast/{{$episode['podcast_id']}}" class="text-center">
                                     <small class="text-center">
-                                        {{substr($episode['title'], 0, 60)}}
+                                        {{ $episode['title']}}
                                     </small>
-                                    <img src="{{$episode['thumbnail_30']}}" class="img-circle">
+                                    <img src="{{$episode['thumbnail_30']}}" class="img-circle" >
                                 </a>
                             </li>
-                            <br>
+
                         @empty
                             <div class="col-lg-12 col-md-6 col-sm-12">
                                 <p>service not available.</p>
@@ -54,7 +54,7 @@
                         <li>
                             <a href="/podcast/{{$feed['id']}}">
                                 <small>
-                                    {{str_replace('–', '', substr($feed['name'], 0, 13))}} <br>
+                                    {{str_replace('–', '', substr($feed['name'], 0, 20))}} <br>
                                     {{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}
                                 </small>
                                 <img src="{{$feed['thumbnail_60']}}" class="img-circle">
@@ -74,5 +74,5 @@
 @endsection
 
 @section('footer')
-    <script src="/js/main.js"></script>
+    <script src="/js/home.js"></script>
 @endsection
