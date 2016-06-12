@@ -1,11 +1,11 @@
 .audioplayer {
     height: 2.5em;
-    color: #95a5a6;
+    color: #2980b9;
     text-shadow: 1px 1px 0 #000;
-    border: 1px solid #222;
+    border: 1px solid #111;
     position: relative;
     z-index: 1;
-    background: #333;
+    background: #222;
 }
 
 .audioplayer-mini {
@@ -51,7 +51,7 @@
     height: 0;
     border: 0.5em solid transparent;
     border-right: none;
-    border-left-color: #95a5a6;
+    border-left-color: #2980b9;
     content: '';
     position: absolute;
     top: 50%;
@@ -72,7 +72,7 @@
 .audioplayer-playing .audioplayer-playpause a:after {
     width: 40%;
     height: 100%;
-    background-color: #95a5a6;
+    background-color: #2980b9;
     content: '';
     position: absolute;
     top: 0;
@@ -102,7 +102,7 @@
 }
 
 .audioplayer-time-duration {
-    border-right: 1px solid #555;
+    border-right: 1px solid #2980b9;
     border-right-color: rgba(255, 255, 255, .1);
     right: 2.5em;
 }
@@ -145,7 +145,6 @@
     background: -webkit-gradient(linear, left top, right top, from(#4aa3df), to(#2980b9));
     background: -webkit-linear-gradient(left, #4aa3df, #2980b9);
     background: -moz-linear-gradient(left, #4aa3df, #2980b9);
-    background: -ms-radial-gradient(left, #4aa3df, #2980b9);
     background: -o-linear-gradient(left, #4aa3df, #2980b9);
     background: linear-gradient(left, #4aa3df, #2980b9);
     z-index: 2;
@@ -177,7 +176,7 @@
 .audioplayer-volume-button a {
     width: 0.313em;
     height: 0.375em;
-    background-color: #95a5a6;
+    background-color: #2980b9;
     display: block;
     position: relative;
     z-index: 1;
@@ -196,7 +195,7 @@
     height: 0;
     border: 0.5em solid transparent;
     border-left: none;
-    border-right-color: #95a5a6;
+    border-right-color: #2980b9;
     z-index: 2;
     top: 50%;
     right: -0.25em;
@@ -206,7 +205,7 @@
 .audioplayer:not(.audioplayer-mute) .audioplayer-volume-button a:after {
     width: 0.313em;
     height: 0.313em;
-    border: 0.25em double #95a5a6;
+    border: 0.25em double #2980b9;
     border-width: 0.25em 0.25em 0 0;
     left: 0.563em;
     top: -0.063em;
@@ -228,18 +227,6 @@
     right: -1px;
     top: -9999px;
     background: #222;
-    background: -webkit-gradient(linear, left top, left bottom, from(#444), to(#222));
-    background: -webkit-linear-gradient(top, #444, #222);
-    background: -moz-linear-gradient(top, #444, #222);
-    background: -ms-radial-gradient(top, #444, #222);
-    background: -o-linear-gradient(top, #444, #222);
-    background: linear-gradient(top, #444, #222);
-    -webkit-border-top-left-radius: 2px;
-    -webkit-border-top-right-radius: 2px;
-    -moz-border-radius-topleft: 2px;
-    -moz-border-radius-topright: 2px;
-    border-top-left-radius: 2px;
-    border-top-right-radius: 2px;
 }
 
 .audioplayer-volume:not(:hover) .audioplayer-volume-adjust {
