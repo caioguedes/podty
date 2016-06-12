@@ -28,7 +28,7 @@ class HomeController extends Controller
 
         return view('home')->with('data', [
             'feeds' => empty($feeds) ? [] : array_chunk($feeds, 4)[0],
-            'episodes' => $this->getLatestsEpisodes()
+            'episodes' => $this->formatEpisodesTitle($this->getLatestsEpisodes())
         ]);
     }
 
@@ -43,6 +43,7 @@ class HomeController extends Controller
         ]);
     }
 
+
     private function getLatestsFeeds()
     {
         return $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=1');
@@ -50,7 +51,9 @@ class HomeController extends Controller
 
     private function getLatestsEpisodes()
     {
-        return $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest');
+        return $this->formatLatestsEpisodes(
+            $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest')
+        );
     }
 
     private function getFeed($name)
@@ -69,6 +72,43 @@ class HomeController extends Controller
     {
         return $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId");
     }
+
+    private function formatEpisodesTitle($episodes)
+    {
+        return array_map(function($episode){
+            $episode['title'] = $this->formatEpisodeTitle($episode['title'], $episode['podcast_name']);
+            return $episode;
+        }, $episodes);
+    }
+
+    private function formatEpisodeTitle($episodeTitle, $podcastTitle)
+    {
+        $episodeTitle = substr($episodeTitle, 0, 60);
+        if (strlen($episodeTitle) < 25) {
+            $episodeTitle =  $podcastTitle . ': ' . $episodeTitle;
+        }
+
+        return $episodeTitle;
+    }
+
+    private function formatLatestsEpisodes($episodes)
+    {
+        return array_map(function($episode){
+            return [
+                'id' => $episode['id'],
+                'podcast_id' => $episode['feed_id'],
+                'podcast_name' => $episode['name'],
+                'title' => $episode['title'],
+                'published_date' => $episode['published_date'],
+                'content' => $episode['content'],
+                'media_url' => $episode['media_url'],
+                'media_type' => $episode['media_type'],
+                'thumbnail_30' => $episode['thumbnail_30'],
+                'thumbnail_60' => $episode['thumbnail_60'],
+            ];
+        }, $episodes);
+    }
+
 
     private function getContentFrom($source)
     {
