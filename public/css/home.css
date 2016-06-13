@@ -57,6 +57,7 @@
 .latests-podcasts-list li > a > small {
     float: right;
     font-size: smaller;
+    text-align: center;
     margin-right: 30%;
     margin-bottom: 2%;
 }
@@ -84,7 +85,7 @@
 
 .latests-episodes-list li > a > small {
     float: left;
-    font-size: smaller;
+    font-size: small;
     margin-bottom: 3%;
 }
 
