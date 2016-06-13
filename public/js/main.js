@@ -25,15 +25,10 @@ toggleColor.click(function(){
         $(this).css('color', '#e74c3c');
     });
 
-    // /home    
+    // /home
     $('.find-podcast-search').css('background-color', '#34495e');
     $('.find-podcast-search').css('border-bottom:', 'none');
-    $('small').css('color', '#e74c3c');
-    $('small').hover(function(){
-        $(this).css('color', '#2980b9')
-    }, function(){
-        $(this).css('color', '#e74c3c');
-    });
+    
 
     // /podcast/podcastId
     $('.audioplayer').css('color', '#95a5a6');
