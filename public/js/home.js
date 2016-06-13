@@ -28,11 +28,15 @@ inputFindPodcast.keypress((e) => {
     if(e.which != 13) {
         return;
     }
-    const searchInput = e.currentTarget.value;
+    findPodcastResults.children(this).remove()
+    const searchInput = e.currentTarget.value.trim();
+    if (!searchInput) {
+        return;
+    }
+    
     $.ajax({
         type: 'GET',
         url: 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/feeds/name/' + searchInput,
-        beforeSend: () => findPodcastResults.children(this).remove(),
         success: response => handleViewRender(response)
     })
 });
