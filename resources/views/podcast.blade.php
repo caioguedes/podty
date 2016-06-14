@@ -10,8 +10,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div>
+        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+            <div class="col-lg-9  col-md-8 col-sm-8 col-xs-12">
                 <h4>
                     Latest Episodes of <br><br>
                         <img src="{{ $data['feed']['thumbnail_100'] }}" alt="" class="img-circle">
@@ -19,8 +19,21 @@
                     ({{ $data['feed']['total_episodes'] }})
                 </h4>
             </div>
+            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                <div class="panel panel-default find">
+                    <div class="panel-body find-episode">
+                        <input type="text" class="find-episode-search form-control">
+                        <input type="number" id="podcast-id" hidden value="{{$data['feed']['id']}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 text-right podcasts-episodes">
             @foreach ($data['episodes'] as $episode)
-                <div class="wrapper col-lg-4 col-md-6">
+                <div class="wrapper col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="card radius shadowDepth1">
                         <div class="card__content card__padding">
                             <div class="card__share">
