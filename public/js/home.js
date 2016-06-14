@@ -25,7 +25,8 @@ const handleViewRender = (response) => {
 };
 
 inputFindPodcast.keypress((e) => {
-    if(e.which != 13) {
+    const KEYBOARD_KEY_ENTER = 13;
+    if(e.which != KEYBOARD_KEY_ENTER) {
         return;
     }
     findPodcastResults.children(this).remove()
