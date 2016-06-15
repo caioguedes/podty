@@ -1,5 +1,5 @@
-
 @extends('layouts.app')
+@section('title', 'BrnPod')
 
 @section('head')
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -50,14 +50,14 @@
             <div class="panel panel-default">
                 <div class="panel-body latests-podcasts">
                     <ul class="latests-podcasts-list">
-                    @forelse($data['feeds'] as $feed)
+                    @forelse($data['podcasts'] as $podcast)
                         <li>
-                            <a href="/podcast/{{$feed['id'] . 'a'. rand(15345,94334)}}">
+                            <a href="/podcast/{{$podcast['id']}}">
                                 <small>
-                                    {{str_replace('–', '', substr($feed['name'], 0, 20))}} <br>
-                                    {{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}
+                                    {{$podcast['name']}} <br>
+                                    {{$podcast['last_episode_at']}}
                                 </small>
-                                <img src="{{$feed['thumbnail_60']}}" class="img-circle">
+                                <img src="{{$podcast['thumbnail_60']}}" class="img-circle">
                             </a>
                         </li>
                     @empty

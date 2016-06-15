@@ -3,16 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use DateTime;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
-    const API_ROOT_URL = 'localhost:8080/v1/';
+    const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
+    //const API_ROOT_URL = 'localhost:8080/v1/';
 
-    /**
-     * Create a new controller instance.
-     */
     public function __construct()
     {
         //$this->middleware('auth');
@@ -25,33 +23,34 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $feeds = $this->getLatestsFeeds();
+        $podcasts = $this->getLatestsPodcasts();
 
         return view('home')->with('data', [
-            'feeds' => empty($feeds) ? [] : array_chunk($feeds, 4)[0],
+            'podcasts' => empty($podcasts) ? [] : array_chunk($podcasts, 4)[0],
             'episodes' => $this->formatEpisodesTitle($this->getLatestsEpisodes())
         ]);
     }
 
-    public function podcast($feedId)
+    public function podcast($podcastId)
     {
-        $feed = $this->getFeedById($feedId);
-        $episodes = $this->getEpisodes($feedId);
+        $podcast = $this->getPodcastById($podcastId);
+        $episodes = $this->getEpisodes($podcastId);
 
-        if (!$feed) {
+        if (!$podcast) {
             return view('errors.404');
         }
 
         return view('podcast')->with('data', [
-            'feed' => $feed,
-            'episodes' => $episodes ?: []
+            'podcast' => reset($podcast),
+            'episodes' => $episodes ? $this->formatEpisodes($episodes) : []
         ]);
     }
 
-
-    private function getLatestsFeeds()
+    private function getLatestsPodcasts()
     {
-        return $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=1');
+        return $this->formatPodcasts(
+            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=1')
+        );
     }
 
     private function getLatestsEpisodes()
@@ -61,22 +60,38 @@ class HomeController extends Controller
         );
     }
 
-    private function getFeed($name)
-    {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/name/$name");
-        return is_null($data) ? [] : reset($data);
-    }
-
-    private function getFeedById($id)
+    private function getPodcastById($id)
     {
         $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/id/$id");
-        return is_null($data) ? [] : reset($data);
+
+        if(is_null($data)) {
+            return [];
+        }
+
+        return $this->formatPodcasts($data);
     }
 
     private function getEpisodes($feedId)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId");
+        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId?limit=8");
         return is_null($data) ? [] : $data;
+    }
+
+    private function formatPodcasts($feeds)
+    {
+        return array_map(function($feed){
+            return [
+                "id" => $this->getLinkHash($feed['id']),
+                "name" => $this->formatPodcastName($feed['name']),
+                "url" => $feed['url'],
+                "thumbnail_30" => $feed['thumbnail_30'],
+                "thumbnail_60" => $feed['thumbnail_60'],
+                "thumbnail_100" => $feed['thumbnail_100'],
+                "thumbnail_600" => $feed['thumbnail_600'],
+                "total_episodes" => $feed['total_episodes'],
+                "last_episode_at" => $this->formatData($feed['last_episode_at'])
+            ];
+        }, $feeds);
     }
 
     private function formatEpisodesTitle($episodes)
@@ -91,10 +106,26 @@ class HomeController extends Controller
     {
         $episodeTitle = substr($episodeTitle, 0, 60);
         if (strlen($episodeTitle) < 25) {
-            $episodeTitle =  $podcastTitle . ': ' . $episodeTitle;
+            $episodeTitle =  $this->formatPodcastName($podcastTitle) . ': ' . $episodeTitle;
         }
 
         return $episodeTitle;
+    }
+
+    private function formatEpisodes($episodes)
+    {
+        return array_map(function($episode){
+            return [
+                'id' => $episode['id'],
+                'podcast_id' => $this->getLinkHash($episode['feed_id']),
+                'title' => strip_tags($episode['title']),
+                'link' => $episode['link'],
+                'published_date' => $this->formatData($episode['published_date']),
+                'content' => strip_tags($episode['content']),
+                'media_url' => $episode['media_url'],
+                'media_type' => $episode['media_type'],
+            ];
+        }, $episodes);
     }
 
     private function formatLatestsEpisodes($episodes)
@@ -102,19 +133,14 @@ class HomeController extends Controller
         return array_map(function($episode){
             return [
                 'id' => $episode['id'],
-                'podcast_id' => $this->createLinkHash($episode['feed_id']),
+                'podcast_id' => $this->getLinkHash($episode['feed_id']),
                 'podcast_name' => $episode['name'],
-                'title' => $episode['title'],
-                'published_date' => $episode['published_date'],
-                'content' => $episode['content'],
-                'media_url' => $episode['media_url'],
-                'media_type' => $episode['media_type'],
+                'title' => strip_tags($episode['title']),
                 'thumbnail_30' => $episode['thumbnail_30'],
                 'thumbnail_60' => $episode['thumbnail_60'],
             ];
         }, $episodes);
     }
-
 
     private function getContentFrom($source)
     {
@@ -126,8 +152,19 @@ class HomeController extends Controller
         return $data ? json_decode($data, true) : [];
     }
 
-    private function createLinkHash($id)
+    private function getLinkHash($id)
     {
-        return  $id . 'd'. rand(15345,94334);
+        return  $id . 'p'. rand(15345,94334);
+    }
+
+    private function formatData($date)
+    {
+        return (new DateTime($date))->format('d/m/Y H:i');
+    }
+
+    private function formatPodcastName($podcastName)
+    {
+        $separators = ['-', '/', '|'];
+        return explode('-', str_replace($separators, '-', $podcastName))[0];
     }
 }
