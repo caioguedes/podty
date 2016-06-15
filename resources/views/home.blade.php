@@ -52,7 +52,7 @@
                     <ul class="latests-podcasts-list">
                     @forelse($data['feeds'] as $feed)
                         <li>
-                            <a href="/podcast/{{$feed['id']}}">
+                            <a href="/podcast/{{$feed['id'] . 'a'. rand(15345,94334)}}">
                                 <small>
                                     {{str_replace('–', '', substr($feed['name'], 0, 20))}} <br>
                                     {{(new DateTime($feed['last_episode_at']))->format('d/m/Y H:i')}}

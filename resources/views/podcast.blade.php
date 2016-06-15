@@ -7,7 +7,6 @@
 @endsection
 
 @section('content')
-
 <div class="container">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -32,7 +31,7 @@
     <hr>
     <div class="row">
         <div class="col-lg-12 col-md-12  col-sm-12 col-xs-12 text-right podcasts-episodes">
-            @foreach ($data['episodes'] as $episode)
+            @forelse ($data['episodes'] as $episode)
                 <div class="wrapper col-lg-3 col-md-4 col-sm-6 col-xs-12">
                     <div class="card radius shadowDepth1">
                         <div class="card__content card__padding">
@@ -64,7 +63,11 @@
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+                <div class="col-lg-12 col-md-6 col-sm-12">
+                    <p>service not available.</p>
+                </div>
+            @endforelse
         </div>
     </div>
 </div>

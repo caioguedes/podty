@@ -1,47 +1,14 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+@extends('layouts.app')
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.</div>
+@section('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-lg-offset-4 col-md-4 col-md-offset-4 col-sm-4 col-sm-offset-4 col-xs-7 col-xs-offset-2">
+                <p class="text-center" style="color: grey; padding-top:50%;font-size: 1.6em;">
+                    go <a href="/">home</a>, there's nothing happening here
+                </p>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
+    //const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
+    const API_ROOT_URL = 'localhost:8080/v1/';
 
     /**
      * Create a new controller instance.
@@ -37,8 +38,12 @@ class HomeController extends Controller
         $feed = $this->getFeedById($feedId);
         $episodes = $this->getEpisodes($feedId);
 
+        if (!$feed) {
+            return view('errors.404');
+        }
+
         return view('podcast')->with('data', [
-            'feed' => $feed ?: [],
+            'feed' => $feed,
             'episodes' => $episodes ?: []
         ]);
     }
@@ -59,18 +64,19 @@ class HomeController extends Controller
     private function getFeed($name)
     {
         $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/name/$name");
-        return reset($data);
+        return is_null($data) ? [] : reset($data);
     }
 
     private function getFeedById($id)
     {
         $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/id/$id");
-        return reset($data);
+        return is_null($data) ? [] : reset($data);
     }
 
     private function getEpisodes($feedId)
     {
-        return $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId");
+        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId");
+        return is_null($data) ? [] : $data;
     }
 
     private function formatEpisodesTitle($episodes)
@@ -96,7 +102,7 @@ class HomeController extends Controller
         return array_map(function($episode){
             return [
                 'id' => $episode['id'],
-                'podcast_id' => $episode['feed_id'],
+                'podcast_id' => $this->createLinkHash($episode['feed_id']),
                 'podcast_name' => $episode['name'],
                 'title' => $episode['title'],
                 'published_date' => $episode['published_date'],
@@ -118,5 +124,10 @@ class HomeController extends Controller
         $data = curl_exec($curl);
 
         return $data ? json_decode($data, true) : [];
+    }
+
+    private function createLinkHash($id)
+    {
+        return  $id . 'd'. rand(15345,94334);
     }
 }
