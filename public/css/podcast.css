@@ -109,22 +109,11 @@ h2 {
 }
 
 /* card action */
-.card__action {
+.card-play {
     overflow: hidden;
     padding-right: 1.6rem;
     padding-left: 1.6rem;
     padding-bottom: 1.6rem;
-}
-
-.card__author img,
-.card__author-content {
-    display: inline-block;
-    vertical-align: middle;
-}
-
-.card__author img{
-    border-radius: 50%;
-    margin-right: 0.6em;
 }
 
 .card__share {
@@ -189,6 +178,8 @@ h2 {
     -ms-transform: scale(1.2);
     -o-transform: scale(1.2);
     transform: scale(1.2);
+    outline:none;
+    text-decoration: none;
 }
 
 .facebook {
