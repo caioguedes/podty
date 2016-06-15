@@ -11,12 +11,14 @@
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
             <div class="col-lg-9  col-md-8 col-sm-8 col-xs-12">
-                <h4>
-                    Latest Episodes of <br><br>
+                <div class="podcast-title">
+                    <h4>
+                        Latest Episodes of <br><br>
                         <img src="{{ $data['feed']['thumbnail_100'] }}" alt="" class="img-circle">
-                    <b>{{ explode(' - ', $data['feed']['name'])[0] }}</b>
-                    ({{ $data['feed']['total_episodes'] }})
-                </h4>
+                        <b>{{ explode(' - ', $data['feed']['name'])[0] }}</b>
+                        ({{ $data['feed']['total_episodes'] }})
+                    </h4>
+                </div>
             </div>
             <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
                 <div class="panel panel-default find">
@@ -44,22 +46,20 @@
                                 <a id="share" class="share-toggle share-icon" href="#"></a>
                             </div>
                             <article class="card__article">
-                                <h2>
+                                <h3>
                                     <a href="{{$episode['link']}}" target="_blank">{{ $episode['title'] }}</a>
                                     <br><small>{{ (new DateTime($episode['published_date']))->format('d/m/Y H:i') }}</small>
-                                </h2>
+                                </h3>
                                 <p>{{Faker\Provider\Lorem::sentence(20)}}</p>
                             </article>
                         </div>
-                        <div class="card__action">
-                            <div class="card__author play">
-                                <a class="btn center">
-                                    <i class="fa fa-play-circle fa-2x play" aria-hidden="true"></i>
-                                    Play
-                                </a>
-                                <input type="text" value="{{ $episode['media_url'] }}" id="url" hidden>
-                                <input type="text" value="{{ $episode['media_type'] }}" id="type" hidden>
-                            </div>
+                        <div class="card-play play">
+                            <a class="btn center">
+                                <i class="fa fa-play-circle fa-2x play" aria-hidden="true"></i>
+                                Play
+                            </a>
+                            <input type="text" value="{{ $episode['media_url'] }}" id="url" hidden>
+                            <input type="text" value="{{ $episode['media_type'] }}" id="type" hidden>
                         </div>
                     </div>
                 </div>
