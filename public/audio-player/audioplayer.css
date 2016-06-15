@@ -44,6 +44,7 @@
 
 .audioplayer-playpause a {
     display: block;
+    outline: none;
 }
 
 .audioplayer:not(.audioplayer-playing) .audioplayer-playpause a {
@@ -166,6 +167,7 @@
 .audioplayer-volume:hover,
 .audioplayer-volume:focus {
     background-color: #222;
+    outline: none;
 }
 
 .audioplayer-volume-button {
@@ -182,6 +184,7 @@
     z-index: 1;
     top: 40%;
     left: 35%;
+    outline: none;
 }
 
 .audioplayer-volume-button a:before,
