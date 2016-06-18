@@ -1,0 +1,25 @@
+#!/bin/bash
+
+###############
+##### API #####
+###############
+
+cd /home/brnbp/Code/podcast-env/api
+
+printf '\ncrafting api..\n'
+printf 'serving application.. \n'
+php artisan serve --port 8080 --quiet &
+printf 'running on localhost:8080 \n'
+
+#---------------------------------------------------------------#
+
+
+###############
+##### APP #####
+###############
+
+cd /home/brnbp/Code/podcast-env/app 
+
+printf 'serving application.. \n'
+php artisan serve -vv
+

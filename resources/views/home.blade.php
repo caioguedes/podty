@@ -7,23 +7,25 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
 
         <div class="col-lg-2 col-md-2 hidden-sm hidden-xs">
             <div class="panel panel-default">
                 <div class="panel-body latests-episodes">
                     <ul class="latests-episodes-list">
+                        <?php $i=0; ?>
                         @forelse($data['episodes'] as $episode)
                             <li>
                                 <a href="/podcast/{{$episode['podcast_id']}}" class="text-center">
-                                    <small class="text-center">
+                                    <small class="text-center episode-title">
                                         {{ $episode['title']}}
                                     </small>
                                     <img src="{{$episode['thumbnail_30']}}" class="img-circle" >
                                 </a>
                             </li>
-
+                            <?php $i++; ?>
+                            @if($i < count($data['episodes'])) <hr> @endif
                         @empty
                             <div class="col-lg-12 col-md-6 col-sm-12">
                                 <p>service not available.</p>
@@ -53,11 +55,15 @@
                     @forelse($data['podcasts'] as $podcast)
                         <li>
                             <a href="/podcast/{{$podcast['id']}}">
-                                <small>
-                                    {{$podcast['name']}} <br>
+                                <span class="podcast-title">
+                                    {{$podcast['name']}}
+                                </span><br>
+                                <span class="podcast-date">
                                     {{$podcast['last_episode_at']}}
-                                </small>
-                                <img src="{{$podcast['thumbnail_60']}}" class="img-circle">
+                                </span>
+                                <span class="podcast-img">
+                                    <img src="{{$podcast['thumbnail_60']}}" class="img-circle">
+                                </span>
                             </a>
                         </li>
                     @empty
