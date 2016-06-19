@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    //const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
-    const API_ROOT_URL = 'localhost:8080/v1/';
+    const API_ROOT_URL = 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
+    //const API_ROOT_URL = 'localhost:8080/v1/';
 
     public function __construct()
     {
