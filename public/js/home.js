@@ -14,7 +14,7 @@ inputFindPodcast
 
 const findPodcastResults = $('.find-podcast-results');
 const handleViewRender = (response) => {
-    response.forEach((param) => {
+    response.data.forEach((param) => {
         let url = '/podcast/' + param.id;
         let ahref = '<a href="' + url + '" target="_blank">';
         let name = '<span>' + param.name + ' (' + param.total_episodes + ')' + '</span>';
@@ -34,7 +34,7 @@ inputFindPodcast.keypress((e) => {
     if (!searchInput) {
         return;
     }
-    
+
     $.ajax({
         type: 'GET',
         url: 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/feeds/name/' + searchInput,

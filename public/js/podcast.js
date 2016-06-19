@@ -30,7 +30,7 @@ inputFindEpisodes
 
 const findEpisodesResults = $('.podcasts-episodes');
 const handleViewRender = (response) => {
-    response.forEach((param) => {
+    response.data.forEach((param) => {
         let content = fulfillInputResult(param)
         findEpisodesResults.append(content);
     });
@@ -67,8 +67,8 @@ $('.more-podcasts').click(function(){
         success: response => {
             removeChildren(findEpisodesResults);
             handleViewRender(response)
-            $(this).val(parseInt(offset) + response.length);
-            if (response.length < 8) {
+            $(this).val(parseInt(offset) + response.data.length);
+            if (response.data.length < 8) {
                 $(this).attr('hidden', true);
             }
         }
