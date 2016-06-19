@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'BrnPod')
+@section('title', 'PodVille')
 
 @section('head')
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>

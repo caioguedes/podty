@@ -30,7 +30,7 @@
 
                 <a class="navbar-brand" href="{{ url('/') }}">
                     <img src="/img/podcast-logo-blue.png" id="brand-img" height="40">
-                    BrnPod
+                    PodVille
                 </a>
             </div>
 
