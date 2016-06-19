@@ -8,8 +8,8 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
-    const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
-    //const API_ROOT_URL = 'localhost:8080/v1/';
+    //const API_ROOT_URL = 'brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
+    const API_ROOT_URL = 'localhost:8080/v1/';
 
     public function __construct()
     {
@@ -149,7 +149,11 @@ class HomeController extends Controller
 
         $data = curl_exec($curl);
 
-        return $data ? json_decode($data, true) : [];
+        if (!$data) {
+            return [];
+        }
+
+        return json_decode($data, true)['data'];
     }
 
     private function getLinkHash($id)
