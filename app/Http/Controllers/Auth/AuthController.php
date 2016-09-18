@@ -49,9 +49,9 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
+            'name' => 'required|max:20|unique:users',
             'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6|confirmed',
+            'password' => 'required|min:5',
         ]);
     }
 
@@ -63,10 +63,49 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+
+        $user = $this->createUserApi($data);
+
         return User::create([
+            'id' => $user['data']['id'],
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    private function createUserApi($data)
+    {
+        $username = $data['name'];
+        $email = $data['email'];
+        $password = bcrypt($data['password']);
+
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => "http://localhost:8081/v1/users",
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => "{\n    \"username\": \"$username\",\n    \"email\": \"$email\",\n    \"password\": \"$password\"\n}",
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Basic YnJuYnA6YnJuYnA=",
+                "content-type: application/json"
+            ),
+        ));
+
+        $response = curl_exec($curl);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        if ($err) {
+            return false;
+        }
+
+        return json_decode($response, true);
     }
 }

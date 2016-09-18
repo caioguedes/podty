@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html lang="en" class="app">
+<html lang="en" class="app bg-dark">
 <head>
     <meta charset="utf-8" />
 
     <title>@yield('title')</title>
 
+    <meta name="theme-color" content="#5a6a7a">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>

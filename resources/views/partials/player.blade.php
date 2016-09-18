@@ -1,3 +1,10 @@
+<style>
+    footer.footer.bg-dark {
+        bottom: 0 !important;
+        position: fixed !important;
+        width: 100% !important;
+    }
+</style>
 <footer class="footer bg-dark">
     <div id="jp_container_N">
     <div class="jp-type-playlist">

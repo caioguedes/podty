@@ -10,8 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    //const API_ROOT_URL = 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
-    const API_ROOT_URL = 'localhost:8081/v1/';
+    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com//v1/';
+    //const API_ROOT_URL = 'localhost:8081/v1/';
 
     public function __construct()
     {
