@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use DateTime;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
     //const API_ROOT_URL = 'http://brnpodapi-env.us-east-1.elasticbeanstalk.com/v1/';
-    const API_ROOT_URL = 'localhost:8080/v1/';
+    const API_ROOT_URL = 'localhost:8081/v1/';
 
     public function __construct()
     {
@@ -23,11 +25,19 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $podcasts = $this->getLatestsPodcasts();
+
+        if (Auth::guest()) {
+            return view('home');
+        }
+
+        $episodes = $this->formatLatestsEpisodes(
+            $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/latests')
+        );
+
+        /*dd(Auth::id(), Auth::user(), Auth::user()->name, Auth::user()->email);*/
 
         return view('home')->with('data', [
-            'podcasts' => empty($podcasts) ? [] : array_chunk($podcasts, 4)[0],
-            'episodes' => $this->formatEpisodesTitle($this->getLatestsEpisodes())
+            'episodes' => $episodes
         ]);
     }
 
@@ -37,8 +47,10 @@ class HomeController extends Controller
         $episodes = $this->getEpisodes($podcastId);
 
         if (!$podcast) {
-            return view('errors.404');
+            return redirect('/404');
         }
+
+
 
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
@@ -56,7 +68,7 @@ class HomeController extends Controller
     private function getLatestsEpisodes()
     {
         return $this->formatLatestsEpisodes(
-            $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest')
+            $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest?limit=12')
         );
     }
 
@@ -73,7 +85,7 @@ class HomeController extends Controller
 
     private function getEpisodes($feedId)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feedId/$feedId?limit=8");
+        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feed/$feedId?limit=8");
         return is_null($data) ? [] : $data;
     }
 
@@ -104,7 +116,6 @@ class HomeController extends Controller
 
     private function formatEpisodeTitle($episodeTitle, $podcastTitle)
     {
-        $episodeTitle = substr($episodeTitle, 0, 60);
         if (strlen($episodeTitle) < 25) {
             $episodeTitle =  $this->formatPodcastName($podcastTitle) . ': ' . $episodeTitle;
         }
@@ -132,12 +143,15 @@ class HomeController extends Controller
     {
         return array_map(function($episode){
             return [
-                'id' => $episode['id'],
                 'podcast_id' => $this->getLinkHash($episode['feed_id']),
-                'podcast_name' => $episode['name'],
-                'title' => strip_tags($episode['title']),
-                'thumbnail_30' => $episode['thumbnail_30'],
-                'thumbnail_60' => $episode['thumbnail_60'],
+                'podcast_name' => $episode['feed_name'],
+                'title' => strip_tags($episode['episode_title']),
+                'thumbnail' => $episode['feed_thumbnail'],
+                'paused_at' => $episode['paused_at'],
+                'media_url' => $episode['media_url'],
+                'media_type' => $episode['media_type'],
+                'published_date' => $episode['published_date'],
+                'content' => $episode['content'],
             ];
         }, $episodes);
     }
@@ -153,17 +167,12 @@ class HomeController extends Controller
         $data = curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
+
         if (!$data || $status_code >= 400) {
             return [];
         }
 
         return json_decode($data, true)['data'];
-    }
-
-    public function callback()
-    {
-
-        
     }
 
     private function getLinkHash($id)

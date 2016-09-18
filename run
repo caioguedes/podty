@@ -4,7 +4,7 @@
 ##### API #####
 ###############
 
-cd /home/brnbp/Code/podcast-env/api
+cd ~/Code/podcast/api
 
 printf '\ncrafting api..\n'
 printf 'serving application.. \n'
@@ -18,7 +18,7 @@ printf 'running on localhost:8080 \n'
 ##### APP #####
 ###############
 
-cd /home/brnbp/Code/podcast-env/app 
+cd ~/Code/podcast/app 
 
 printf 'serving application.. \n'
 php artisan serve -vv
