@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com//v1/';
+    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
     //const API_ROOT_URL = 'localhost:8081/v1/';
 
     public function __construct()
@@ -25,13 +25,10 @@ class HomeController extends Controller
      */
     public function index()
     {
-
         if (Auth::guest()) {
             return view('home');
         }
         
-        /*dd(Auth::id(), Auth::user(), Auth::user()->name, Auth::user()->email);*/
-
         return view('home');
     }
 

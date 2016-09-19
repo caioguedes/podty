@@ -19,7 +19,7 @@ Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
 
 
 Route::get('feed/{searchInput}', function($searchInput){
-    $source = 'localhost:8081/v1/feeds/name/' . $searchInput;
+    $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . $searchInput;
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
