@@ -29,16 +29,10 @@ class HomeController extends Controller
         if (Auth::guest()) {
             return view('home');
         }
-
-        $episodes = $this->formatLatestsEpisodes(
-            $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/latests')
-        );
-
+        
         /*dd(Auth::id(), Auth::user(), Auth::user()->name, Auth::user()->email);*/
 
-        return view('home')->with('data', [
-            'episodes' => $episodes
-        ]);
+        return view('home');
     }
 
     public function podcast($podcastId)
@@ -189,5 +183,17 @@ class HomeController extends Controller
     {
         $separators = ['-', '/', '|'];
         return explode('-', str_replace($separators, '-', $podcastName))[0];
+    }
+
+    public function ajaxHome()
+    {
+        return $this->formatLatestsEpisodes(
+            $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/latests')
+        );
+    }
+
+    public function ajaxSidebar()
+    {
+        return $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name);
     }
 }

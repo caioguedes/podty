@@ -13,6 +13,9 @@ Route::get('profile', function(){
 
 
 
+Route::get('ajax/home', 'HomeController@ajaxHome');
+Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
+
 
 
 Route::get('feed/{searchInput}', function($searchInput){

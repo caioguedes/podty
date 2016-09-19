@@ -29,16 +29,21 @@
                 </a>
             </li>
         </ul>
-    <form class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
+    <div class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
         <div class="form-group">
             <div class="input-group">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-sm bg-white btn-icon rounded"><i class="fa fa-search"></i></button>
-            </span>
-                <input type="text" class="form-control input-sm no-border rounded" placeholder="Search songs, albums...">
+                <span class="input-group-btn">
+                  <button type="submit" class="btn btn-sm bg-white btn-icon rounded btn-find-cast">
+                      <i class="fa fa-search"></i>
+                  </button>
+                </span>
+                <input type="text" id="find-cast"
+                       class="form-control input-sm no-border rounded"
+                       placeholder="Search podcasts"
+                >
             </div>
         </div>
-    </form>
+    </div>
 
     @endunless
     @if (Auth::guest())
