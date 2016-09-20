@@ -14,7 +14,10 @@ Route::get('profile', function(){
 
 
 Route::get('ajax/home', 'HomeController@ajaxHome');
+Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
 Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
+Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
+Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
 
 
 

@@ -13,7 +13,7 @@
           <section class="w-f-md">
             <section class="hbox stretch bg-black dker">
 
-              <aside class="col-sm-3 no-padder hidden-xs" id="sidebar">
+              <aside class="col-sm-3 no-padder" id="sidebar">
                 <section class="vbox animated fadeInUp">
                   <section class="scrollable">
                     <div class="m-t-n-xxs item pos-rlt">
@@ -27,18 +27,16 @@
                         </span>
                       </div>
                       <div class="bottom gd bg-info wrapper-lg">
-                        <span class="pull-right text-sm">101,400 <br>Followers</span>
+                        <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>
                         <span class="h2 font-thin">{{$data['podcast']['name']}}</span>
                       </div>
                       <img class="img-full" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
-                    <ul class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
-                      <li class="list-group-item"></li>
-                      <li class="list-group-item"></li>
-                      <li class="list-group-item"></li>
-                      <li class="list-group-item"></li>
-                      <li class="list-group-item"></li>
-                    </ul>
+                    <div class="col-md-offset-3 button-follow">
+                        <button class="btn btn-lg btn-dark {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
+                            {{$data['userFollows'] ? 'Unfollow':'Follow'}}
+                        </button>
+                    </div>
                   </section>
                 </section>
               </aside>
@@ -63,7 +61,7 @@
                             </a>
                             <a class="clear" href="#">
                               <span class="block text-ellipsis">{{$episode['title']}}</span>
-                              <span class="text-muted">04:35</span>
+                              <span class="text-muted">{{$episode['published_date']}}</span>
                             </a>
                           </li>
                         @endforeach
@@ -71,12 +69,18 @@
                   </section>
                 </section>
               </section>
-              @include('partials.connected')
             </section>
           </section>
         </section>
         </section>
       </section>
-        {{--@include('partials.player')--}}
+{{--
+        @include('partials.player')
+--}}
   </section>
+@endsection
+
+@section('footer-scripts')
+    <script type="text/javascript" src="/js/partials/leftbar.js"></script>
+    <script type="text/javascript" src="/js/podcast.js"></script>
 @endsection

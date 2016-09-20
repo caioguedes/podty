@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (Auth::guest()) {
             return view('home');
         }
-        
+
         return view('home');
     }
 
@@ -40,19 +40,18 @@ class HomeController extends Controller
         if (!$podcast) {
             return redirect('/404');
         }
-
-
-
+        
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
-            'episodes' => $episodes ? $this->formatEpisodes($episodes) : []
+            'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
+            'userFollows' => $this->getUserListensToPodcast($podcastId)
         ]);
     }
 
     private function getLatestsPodcasts()
     {
         return $this->formatPodcasts(
-            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=1')
+            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=12')
         );
     }
 
@@ -78,6 +77,13 @@ class HomeController extends Controller
     {
         $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feed/$feedId?limit=8");
         return is_null($data) ? [] : $data;
+    }
+
+    public function getUserListensToPodcast($feedId)
+    {
+        $url = self::API_ROOT_URL . 'users/'.Auth::user()->name.'/feeds/'.$feedId;
+
+        return $this->getContentFrom($url) ? true : false;
     }
 
     private function formatPodcasts($feeds)
@@ -158,7 +164,6 @@ class HomeController extends Controller
         $data = curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 
-
         if (!$data || $status_code >= 400) {
             return [];
         }
@@ -189,8 +194,52 @@ class HomeController extends Controller
         );
     }
 
+    public function ajaxHomeNoFeeds()
+    {
+        return $this->getLatestsPodcasts();
+    }
+
     public function ajaxSidebar()
     {
         return $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name);
+    }
+
+    public function ajaxFollowPodcast($feedId)
+    {
+        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
+
+        return $this->makeCurl($url);
+    }
+
+    public function ajaxUnfollowPodcast($feedId)
+    {
+        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
+
+        return $this->makeCurl($url, 'DELETE');
+    }
+
+    private function makeCurl($url, $method = 'POST')
+    {
+        $curl = curl_init();
+
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => $url,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_TIMEOUT => 30,
+            CURLOPT_CUSTOMREQUEST => $method,
+            CURLOPT_HTTPHEADER => array(
+                "authorization: Basic YnJuYnA6YnJuYnA="
+            ),
+        ));
+
+        curl_exec($curl);
+        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+
+        if ($status_code >= 400) {
+            return response('', 400);
+        }
+
+        return response('', 200);
     }
 }

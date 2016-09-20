@@ -16,11 +16,6 @@
     <link rel="stylesheet" href="/css/simple-line-icons.css" type="text/css" />
     <link rel="stylesheet" href="/css/font.css" type="text/css" />
     <link rel="stylesheet" href="/css/app.css" type="text/css" />
-    <!--[if lt IE 9]>
-    <script src="/js/ie/html5shiv.js"></script>
-    <script src="/js/ie/respond.min.js"></script>
-    <script src="/js/ie/excanvas.js"></script>
-    <![endif]-->
 
     @yield('head')
 </head>
@@ -35,11 +30,7 @@
     <script src="/js/app.js"></script>
     <script src="/js/slimscroll/jquery.slimscroll.min.js"></script>
     <script src="/js/app.plugin.js"></script>
-    <script type="text/javascript" src="/js/jPlayer/jquery.jplayer.min.js"></script>
-    <script type="text/javascript" src="/js/jPlayer/add-on/jplayer.playlist.min.js"></script>
-    <script type="text/javascript" src="/js/jPlayer/demo.js"></script>
-    <script type="text/javascript" src="js/home.js"></script>
 
-
+    @yield('footer-scripts')
 </body>
 </html>

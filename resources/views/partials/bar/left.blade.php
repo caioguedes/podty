@@ -13,14 +13,14 @@
                         <li>
                             <a href="#">
                                 <i class="icon-microphone icon text-info"></i>
-                                <b class="badge bg-primary pull-right" id="podcasts-count"></b>
+                                <b class="badge bg-primary pull-right" id="podcasts-count">-</b>
                                 <span class="font-bold">My Podcasts</span>
                             </a>
                         </li>
                         <li>
                             <a href="#">
                                 <i class="icon-users icon text-info"></i>
-                                <b class="badge bg-primary pull-right" id="friends-count"></b>
+                                <b class="badge bg-primary pull-right" id="friends-count">-</b>
                                 <span class="font-bold">Friends</span>
                             </a>
                         </li>

@@ -59,7 +59,7 @@ inputFindEpisodes.keypress(function (e) {
     }
 
     $.ajax({
-        url: '/episode/' + podcastId + '/' + searchInput,
+        url: '/episodes/feed/' + podcastId + '?term=' + searchInput,
         success: function success(response) {
             removeChildren(findEpisodesResults);
             handleViewRender(JSON.parse(response));
@@ -101,18 +101,75 @@ var getCurrentUrlId = function getCurrentUrlId() {
     return window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 };
 
-var formatDateTime = function formatDateTime(string) {
-    var a = string.split('-');
-    var b = a[2].split(' ');
-    return b[0] + '/' + a[1] + '/' + a[0] + ' ' + b[1];
-};
 
-$('.card__share > a').on('click', function (e) {
-    e.preventDefault(); // prevent default action - hash doesn't appear in url
-    $(this).parent().find('div').toggleClass('card__social--active');
-    $(this).toggleClass('share-expanded');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+(function($) {
+    $.fn.clickToggle = function(func1, func2) {
+        var funcs = [func1, func2];
+        this.data('toggleclicked', 0);
+        this.click(function() {
+            var data = $(this).data();
+            var tc = data.toggleclicked;
+            $.proxy(funcs[tc], this)();
+            data.toggleclicked = (tc + 1) % 2;
+        });
+        return this;
+    };
+}(jQuery));
+
+$('.btn-fllw').clickToggle(function(){
+    $.ajax({
+        url: '/ajax/followPodcast/' + getCurrentUrlId(),
+        success: function success() {
+
+        }
+    });
+    $(this).text('Unfollow');
+}, function(){
+    $.ajax({
+        url: '/ajax/unfollowPodcast/' + getCurrentUrlId(),
+        success: function success() {
+
+        }
+    });
+    $(this).text('Follow');
 });
-$('.twitter').on('click', function () {
-    var tweetText = 'Hey!%20Check out this  ' + $(location).attr('href');
-    window.open('https://twitter.com/intent/tweet?text=' + tweetText, '', "width=600,height=230");
-});
+
+
+
+$('.btn-ufllw').clickToggle(function(){
+    $.ajax({
+        url: '/ajax/unfollowPodcast/' + getCurrentUrlId(),
+        success: function success() {
+
+        }
+    });
+    $(this).text('Follow');
+}, function(){
+    $.ajax({
+        url: '/ajax/followPodcast/' + getCurrentUrlId(),
+        success: function success() {
+
+        }
+    });
+    $(this).text('Unfollow');
+})
