@@ -40,7 +40,7 @@ class HomeController extends Controller
         if (!$podcast) {
             return redirect('/404');
         }
-        
+
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
@@ -189,9 +189,20 @@ class HomeController extends Controller
 
     public function ajaxHome()
     {
-        return $this->formatLatestsEpisodes(
-            $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/latests')
-        );
+        $data = $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds');
+
+        return array_map(function($feed){
+            return [
+                "id" => $this->getLinkHash($feed['id']),
+                "name" => $this->formatPodcastName($feed['name']),
+                "thumbnail_30" => $feed['thumbnail_30'],
+                "thumbnail_600" => $feed['thumbnail_600'],
+                "total_episodes" => $feed['total_episodes'],
+                "listen_all" => $feed['listen_all'],
+                "last_episode_at" => $this->formatData($feed['last_episode_at'])
+            ];
+        }, $data);
+        
     }
 
     public function ajaxHomeNoFeeds()
