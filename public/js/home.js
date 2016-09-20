@@ -51,7 +51,6 @@ var findPodcast = function(searchInput){
             return handleViewRender(JSON.parse(response));
         },
         error: function(a, b, c){
-            console.log(a, b, c)
         }
     });
 };
@@ -59,7 +58,7 @@ var findPodcast = function(searchInput){
 
 function handleViewRender(response) {
     response.data.forEach(function (param) {
-        var a = '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><div class="item"><div class="pos-rlt"><div class="bottom"><span class="badge bg-info m-l-sm m-b-sm">' +  param.total_episodes +  '</span></div><div class="item-overlay opacity r r-2x bg-black"><div class="center text-center m-t-n"><a href="#"><i class="icon-control-play i-2x"></i></a></div><div class="bottom padder m-b-sm"><a href="#" class="pull-right"><i class="fa fa-plus-circle"></i></a></div></div><a href="#">';
+        var a = '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><div class="item"><div class="pos-rlt"><div class="bottom"><span class="badge bg-info m-l-sm m-b-sm">' +  param.total_episodes +  '</span></div><div class="item-overlay opacity r r-2x bg-black"><div class="center text-center m-t-n"><a href="#"><i class="icon-action-redo i-2x"></i></a></div><div class="bottom padder m-b-sm"><a href="#" class="pull-right"><i class="fa fa-plus-circle"></i></a></div></div><a href="#">';
         var b = a + '<img src="' + param.thumbnail_600 + '" class="r r-2x img-full"></a></div><div class="padder-v" style="padding-top: 5px"><a href="/podcast/' + param.id + '" class="text-ellipsis">' + param.name + '</a></div></div></div>';
         findPodcastResults.append(b);
     });
