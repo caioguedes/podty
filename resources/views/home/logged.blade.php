@@ -17,24 +17,24 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-xs-5" style="margin-right: 50px;">
                                 <div class="image-shadow"></div>
                                 <div class="subtitle"></div>
                                 <div class="title"></div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 col-xs-4" style="margin-right: 50px;">
                                 <div class="image-shadow"></div>
                                 <div class="subtitle"></div>
                                 <div class="title"></div>
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 hidden-xs" style="margin-right: 20px;">
                                 <div class="image-shadow"></div>
                                 <div class="subtitle"></div>
                                 <div class="title"></div>
                             </div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-2"></div>
+                            <div class="col-md-2 hidden-xs"></div>
+                            <div class="col-md-2 hidden-xs"></div>
+                            <div class="col-md-2 hidden-xs"></div>
                         </div>
                         <style>
                             .header-title {

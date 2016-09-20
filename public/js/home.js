@@ -93,7 +93,7 @@ function getHome(){
 
 function handleViewRenderHome(response) {
     response.forEach(function (param) {
-        var a = '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><div class="item"><div class="pos-rlt"><div class="bottom"><span class="badge bg-info m-l-sm m-b-sm">03:20</span></div><div class="item-overlay opacity r r-2x bg-black">';
+        var a = '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-2"><div class="item"><div class="pos-rlt"><div class="bottom"><span class="badge bg-info m-l-sm m-b-sm">'+param.published_date+'</span></div><div class="item-overlay opacity r r-2x bg-black">';
         var b = a + '<div class="center text-center m-t-n"><a href="/podcast/'+param.podcast_id+'"><i class="icon-action-redo i-2x"></i></a></div></div>';
         var c = b + '<a href="#"><img src="'+param.thumbnail+'" class="r r-2x img-full"></a></div><div class="padder-v">';
         var d = c + '<a href="/podcast/'+param.podcast_id+'" class="text-ellipsis">' + param.title + '</a>';
@@ -129,6 +129,7 @@ function responseHomeAdapter(response){
             title: podcast.name,
             podcast_id: podcast.id,
             podcast_name: '',
+            published_date: podcast.total_episodes + ' Episodes',
         }
     });
 }

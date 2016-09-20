@@ -147,7 +147,7 @@ class HomeController extends Controller
                 'paused_at' => $episode['paused_at'],
                 'media_url' => $episode['media_url'],
                 'media_type' => $episode['media_type'],
-                'published_date' => $episode['published_date'],
+                'published_date' => $this->formatData($episode['published_date']),
                 'content' => $episode['content'],
             ];
         }, $episodes);

@@ -5,7 +5,7 @@
 
     <title>@yield('title')</title>
 
-    <meta name="theme-color" content="#5a6a7a">
+    <meta name="theme-color" content="#232c32">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
