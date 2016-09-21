@@ -7,6 +7,11 @@ class ProfileController extends Controller
 {
     const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
 
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index($user = null)
     {
         $user = $this->getUser($user);
@@ -14,7 +19,7 @@ class ProfileController extends Controller
         if (!$user) {
             return redirect('/404');
         }
-        
+
         return view('profile')->with('data', [
             'user' => $user,
             'podcasts' => $this->getUserPodcasts($user['username']),
