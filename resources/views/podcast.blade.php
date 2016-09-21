@@ -33,7 +33,7 @@
                       <img class="img-full" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
                     <div class="col-md-offset-3 button-follow">
-                        <button class="btn btn-lg btn-dark {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
+                        <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
                             {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>
                     </div>

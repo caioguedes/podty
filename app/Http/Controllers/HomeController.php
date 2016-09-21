@@ -202,7 +202,6 @@ class HomeController extends Controller
                 "last_episode_at" => $this->formatData($feed['last_episode_at'])
             ];
         }, $data);
-        
     }
 
     public function ajaxHomeNoFeeds()

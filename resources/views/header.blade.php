@@ -16,7 +16,7 @@
         </a>
         <a href="/" class="navbar-brand text-lt">
             <i class="icon-earphones"></i>
-            <img src="images/logo.png" alt="." class="hide">
+            <img src="" alt="." class="hide">
             <span class="hidden-nav-xs m-l-sm">Vllep</span>
         </a>
     </div>

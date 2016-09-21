@@ -7,9 +7,7 @@ Route::get('/', 'HomeController@index');
 Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 
 
-Route::get('profile', function(){
-    return view('profile');
-});
+Route::get('profile/{user?}', 'ProfileController@index');
 
 
 
@@ -18,6 +16,9 @@ Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
 Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
 Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
 Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
+
+Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
+Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 
 
 
