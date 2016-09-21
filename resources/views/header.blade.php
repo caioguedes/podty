@@ -96,7 +96,7 @@
                             <a href="#">Settings</a>
                         </li>
                         <li>
-                            <a href="profile">Profile</a>
+                            <a href="/profile">Profile</a>
                         </li>
                         <li class="divider"></li>
                         <li>
