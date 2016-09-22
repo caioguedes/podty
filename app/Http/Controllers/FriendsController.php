@@ -9,17 +9,22 @@ class FriendsController extends Controller
 
     public function all()
     {
-        $response = $this->getContentFrom(self::API_ROOT_URL . 'users/'. Auth::user()->name .'/friends');
+        $response = collect($this->getContentFrom(self::API_ROOT_URL . 'users/'. Auth::user()->name .'/friends'));
 
-
-        return array_map(function($friend){
+        $dateLimit = (new \DateTime())->modify('-1 day');
+        $res = $response->sortByDesc('last_update')->map(function($friend) use($dateLimit) {
+            $last_activity = new \DateTime($friend['last_update']);
             return [
                 'username' => $friend['username'],
                 'profile_url' => 'profile/' . $friend['username'],
                 'email' => $friend['email'],
                 'email_hash' => md5(strtolower(trim($friend['email']))),
+                'last_update' => $friend['last_update'],
+                'was_recently_active' => ($last_activity > $dateLimit) ? true : false
             ];
-        }, $response);
+        })->toArray();
+
+        return array_values($res);
     }
 
     private function getContentFrom($source)

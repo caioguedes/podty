@@ -224,6 +224,11 @@ class HomeController extends Controller
         return $this->makeCurl($url, 'DELETE');
     }
 
+    public function ajaxTouchUser()
+    {
+        $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
+    }
+
     private function makeCurl($url, $method = 'POST')
     {
         $curl = curl_init();

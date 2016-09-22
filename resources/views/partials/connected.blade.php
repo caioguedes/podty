@@ -10,9 +10,9 @@
             <form class="" role="search">
                 <div class="form-group clearfix m-b-none">
                     <div class="input-group m-t m-b">
-                                <span class="input-group-btn">
-                                  <button type="submit" class="btn btn-sm bg-empty text-muted btn-icon"><i class="fa fa-search"></i></button>
-                                </span>
+                        <span class="input-group-btn">
+                          <button type="submit" class="btn btn-sm bg-empty text-muted btn-icon"><i class="fa fa-search"></i></button>
+                        </span>
                         <input type="text" class="form-control input-sm text-white bg-empty b-b b-dark no-border" placeholder="Search members">
                     </div>
                 </div>

@@ -21,6 +21,7 @@ Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
 Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 
 Route::get('ajax/allFriends', 'FriendsController@all');
+Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
 
 
 Route::get('feed/{searchInput}', function($searchInput){

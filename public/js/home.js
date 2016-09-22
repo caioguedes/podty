@@ -2,6 +2,15 @@
 
 $(window).load(function(){
     getHome();
+    (function() {
+        $.ajax({
+            url: '/ajax/touchUser',
+            success: function success() {
+                console.log('done')
+            }
+        });
+    })()
+
 });
 
 
