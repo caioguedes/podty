@@ -5,12 +5,6 @@
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav bg clearfix">
                         <li>
-                            <a href="/">
-                                <i class="icon-bell icon text-success"></i>
-                                <span class="font-bold">What's new</span>
-                            </a>
-                        </li>
-                        <li>
                             <a href="#">
                                 <i class="icon-microphone icon text-info"></i>
                                 <b class="badge bg-primary pull-right" id="podcasts-count">-</b>

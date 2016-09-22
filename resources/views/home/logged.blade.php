@@ -4,7 +4,7 @@
     <section class="hbox stretch">
         <section>
             <section class="vbox">
-                <section class="scrollable padder-lg w-f-md" id="bjax-target">
+                <section class="scrollable padder-lg" id="bjax-target">
                     <h2 class="font-thin m-b" id="home-title"></h2>
                     <div class="row row-sm podcasts-episodes-home">
                     </div>
@@ -61,7 +61,7 @@
                         </style>
                     </div>
                 </section>
-                @include('partials.player')
+                {{--@include('partials.player')--}}
             </section>
         </section>
     </section>
