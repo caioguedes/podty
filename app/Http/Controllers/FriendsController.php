@@ -12,7 +12,7 @@ class FriendsController extends Controller
         $response = collect($this->getContentFrom(self::API_ROOT_URL . 'users/'. Auth::user()->name .'/friends'));
 
         $dateLimit = (new \DateTime())->modify('-1 day');
-        $res = $response->sortByDesc('last_update')->map(function($friend) use($dateLimit) {
+        return $response->map(function($friend) use($dateLimit) {
             $last_activity = new \DateTime($friend['last_update']);
             return [
                 'username' => $friend['username'],
@@ -22,9 +22,7 @@ class FriendsController extends Controller
                 'last_update' => $friend['last_update'],
                 'was_recently_active' => ($last_activity > $dateLimit) ? true : false
             ];
-        })->toArray();
-
-        return array_values($res);
+        });
     }
 
     private function getContentFrom($source)
