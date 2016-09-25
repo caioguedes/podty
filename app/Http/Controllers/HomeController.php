@@ -31,6 +31,9 @@ class HomeController extends Controller
     public function podcast($podcastId)
     {
         $podcast = $this->getPodcastById($podcastId);
+
+        $userFollows = $this->getUserListensToPodcast($podcastId);
+
         $episodes = $this->getEpisodes($podcastId);
         $totalPages = (int)round(($this->meta['total_episodes']??0) / 28);
 
@@ -41,7 +44,7 @@ class HomeController extends Controller
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
-            'userFollows' => $this->getUserListensToPodcast($podcastId),
+            'userFollows' => $userFollows,
             'total_pages' => $totalPages,
         ]);
     }
