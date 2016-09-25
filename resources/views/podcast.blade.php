@@ -32,7 +32,8 @@
                       </div>
                       <img class="img-full" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
-                    <div class="col-md-offset-3 button-follow">
+                    <br>
+                    <div class="button-follow col-lg-offset-4">
                         <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
                             {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>
@@ -43,29 +44,70 @@
 
               <section class="col-sm-6 no-padder bg">
                 <section class="vbox">
-                  <section class="scrollable hover">
-                    <ul class="list-group list-group-lg no-bg auto m-b-none m-t-n-xxs">
+                  <section class="scrollable hover" style="padding-bottom: 50px;">
+
                         @foreach($data['episodes'] as $episode)
-                          <li class="list-group-item clearfix">
-                            <a href="#" class="jp-play-me pull-right m-t-sm m-l text-md">
-                              <i class="icon-control-play text"></i>
-                              <i class="icon-control-pause text-active"></i>
-                                <div class="pull-right m-l">
-                                    <a href="#" class="m-r-sm"><i class="icon-cloud-download"></i></a>
-                                    <a href="#" class="m-r-sm"><i class="icon-plus"></i></a>
-                                    <a href="#"><i class="icon-close"></i></a>
-                                </div>
-                            </a>
-                            <a href="#" class="pull-left thumb-sm m-r">
-                              <img src="{{$data['podcast']['thumbnail_100']}}" class="img-circle">
-                            </a>
-                            <a class="clear" href="#">
-                              <span class="block text-ellipsis">{{$episode['title']}}</span>
-                              <span class="text-muted">{{$episode['published_date']}}</span>
-                            </a>
-                          </li>
+                          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
+                              <div class="item">
+                                  <div class="pos-rlt">
+                                      <div class="bottom">
+                                          @if($episode['duration'])
+                                              <span class="badge bg-info m-l-sm m-b-sm">
+                                                  {{$episode['duration']}}
+                                              </span>
+                                          @endif
+                                      </div>
+
+                                      <div class="item-overlay opacity r r-2x bg-black">
+                                          <a href="#" class="center text-center jp-play-me m-t-n">
+                                              <i class="icon-control-play text i-2x"></i>
+                                              <i class="icon-control-pause text-active  i-2x"></i>
+                                          </a>
+                                          <div class="bottom pull-right text-sm">
+                                              <a href="#" class="pull-right text-sm m-r-sm m-b-sm">
+                                                  <i class="icon-cloud-download"></i>
+                                              </a>
+                                          </div>
+                                      </div>
+                                      <a href="#">
+                                        <img src="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}" class="r r-2x img-full">
+                                      </a>
+                                  </div>
+                                  <div class="padder-v">
+                                      <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a>
+                                      <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$episode['id']}}">
+                                          {{$episode['published_date']}}
+                                      </a>
+                                  </div>
+
+                                  <div class="modal fade" id="myModal{{$episode['id']}}" role="dialog">
+                                      <div class="modal-dialog">
+                                          <div class="modal-content bg-dark">
+                                              <div class="modal-body" style="overflow: scroll; max-height: 300px;">
+                                                  <h4 class="modal-title">{{$episode['title']}}</h4>
+                                                  <hr>
+                                                  <?= !empty($episode['content']) ? $episode['content'] : $episode['summary']?>
+                                              </div>
+                                              <div class="modal-footer">
+                                                  <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">
+                                                      Close
+                                                  </button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+
+                              </div>
+                          </div>
+
                         @endforeach
-                    </ul>
+                      {{--<div>
+                          <ul class="pagination center">
+                              @for($i=1;$i<=$data['total_pages'];$i++)
+                                  <li class="@if($i==1) active @endif"><a href="#">{{$i}}</a></li>
+                              @endfor
+                          </ul>
+                      </div>--}}
                   </section>
                 </section>
               </section>

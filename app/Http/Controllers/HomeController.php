@@ -32,6 +32,7 @@ class HomeController extends Controller
     {
         $podcast = $this->getPodcastById($podcastId);
         $episodes = $this->getEpisodes($podcastId);
+        $totalPages = (int)round(($this->meta['total_episodes']??0) / 28);
 
         if (!$podcast) {
             return redirect('/404');
@@ -40,7 +41,8 @@ class HomeController extends Controller
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
-            'userFollows' => $this->getUserListensToPodcast($podcastId)
+            'userFollows' => $this->getUserListensToPodcast($podcastId),
+            'total_pages' => $totalPages,
         ]);
     }
 
@@ -71,7 +73,7 @@ class HomeController extends Controller
 
     private function getEpisodes($feedId)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feed/$feedId?limit=8");
+        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feed/$feedId?limit=28");
         return is_null($data) ? [] : $data;
     }
 
@@ -125,7 +127,10 @@ class HomeController extends Controller
                 'title' => strip_tags($episode['title']),
                 'link' => $episode['link'],
                 'published_date' => $this->formatData($episode['published_date']),
-                'content' => strip_tags($episode['content']),
+                'content' => $episode['content'],
+                'summary' => $episode['summary'] ?? '',
+                'image' => $episode['image'],
+                'duration' => $episode['duration'],
                 'media_url' => $episode['media_url'],
                 'media_type' => $episode['media_type'],
             ];
@@ -164,7 +169,11 @@ class HomeController extends Controller
             return [];
         }
 
-        return json_decode($data, true)['data'];
+        $response = json_decode($data, true);
+
+        $this->meta = $response['meta'] ?? [];
+
+        return $response['data'];
     }
 
     private function getLinkHash($id)
