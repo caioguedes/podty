@@ -11,9 +11,9 @@
         <section id="content">
           <section class="vbox">
           <section class="w-f-md">
-            <section class="hbox stretch bg-black dker">
+            <section class="hbox stretch bg-light dk">
 
-              <aside class="col-sm-3 no-padder" id="sidebar">
+              <aside class="col-sm-3 no-padder bg-black" id="sidebar">
                 <section class="vbox animated fadeInUp">
                   <section class="scrollable">
                     <div class="m-t-n-xxs item pos-rlt">
@@ -51,7 +51,7 @@
                 </section>
               </aside>
 
-              <section class="col-sm-6 no-padder bg">
+              <section class="col-sm-6 no-padder bg-light dk" style="padding-top: 10px !important;">
                 <section class="vbox">
                   <section class="scrollable hover" style="padding-bottom: 10px;">
 
@@ -73,11 +73,11 @@
                                               <i class="icon-control-play text i-2x"></i>
                                               <i class="icon-control-pause text-active  i-2x"></i>
                                           </a>
-                                          <div class="bottom pull-right text-sm">
+                                          {{--<div class="bottom pull-right text-sm">
                                               <a href="#" class="pull-right text-sm m-r-sm m-b-sm">
                                                   <i class="icon-cloud-download"></i>
                                               </a>
-                                          </div>
+                                          </div>--}}
                                       </div>
                                       <a href="#">
                                         <img src="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}" class="r r-2x img-full">
