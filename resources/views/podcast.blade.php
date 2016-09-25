@@ -32,19 +32,28 @@
                       </div>
                       <img class="img-full" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
+                    <div id="audio" hidden>
+                        <audio controls id="player" style="width: 100%">
+                            <source src="" id="source">
+                        </audio>
+                        <div id="playing">
+                            <span class="center"></span>
+                        </div>
+                    </div>
                     <br>
-                    <div class="button-follow col-lg-offset-4">
+                    <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-4 col-xs-offset-5">
                         <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
                             {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>
                     </div>
+                    <br>
                   </section>
                 </section>
               </aside>
 
               <section class="col-sm-6 no-padder bg">
                 <section class="vbox">
-                  <section class="scrollable hover" style="padding-bottom: 50px;">
+                  <section class="scrollable hover" style="padding-bottom: 10px;">
 
                         @foreach($data['episodes'] as $episode)
                           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
@@ -59,7 +68,8 @@
                                       </div>
 
                                       <div class="item-overlay opacity r r-2x bg-black">
-                                          <a href="#" class="center text-center jp-play-me m-t-n">
+                                          <a href="#" class="center text-center play-me m-t-n">
+                                              <input type="hidden" value="{{$episode['media_url']}}" data-value="{{$episode['title']}}">
                                               <i class="icon-control-play text i-2x"></i>
                                               <i class="icon-control-pause text-active  i-2x"></i>
                                           </a>
@@ -114,7 +124,6 @@
             </section>
           </section>
         </section>
-        @include('partials.player')
         </section>
       </section>
   </section>
