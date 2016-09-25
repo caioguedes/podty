@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
-    <link rel="stylesheet" href="/js/jPlayer/jplayer.flat.css" type="text/css" />
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
     <link rel="stylesheet" href="/css/animate.css" type="text/css" />
     <link rel="stylesheet" href="/css/font-awesome.min.css" type="text/css" />

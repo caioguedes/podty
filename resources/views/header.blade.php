@@ -94,10 +94,10 @@
                         {{ Auth::user()->name }}<b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu animated fadeInRight">
-                        <li>
+                        {{--<li>
                             <span class="arrow top"></span>
                             <a href="#">Settings</a>
-                        </li>
+                        </li>--}}
                         <li>
                             <a href="/profile">Profile</a>
                         </li>
