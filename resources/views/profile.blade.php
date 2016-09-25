@@ -19,19 +19,15 @@
                                 <div class="h3 m-t-xs m-b-xs">{{$data['user']['username']}}</div>
                             </div>
                         </div>
-                        <div class="panel wrapper">
+                        <div class="panel wrapper bg-dark">
                             <div class="row text-center">
                                 <div class="col-xs-6">
-                                    <a href="#">
-                                        <span class="m-b-xs h4 block">{{$data['user']['podcasts_count']}}</span>
-                                        <small class="text-muted">Podcasts</small>
-                                    </a>
+                                    <span class="m-b-xs h4 block">{{$data['user']['podcasts_count']}}</span>
+                                    <small class="text-muted">Podcasts</small>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a href="#">
-                                        <span class="m-b-xs h4 block">{{$data['user']['friends_count']}}</span>
-                                        <small class="text-muted">Friends</small>
-                                    </a>
+                                    <span class="m-b-xs h4 block">{{$data['user']['friends_count']}}</span>
+                                    <small class="text-muted">Friends</small>
                                 </div>
                             </div>
                         </div>
