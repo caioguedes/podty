@@ -107,7 +107,11 @@ $(document).ready(function(){
         var audio = document.getElementById('player');
         var source = document.getElementById('source');
         source.src = $(this).find('input').val();
-        $('#playing span').text($(this).find('input').attr('data-value'));
+
+        var inputData = $(this).find('input');
+
+        $('#playing span').text(inputData.attr('data-title'));
+        $('.podcast-image').attr('src', inputData.attr('data-image'));
         audio.load();
         $('#audio').attr('hidden', false);
         audio.play();

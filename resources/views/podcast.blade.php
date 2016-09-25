@@ -30,7 +30,7 @@
                         <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>
                         <span class="h2 font-thin">{{$data['podcast']['name']}}</span>
                       </div>
-                      <img class="img-full" src="{{$data['podcast']['thumbnail_600']}}">
+                      <img class="img-full podcast-image" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
                     <div id="audio" hidden>
                         <audio controls id="player" style="width: 100%">
@@ -69,7 +69,11 @@
 
                                       <div class="item-overlay opacity r r-2x bg-black">
                                           <a href="#" class="center text-center play-me m-t-n">
-                                              <input type="hidden" value="{{$episode['media_url']}}" data-value="{{$episode['title']}}">
+                                              <input type="hidden"
+                                                     value="{{$episode['media_url']}}"
+                                                     data-title="{{$episode['title']}}"
+                                                     data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}"
+                                              >
                                               <i class="icon-control-play text i-2x"></i>
                                               <i class="icon-control-pause text-active  i-2x"></i>
                                           </a>
