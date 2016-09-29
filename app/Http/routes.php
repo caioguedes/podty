@@ -17,6 +17,9 @@ Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
 Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
 Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
 
+Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpisodes');
+
+
 Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
 Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 

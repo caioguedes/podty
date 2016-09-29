@@ -49,10 +49,27 @@ class HomeController extends Controller
         ]);
     }
 
+    public function ajaxMoreEpisodes($podcastId, $page = 1)
+    {
+        $limit = 28;
+        $offset = ($limit * $page);
+
+        $episodes = $this->getEpisodes($podcastId, $offset);
+
+        if (!$episodes) {
+            return response()->json([], 404);
+        }
+
+        return [
+            'podcast' => array_first($this->getPodcastById($podcastId)),
+            'episodes' => $this->formatEpisodes($episodes),
+        ];
+    }
+
     private function getLatestsPodcasts()
     {
         return $this->formatPodcasts(
-            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest?limit=12')
+            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest')
         );
     }
 
@@ -74,9 +91,15 @@ class HomeController extends Controller
         return $this->formatPodcasts($data);
     }
 
-    private function getEpisodes($feedId)
+    private function getEpisodes($feedId, $offset = 0, $limit = 28)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "episodes/feed/$feedId?limit=28");
+        $url = self::API_ROOT_URL . "episodes/feed/$feedId?limit=" . $limit;
+
+        if ($offset) {
+            $url .= '&offset=' . $offset;
+        }
+
+        $data = $this->getContentFrom($url);
         return is_null($data) ? [] : $data;
     }
 

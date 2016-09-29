@@ -101,8 +101,29 @@ var getCurrentUrlId = function getCurrentUrlId() {
     return window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
 };
 
-
 $(document).ready(function(){
+    var page = 1;
+    var stopRetrieving = false;
+    $('#podcast-list').on('scroll', function() {
+        if(!stopRetrieving && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            var podcastId = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+            $.ajax({
+                method: 'GET',
+                url: '/ajax/moreEpisodes/' + podcastId + '/' + page++,
+                success: function(res) {
+                    renderPodcastView(res);
+                    stopRetrieving = false;
+                },
+                beforeSend: function(){
+                    stopRetrieving = true;
+                },
+                error: function(){
+                    stopRetrieving = true;
+                }
+            });
+        }
+    });
+
     $(document).on('click', '.play-me', function(){
         var audio = document.getElementById('player');
         var source = document.getElementById('source');
@@ -188,3 +209,47 @@ $('.btn-ufllw').clickToggle(function(){
     });
     $(this).text('Unfollow');
 })
+
+
+
+function renderPodcastView(data) {
+    data.episodes.map(function(episode){
+        var view = render(episode, data.podcast)
+
+        $('#podcast-list').append(view);
+
+    })
+}
+
+function render(episode, podcast) {
+    return '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">'
+                + '<div class="item">'
+                    + '<div class="pos-rlt">'
+                        + '<div class="bottom">' +
+                            (!episode.duration ? '' : '<span class="badge bg-info m-l-sm m-b-sm">' + episode.duration + '</span>' )
+                        + '</div>'
+                        + '<div class="item-overlay opacity r r-2x bg-black">'
+                            + '<a href="#" class="center text-center play-me m-t-n">'
+                                + '<input type="hidden" value="' + episode.media_url + '" data-title="' + episode.title + '" data-image="' + (episode.image ? episode.image : podcast.thumbnail_600) + '">'
+                                + '<i class="icon-control-play text i-2x"></i>'
+                                + '<i class="icon-control-pause text-active  i-2x"></i>'
+                            + '</a>'
+                        + '</div>'
+                        + '<a href="#">'
+                            + '<img src="' + (episode.image ? episode.image: podcast.thumbnail_600) + '" class="r r-2x img-full">'
+                        + '</a>'
+                    + '</div>'
+                    + '<div class="padder-v">'
+                        + '<a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal'+episode.id+'">'
+                            + episode.title
+                        + '</a>'
+                        + '<a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal'+episode.id+'">'
+                            + episode.published_date
+                        + '</a>'
+                    + '</div>'
+                    + '<div class="modal fade" id="myModal'+episode.id+'" role="dialog">'
+                    + '</div>'
+                + '</div>'
+            + '</div>'
+        + '</div>';
+}
