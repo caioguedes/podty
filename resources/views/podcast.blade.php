@@ -12,7 +12,6 @@
           <section class="vbox">
           <section class="w-f-md">
             <section class="hbox stretch bg-light dk">
-
               <aside class="col-sm-3 no-padder bg-black" id="sidebar">
                 <section class="vbox animated fadeInUp">
                   <section class="scrollable">
@@ -54,7 +53,6 @@
               <section class="col-sm-6 no-padder bg-light dk" style="padding-top: 10px !important;">
                 <section class="vbox">
                   <section class="scrollable hover" id="podcast-list" style="padding-bottom: 10px;">
-
                         @foreach($data['episodes'] as $episode)
                           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
                               <div class="item">
@@ -110,18 +108,9 @@
                                           </div>
                                       </div>
                                   </div>
-
                               </div>
                           </div>
-
                         @endforeach
-                      {{--<div>
-                          <ul class="pagination center">
-                              @for($i=1;$i<=$data['total_pages'];$i++)
-                                  <li class="@if($i==1) active @endif"><a href="#">{{$i}}</a></li>
-                              @endfor
-                          </ul>
-                      </div>--}}
                   </section>
                 </section>
               </section>
