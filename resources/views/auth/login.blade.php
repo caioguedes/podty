@@ -18,7 +18,7 @@
 @section('content')
     <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
         <div class="container aside-xl">
-            <a class="navbar-brand block" href="/"><span class="h1 font-bold">Vllep</span></a>
+            <a class="navbar-brand block" href="/"><span class="h1 font-bold">Podty</span></a>
             <section class="m-b-lg">
                 <header class="wrapper text-center">
                     <strong>Sign in to get in touch</strong>
@@ -39,7 +39,7 @@
                         <input type="text" class="form-control rounded input-lg text-center no-border" name="name" value="{{ old('name') }}" placeholder="username" required>
                     </div>
                     <div class="form-group">
-                        <input type="password" class="form-control rounded input-lg text-center no-border" name="password" placeholder="Password" required>
+                        <input type="password" class="form-control rounded input-lg text-center no-border" name="password" placeholder="password" required>
                     </div>
                     <div class="form-group">
                         <div class="col-md-6 col-md-offset-4">

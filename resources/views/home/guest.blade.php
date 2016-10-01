@@ -26,7 +26,7 @@
 @endsection
 
 <div class="text-center" style="padding-top: 10%; height: 100%;">
-    <h1 class="hidden-xs" style="padding-bottom: 2%;">Vllep</h1>
+    <h1 class="hidden-xs" style="padding-bottom: 2%;">Podty</h1>
 
     <h2>Welcome to the worldwide <br> podcast community </h2>
 

@@ -355,8 +355,8 @@ a.list-group-item:focus {
   margin: -5px 0;
 }
 .dropdown-menu > li > a {
-  padding: 5px 15px;
-}
+   padding: 5px 15px;
+ }
 .dropdown-menu > li > a:hover,
 .dropdown-menu > li > a:focus,
 .dropdown-menu > .active > a,
@@ -367,6 +367,25 @@ a.list-group-item:focus {
   background-color: #e8eff0 !important;
   color: #303437;
 }
+
+
+a#logout-anchor {
+  padding: 5px 15px;
+  display: block;
+  clear: both;
+  font-weight: normal;
+  line-height: 1.42857143;
+  color: #333;
+  white-space: nowrap;
+}
+a#logout-anchor:hover,
+a#logout-anchor:focus {
+  background-image: none;
+  filter: none;
+  background-color: #e8eff0 !important;
+  color: #303437;
+}
+
 .dropdown-header {
   padding: 5px 15px;
 }

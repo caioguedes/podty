@@ -17,7 +17,7 @@
         <a href="/" class="navbar-brand text-lt">
             <i class="icon-earphones"></i>
             <img src="" alt="." class="hide">
-            <span class="hidden-nav-xs m-l-sm">Vllep</span>
+            <span class="hidden-nav-xs m-l-sm">Podty</span>
         </a>
     </div>
     @unless(Auth::guest())
@@ -103,7 +103,10 @@
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="{{ url('/logout') }}" >Logout</a>
+                            <form action="{{ url('/logout') }}" method="POST" id="logout-form">
+                                {{ csrf_field() }}
+                                <a href="#" id="logout-anchor">Logout</a>
+                            </form>
                         </li>
                     </ul>
                 </li>
@@ -111,5 +114,8 @@
         </div>
     @endif
 </header>
-
-
+<script>
+    $("a#logout-anchor").click(function(){
+        $("#logout-form").submit();
+    });
+</script>

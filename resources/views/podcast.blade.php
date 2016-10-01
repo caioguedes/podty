@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Vllep')
+@section('title', 'Podty')
 
 @section('content')
   <section class="vbox">

@@ -1,32 +1,9 @@
 <?php
 
-Route::auth();
-
+Auth::routes();
 Route::get('/', 'HomeController@index');
-
 Route::get('/podcast/{podcastId}', 'HomeController@podcast');
-
-
 Route::get('profile/{user?}', 'ProfileController@index');
-
-
-
-Route::get('ajax/home', 'HomeController@ajaxHome');
-Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
-Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
-Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
-Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
-
-Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpisodes');
-
-
-Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
-Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
-
-Route::get('ajax/allFriends', 'FriendsController@all');
-Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
-
-
 Route::get('feed/{searchInput}', function($searchInput){
     $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . $searchInput;
     $curl = curl_init($source);
@@ -62,3 +39,16 @@ Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
 
     return $data;
 });
+
+
+Route::get('ajax/home', 'HomeController@ajaxHome');
+Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
+Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
+Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
+Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
+Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpisodes');
+Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
+Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
+Route::get('ajax/allFriends', 'FriendsController@all');
+Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
+

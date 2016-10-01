@@ -18,7 +18,7 @@
 @section('content')
     <section id="content" class="m-t-lg wrapper-md animated fadeInDown">
         <div class="container aside-xl">
-            <a class="navbar-brand block" href="/"><span class="h1 font-bold">Vllep</span></a>
+            <a class="navbar-brand block" href="/"><span class="h1 font-bold">Podty</span></a>
             <section class="m-b-lg">
                 <header class="wrapper text-center">
                     <strong>Sign up to find interesting thing</strong>
@@ -27,7 +27,7 @@
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <input placeholder="Username" name="name" class="form-control rounded input-lg text-center no-border" value="{{ old('name') }}">
+                            <input placeholder="username" name="name" class="form-control rounded input-lg text-center no-border" value="{{ old('name') }}">
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('name') }}</strong>
@@ -36,7 +36,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <input type="email" placeholder="Email" class="form-control rounded input-lg text-center no-border" name="email" value="{{ old('email') }}">
+                            <input type="email" placeholder="email" class="form-control rounded input-lg text-center no-border" name="email" value="{{ old('email') }}">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('email') }}</strong>
@@ -45,7 +45,7 @@
                         </div>
 
                         <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <input type="password" class="form-control rounded input-lg text-center no-border" name="password" placeholder="Password">
+                            <input type="password" class="form-control rounded input-lg text-center no-border" name="password" placeholder="password">
                             @if ($errors->has('password'))
                                 <span class="help-block">
                                     <strong>{{ $errors->first('password') }}</strong>
