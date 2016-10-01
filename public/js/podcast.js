@@ -102,6 +102,7 @@ var getCurrentUrlId = function getCurrentUrlId() {
 };
 
 $(document).ready(function(){
+    (function() {$.ajax({url: '/ajax/touchUser'});})()
     var page = 1;
     var stopRetrieving = false;
     $('#podcast-list').on('scroll', function() {

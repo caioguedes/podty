@@ -255,7 +255,9 @@ class HomeController extends Controller
 
     public function ajaxTouchUser()
     {
-        $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
+        if (Auth::user()) {
+            $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
+        }
     }
 
     private function makeCurl($url, $method = 'POST')
