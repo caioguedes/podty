@@ -35,11 +35,9 @@ var findPodcast = function(searchInput){
     if (!searchInput) {
         return;
     }
-
-    searchInput = searchInput.trim();
-
+    
     $.ajax({
-        url: 'feed/' + searchInput,
+        url: 'feed/' + encodeURI(searchInput.trim()),
         beforeSend: function() {
             $('#home-title').text('Discover Podcasts')
             removeChildren(findPodcastResults)
