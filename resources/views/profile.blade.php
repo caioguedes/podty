@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Podty')
+@section('title', $data['user']['username'] . " - Podty")
 
 @section('content')
   <section class="vbox">
@@ -32,12 +32,13 @@
                             </div>
                         </div>
 
-                        <div class="col-md-offset-3 button-follow" @if(Auth::user()->name == $data['user']['username']) hidden @endif>
-                            <button class="btn btn-lg btn-info btn-rounded {{$data['isFriend'] ? 'btn-ufllw':'btn-fllw'}}">
-                                {{$data['isFriend'] ? 'Unfollow':'Follow'}}
-                            </button>
-                        </div>
-
+                        @if(Auth::user())
+                            <div class="col-md-offset-3 button-follow" @if(Auth::user()->name == $data['user']['username']) hidden @endif>
+                                <button class="btn btn-lg btn-info btn-rounded {{$data['isFriend'] ? 'btn-ufllw':'btn-fllw'}}">
+                                    {{$data['isFriend'] ? 'Unfollow':'Follow'}}
+                                </button>
+                            </div>
+                        @endif
                     </div>
                     <div class="col-md-8">
                         <h2>Podcasts</h2>

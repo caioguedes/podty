@@ -7,11 +7,6 @@ class ProfileController extends Controller
 {
     const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
 
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
     public function index($user = null)
     {
         $user = $this->getUser($user);
@@ -23,7 +18,7 @@ class ProfileController extends Controller
         return view('profile')->with('data', [
             'user' => $user,
             'podcasts' => $this->getUserPodcasts($user['username']),
-            'isFriend' => empty($this->getAreFriends($user)) ? false : true
+            'isFriend' => !Auth::user() ? false : empty($this->getAreFriends($user)) ? false : true
         ]);
     }
 

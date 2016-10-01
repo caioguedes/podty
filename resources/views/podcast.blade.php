@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Podty')
+@section('title', str_limit($data['podcast']['name'], 20) . ' - Podty')
 
 @section('content')
   <section class="vbox">
