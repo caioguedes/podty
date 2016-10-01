@@ -40,12 +40,14 @@
                         </div>
                     </div>
                     <br>
-                    <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-4 col-xs-offset-5">
+                    @if(Auth::user())
+                      <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-4 col-xs-offset-5">
                         <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
-                            {{$data['userFollows'] ? 'Unfollow':'Follow'}}
+                          {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>
-                    </div>
-                    <br>
+                      </div>
+                      <br>
+                    @endif
                   </section>
                 </section>
               </aside>

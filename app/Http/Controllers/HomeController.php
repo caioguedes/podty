@@ -11,12 +11,6 @@ use Illuminate\Support\Facades\Auth;
 class HomeController extends Controller
 {
     const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
-    //const API_ROOT_URL = 'localhost:8081/v1/';
-
-    public function __construct()
-    {
-        $this->middleware('auth')->except('index');
-    }
 
     /**
      * Show the application dashboard.
@@ -32,7 +26,7 @@ class HomeController extends Controller
     {
         $podcast = $this->getPodcastById($podcastId);
 
-        $userFollows = $this->getUserListensToPodcast($podcastId);
+        $userFollows = Auth::user()? $this->getUserListensToPodcast($podcastId) : false;
 
         $episodes = $this->getEpisodes($podcastId);
         $totalPages = (int)round(($this->meta['total_episodes']??0) / 28);
