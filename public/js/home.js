@@ -35,7 +35,7 @@ var findPodcast = function(searchInput){
     if (!searchInput) {
         return;
     }
-    
+
     $.ajax({
         url: 'feed/' + encodeURI(searchInput.trim()),
         beforeSend: function() {
@@ -110,7 +110,7 @@ function getHomeNoFeed(){
             showLoader(false)
         },
         success: function success(response) {
-            $('#home-title').text('Latests Podcasts');
+            $('#home-title').text('Top Podcasts');
             return handleViewRenderHome(response);
         },
         error: function(){

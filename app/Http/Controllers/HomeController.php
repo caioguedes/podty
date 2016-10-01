@@ -67,6 +67,13 @@ class HomeController extends Controller
         );
     }
 
+    private function getTopPodcasts()
+    {
+        return $this->formatPodcasts(
+            $this->getContentFrom(self::API_ROOT_URL . 'feeds/top/25')
+        );
+    }
+
     private function getLatestsEpisodes()
     {
         return $this->formatLatestsEpisodes(
@@ -231,7 +238,7 @@ class HomeController extends Controller
 
     public function ajaxHomeNoFeeds()
     {
-        return $this->getLatestsPodcasts();
+        return $this->getTopPodcasts();
     }
 
     public function ajaxSidebar()
