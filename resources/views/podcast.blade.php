@@ -33,7 +33,7 @@
                     <br>
                     @if(Auth::user())
                       <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-4">
-                        <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
+                        <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}" data-follows="{{$data['userFollows']}}">
                           {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>
                       </div>
@@ -63,6 +63,7 @@
                                               <input type="hidden"
                                                      value="{{$episode['media_url']}}"
                                                      data-title="{{$episode['title']}}"
+                                                     data-id="{{$episode['id']}}"
                                                      data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}"
                                               >
                                               <i class="icon-control-play text i-2x"></i>

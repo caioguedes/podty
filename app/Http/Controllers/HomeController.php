@@ -268,6 +268,12 @@ class HomeController extends Controller
         }
     }
 
+    public function ajaxUptEpisode($episodeId, $currentTime)
+    {
+        if (Auth::user())
+            $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/' . $episodeId . '/paused/' . $currentTime, 'PUT');
+    }
+
     private function makeCurl($url, $method = 'POST')
     {
         $curl = curl_init();

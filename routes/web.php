@@ -54,3 +54,4 @@ Route::get('ajax/allFriends', 'FriendsController@all');
 Route::get('ajax/findUser/{user}', 'FriendsController@find');
 Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
 
+Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptEpisode');
