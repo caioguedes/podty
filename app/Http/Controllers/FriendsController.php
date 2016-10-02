@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class FriendsController extends Controller
@@ -11,7 +12,7 @@ class FriendsController extends Controller
     {
         $response = collect($this->getContentFrom(self::API_ROOT_URL . 'users/'. Auth::user()->name .'/friends'));
 
-        $dateLimit = (new \DateTime())->modify('-1 day');
+        $dateLimit = (new \DateTime())->modify('-6 hour');
         return $response->map(function($friend) use($dateLimit) {
             $last_activity = new \DateTime($friend['last_update']);
             return [
@@ -19,7 +20,7 @@ class FriendsController extends Controller
                 'profile_url' => 'profile/' . $friend['username'],
                 'email' => $friend['email'],
                 'email_hash' => md5(strtolower(trim($friend['email']))),
-                'last_update' => $friend['last_update'],
+                'last_seen' => Carbon::createFromFormat('Y-m-d H:i:s',$friend['last_update'])->diffForHumans(),
                 'was_recently_active' => ($last_activity > $dateLimit) ? true : false
             ];
         });

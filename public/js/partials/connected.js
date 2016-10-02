@@ -20,7 +20,7 @@ function renderHTML(friend) {
     var c = b + '<i class="' + active + ' b-light right sm"></i></span><div class="clear">';
     var d = c + '<div><a href="/' + friend.profile_url + '">' + friend.username + '</a></div>';
 
-    return d + '<small class="text-muted">Coffee</small></div></li>';
+    return d + '<small class="text-muted">'+friend.last_seen+'</small></div></li>';
 }
 
 
