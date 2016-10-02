@@ -50,5 +50,6 @@ Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpis
 Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
 Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 Route::get('ajax/allFriends', 'FriendsController@all');
+Route::get('ajax/findUser/{user}', 'FriendsController@find');
 Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
 

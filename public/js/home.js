@@ -10,6 +10,7 @@ var removeChildren = function(e) {
     return e.children().remove()
 };
 
+var canSearchForPodcasts = true;
 var inputFindPodcast = $('#find-cast');
 var btnFindPodcast = $('.btn-find-cast');
 var findPodcastResults = $('.podcasts-episodes-home');
@@ -32,21 +33,23 @@ btnFindPodcast.click(function(){
 
 var findPodcast = function(searchInput){
 
-    if (!searchInput) {
+    if (!searchInput || !canSearchForPodcasts) {
         return;
     }
 
     $.ajax({
         url: 'feed/' + encodeURI(searchInput.trim()),
         beforeSend: function() {
-            $('#home-title').text('Discover Podcasts')
-            removeChildren(findPodcastResults)
-            showLoader(true)
+            $('#home-title').text('Discover Podcasts');
+            removeChildren(findPodcastResults);
+            showLoader(true);
+            canSearchForPodcasts = false;
         },
         complete: function() {
             showLoader(false)
         },
         success: function success(response) {
+            canSearchForPodcasts = true;
             return handleViewRender(JSON.parse(response));
         },
         error: function(a, b, c){

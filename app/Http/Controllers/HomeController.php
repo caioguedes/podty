@@ -70,7 +70,7 @@ class HomeController extends Controller
     private function getTopPodcasts()
     {
         return $this->formatPodcasts(
-            $this->getContentFrom(self::API_ROOT_URL . 'feeds/top/25')
+            $this->getContentFrom(self::API_ROOT_URL . 'feeds/top/24')
         );
     }
 

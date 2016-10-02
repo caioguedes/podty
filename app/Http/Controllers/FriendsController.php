@@ -25,6 +25,24 @@ class FriendsController extends Controller
         });
     }
 
+    public function find($user)
+    {
+        $response = $this->getContentFrom(self::API_ROOT_URL . 'users/' . $user);
+
+        $dateLimit = (new \DateTime())->modify('-1 day');
+
+        $last_activity = new \DateTime($response['last_update']);
+
+        return [
+            'username' => $response['username'],
+            'profile_url' => 'profile/' . $response['username'],
+            'email' => $response['email'],
+            'email_hash' => md5(strtolower(trim($response['email']))),
+            'last_update' => $response['last_update'] ?? '',
+            'was_recently_active' => ($last_activity > $dateLimit) ? true : false
+        ];
+    }
+
     private function getContentFrom($source)
     {
         $curl = curl_init($source);
