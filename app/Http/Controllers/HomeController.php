@@ -115,7 +115,7 @@ class HomeController extends Controller
     {
         return array_map(function($feed){
             return [
-                "id" => $this->getLinkHash($feed['id']),
+                "id" => $feed['id'],
                 "name" => $this->formatPodcastName($feed['name']),
                 "url" => $feed['url'],
                 "thumbnail_30" => $feed['thumbnail_30'],
@@ -226,7 +226,7 @@ class HomeController extends Controller
 
         return array_map(function($feed){
             return [
-                "id" => $this->getLinkHash($feed['id']),
+                "id" => $feed['id'],
                 "name" => $this->formatPodcastName($feed['name']),
                 "thumbnail_30" => $feed['thumbnail_30'],
                 "thumbnail_600" => $feed['thumbnail_600'],
