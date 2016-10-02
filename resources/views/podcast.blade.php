@@ -16,18 +16,9 @@
                 <section class="vbox animated fadeInUp">
                   <section class="scrollable">
                     <div class="m-t-n-xxs item pos-rlt">
-                      <div class="top text-right">
-                        <span class="musicbar animate bg-success bg-empty inline m-r-lg m-t" style="width:25px;height:30px">
-                          <span class="bar1 a3 lter"></span>
-                          <span class="bar2 a5 lt"></span>
-                          <span class="bar3 a1 bg"></span>
-                          <span class="bar4 a4 dk"></span>
-                          <span class="bar5 a2 dker"></span>
-                        </span>
-                      </div>
-                      <div class="bottom gd bg-info wrapper-lg">
+                      <div class="bottom gd bg-info wrapper-lg podcast-image-texts">
                         <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>
-                        <span class="h2 font-thin">{{$data['podcast']['name']}}</span>
+                        <span class="text-sm">{{$data['podcast']['listeners']}} <br> Listeners</span>
                       </div>
                       <img class="img-full podcast-image" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
@@ -41,7 +32,7 @@
                     </div>
                     <br>
                     @if(Auth::user())
-                      <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-4 col-xs-offset-5">
+                      <div class="button-follow col-lg-offset-4 col-md-offset-3 col-sm-offset-3 col-xs-offset-4">
                         <button class="btn btn-lg btn-info btn-rounded {{$data['userFollows'] ? 'btn-ufllw':'btn-fllw'}}">
                           {{$data['userFollows'] ? 'Unfollow':'Follow'}}
                         </button>

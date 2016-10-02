@@ -123,6 +123,7 @@ class HomeController extends Controller
                 "thumbnail_100" => $feed['thumbnail_100'],
                 "thumbnail_600" => $feed['thumbnail_600'],
                 "total_episodes" => $feed['total_episodes'],
+                "listeners" => $feed['listeners'],
                 "last_episode_at" => $this->formatData($feed['last_episode_at'])
             ];
         }, $feeds);

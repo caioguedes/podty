@@ -102,6 +102,7 @@ var getCurrentUrlId = function getCurrentUrlId() {
 };
 
 $(document).ready(function(){
+
     (function() {$.ajax({url: '/ajax/touchUser'});})()
     var page = 1;
     var stopRetrieving = false;
@@ -134,8 +135,10 @@ $(document).ready(function(){
 
         $('#playing span').text(inputData.attr('data-title'));
         $('.podcast-image').attr('src', inputData.attr('data-image'));
+        $('.podcast-image-texts').attr('hidden', true);
         audio.load();
         $('#audio').attr('hidden', false);
+        $('.musicbar').addClass('animate')
         audio.play();
     });
 });
