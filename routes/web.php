@@ -5,7 +5,8 @@ Route::get('/', 'HomeController@index');
 Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 Route::get('profile/{user?}', 'ProfileController@index');
 Route::get('feed/{searchInput}', function($searchInput){
-    $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . $searchInput;
+
+    $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . rawurlencode($searchInput);
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
