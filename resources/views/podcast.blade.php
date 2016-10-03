@@ -5,10 +5,14 @@
   <section class="vbox">
       @include('header')
       <section class="hbox stretch">
+
         @include('partials.bar.left')
-          <section id="content">
-              <section class="hbox stretch bg-light dk">
-                 <aside class="col-sm-3 no-padder bg-black" id="sidebar">
+
+        <section id="content">
+          <section class="vbox">
+          <section class="w-f-md">
+            <section class="hbox stretch bg-light dk">
+              <aside class="col-sm-3 no-padder bg-black" id="sidebar">
                     <div class="item pos-rlt">
                       <div class="bottom gd bg-info wrapper-md podcast-image-texts">
                         <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>
@@ -35,8 +39,9 @@
                     @endif
 
               </aside>
+
               <section class="col-sm-6 no-padder bg-light dk" style="padding-top: 10px !important;">
-              <section class="vbox">
+                <section class="vbox">
                   <section class="scrollable hover" id="podcast-list" style="padding-bottom: 10px;">
                         @foreach($data['episodes'] as $episode)
                           <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
@@ -100,8 +105,10 @@
                   </section>
                 </section>
               </section>
-              </section>
+            </section>
           </section>
+        </section>
+        </section>
       </section>
   </section>
 @endsection
