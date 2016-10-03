@@ -34,7 +34,7 @@ class HomeController extends Controller
         if (!$podcast) {
             return redirect('/404');
         }
-
+        
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],

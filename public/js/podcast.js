@@ -60,14 +60,12 @@ $(document).ready(function() {
 
             lastCurrentTime = currentTime;
 
-            console.log($('.button-follow button').attr('data-follows'));
-
             if (!$('.button-follow button').attr('data-follows')) return false;
 
             $.ajax({
                 url: '/ajax/uptEpisode/' + inputData.attr('data-id') + '/' + currentTime
             });
-        }, 5000);
+        }, 15000);
     });
 });
 
