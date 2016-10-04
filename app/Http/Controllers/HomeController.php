@@ -34,13 +34,18 @@ class HomeController extends Controller
         if (!$podcast) {
             return redirect('/404');
         }
-        
+
         return view('podcast')->with('data', [
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
             'userFollows' => $userFollows,
             'total_pages' => $totalPages,
         ]);
+    }
+
+    public function top()
+    {
+        return view('top');
     }
 
     public function ajaxMoreEpisodes($podcastId, $page = 1)

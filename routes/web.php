@@ -4,6 +4,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 Route::get('profile/{user?}', 'ProfileController@index');
+Route::get('top', 'HomeController@top');
 Route::get('feed/{searchInput}', function($searchInput){
 
     $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . rawurlencode($searchInput);
