@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Vllep - Sign Up')
+@section('title', 'Podty - Sign Up')
 
 @section('head')
     <style>
