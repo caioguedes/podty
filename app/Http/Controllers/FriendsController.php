@@ -6,11 +6,9 @@ use Illuminate\Support\Facades\Auth;
 
 class FriendsController extends Controller
 {
-    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
-
     public function all()
     {
-        $response = collect($this->getContentFrom(self::API_ROOT_URL . 'users/'. Auth::user()->name .'/friends'));
+        $response = collect($this->getContentFrom(env('API_BASE_URL') . 'users/'. Auth::user()->name .'/friends'));
 
         $dateLimit = (new \DateTime())->modify('-6 hour');
         return $response->map(function($friend) use($dateLimit) {
@@ -28,7 +26,7 @@ class FriendsController extends Controller
 
     public function find($user)
     {
-        $response = $this->getContentFrom(self::API_ROOT_URL . 'users/' . $user);
+        $response = $this->getContentFrom(env('API_BASE_URL') . 'users/' . $user);
 
         $dateLimit = (new \DateTime())->modify('-1 day');
 
@@ -50,7 +48,7 @@ class FriendsController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, 'brnbp' . ":" . 'brnbp');
+        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
 
         $data = curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);

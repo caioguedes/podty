@@ -81,7 +81,7 @@ class RegisterController extends Controller
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => "http://brnapi.us-east-1.elasticbeanstalk.com/v1/users",
+            CURLOPT_URL => env('API_BASE_URL') . "users",
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => "",
             CURLOPT_MAXREDIRS => 10,
@@ -90,9 +90,9 @@ class RegisterController extends Controller
             CURLOPT_CUSTOMREQUEST => "POST",
             CURLOPT_POSTFIELDS => "{\n    \"username\": \"$username\",\n    \"email\": \"$email\",\n    \"password\": \"$password\"\n}",
             CURLOPT_HTTPHEADER => array(
-                "authorization: Basic YnJuYnA6YnJuYnA=",
                 "content-type: application/json"
             ),
+            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
         ));
 
         $response = curl_exec($curl);

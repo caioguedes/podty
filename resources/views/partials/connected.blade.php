@@ -7,7 +7,7 @@
             </section>
 
             <footer class="footer footer-md search-users" style="margin-bottom:35px;background:#4d5d6e;border-top: 2px solid #657789;" hidden>
-                <h4 class="font-thin m-l-md m-t">Results <a id="clear-search-users" style="font-size: 12px;">Clear</a></h4>
+                <h4 class="font-thin m-l-md m-t">Results <a href="#" id="clear-search-users" style="font-size: 12px;">Clear</a></h4>
                 <ul class="list-group no-bg no-borders auto m-t-n-xxs search-users-list"></ul>
             </footer>
             <footer class="footer footer-md bg-black">

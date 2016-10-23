@@ -7,12 +7,12 @@ Route::get('profile/{user?}', 'ProfileController@index');
 Route::get('top', 'HomeController@top');
 Route::get('feed/{searchInput}', function($searchInput){
 
-    $source = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/feeds/name/' . rawurlencode($searchInput);
+    $source = env('API_BASE_URL') . 'feeds/name/' . rawurlencode($searchInput);
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_USERPWD, 'brnbp' . ":" . 'brnbp');
+    curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
 
     $data = curl_exec($curl);
     $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -25,12 +25,12 @@ Route::get('feed/{searchInput}', function($searchInput){
 });
 
 Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
-    $source = 'localhost:8081/v1/episodes/feedId/' . $podcastId . '?term=' . $term;
+    $source = env('API_BASE_URL') . 'episodes/feedId/' . $podcastId . '?term=' . $term;
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
     curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_USERPWD, 'brnbp' . ":" . 'brnbp');
+    curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
 
     $data = curl_exec($curl);
     $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
