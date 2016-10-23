@@ -5,7 +5,7 @@
                 <nav class="nav-primary hidden-xs">
                     <ul class="nav bg">
                         <li>
-                            <a href="top">
+                            <a href="/top">
                                 <i class="icon icon-bell text-info"></i>
                                 <span class="font-bold">Discover</span>
                             </a>
