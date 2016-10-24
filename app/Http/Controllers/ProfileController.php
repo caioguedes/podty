@@ -5,8 +5,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
-    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
-
     public function index($user = null)
     {
         $user = $this->getUser($user);
@@ -24,12 +22,12 @@ class ProfileController extends Controller
 
     private function getUser($user = null)
     {
-        return $this->getContentFrom(self::API_ROOT_URL . 'users/' . ($user ?? Auth::user()->name));
+        return $this->getContentFrom(env('API_BASE_URL') . 'users/' . ($user ?? Auth::user()->name));
     }
 
     public function getAreFriends($user)
     {
-        $url = self::API_ROOT_URL . 'users/'.Auth::user()->name.'/friends';
+        $url = env('API_BASE_URL') . 'users/'.Auth::user()->name.'/friends';
 
         $response = $this->getContentFrom($url);
 
@@ -43,7 +41,7 @@ class ProfileController extends Controller
 
     public function getUserPodcasts($username)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . 'users/' . $username . '/feeds');
+        $data = $this->getContentFrom(env('API_BASE_URL') . 'users/' . $username . '/feeds');
 
         return array_map(function($feed){
             return [
@@ -64,7 +62,7 @@ class ProfileController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, 'brnbp' . ":" . 'brnbp');
+        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
 
         $data = curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -95,14 +93,14 @@ class ProfileController extends Controller
 
     public function ajaxFollowUser($username)
     {
-        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/friends/' . $username;
+        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/friends/' . $username;
 
         return $this->makeCurl($url);
     }
 
     public function ajaxUnfollowUser($username)
     {
-        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/friends/' . $username;
+        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/friends/' . $username;
 
         return $this->makeCurl($url, 'DELETE');
     }

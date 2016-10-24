@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    const API_ROOT_URL = 'http://brnapi.us-east-1.elasticbeanstalk.com/v1/';
-
     /**
      * Show the application dashboard.
      *
@@ -68,27 +66,27 @@ class HomeController extends Controller
     private function getLatestsPodcasts()
     {
         return $this->formatPodcasts(
-            $this->getContentFrom(self::API_ROOT_URL . 'feeds/latest')
+            $this->getContentFrom(env('API_BASE_URL') . 'feeds/latest')
         );
     }
 
     private function getTopPodcasts()
     {
         return $this->formatPodcasts(
-            $this->getContentFrom(self::API_ROOT_URL . 'feeds/top/24')
+            $this->getContentFrom(env('API_BASE_URL') . 'feeds/top/24')
         );
     }
 
     private function getLatestsEpisodes()
     {
         return $this->formatLatestsEpisodes(
-            $this->getContentFrom(self::API_ROOT_URL . 'episodes/latest?limit=12')
+            $this->getContentFrom(env('API_BASE_URL') . 'episodes/latest?limit=12')
         );
     }
 
     private function getPodcastById($id)
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . "feeds/id/$id");
+        $data = $this->getContentFrom(env('API_BASE_URL') . "feeds/id/$id");
 
         if(is_null($data)) {
             return [];
@@ -99,7 +97,7 @@ class HomeController extends Controller
 
     private function getEpisodes($feedId, $offset = 0, $limit = 28)
     {
-        $url = self::API_ROOT_URL . "episodes/feed/$feedId?limit=" . $limit;
+        $url = env('API_BASE_URL') . "episodes/feed/$feedId?limit=" . $limit;
 
         if ($offset) {
             $url .= '&offset=' . $offset;
@@ -111,7 +109,7 @@ class HomeController extends Controller
 
     public function getUserListensToPodcast($feedId)
     {
-        $url = self::API_ROOT_URL . 'users/'.Auth::user()->name.'/feeds/'.$feedId;
+        $url = env('API_BASE_URL') . 'users/'.Auth::user()->name.'/feeds/'.$feedId;
 
         return $this->getContentFrom($url) ? true : false;
     }
@@ -193,7 +191,7 @@ class HomeController extends Controller
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_TIMEOUT, 10);
         curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, 'brnbp' . ":" . 'brnbp');
+        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
 
         $data = curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
@@ -227,7 +225,7 @@ class HomeController extends Controller
 
     public function ajaxHome()
     {
-        $data = $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds');
+        $data = $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds');
 
         return array_map(function($feed){
             return [
@@ -249,19 +247,19 @@ class HomeController extends Controller
 
     public function ajaxSidebar()
     {
-        return $this->getContentFrom(self::API_ROOT_URL . 'users/' . Auth::user()->name);
+        return $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name);
     }
 
     public function ajaxFollowPodcast($feedId)
     {
-        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
+        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
 
         return $this->makeCurl($url);
     }
 
     public function ajaxUnfollowPodcast($feedId)
     {
-        $url = self::API_ROOT_URL . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
+        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
 
         return $this->makeCurl($url, 'DELETE');
     }
@@ -269,14 +267,14 @@ class HomeController extends Controller
     public function ajaxTouchUser()
     {
         if (Auth::user()) {
-            $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
+            $this->makeCurl(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
         }
     }
 
     public function ajaxUptEpisode($episodeId, $currentTime)
     {
         if (Auth::user())
-            $this->makeCurl(self::API_ROOT_URL . 'users/' . Auth::user()->name . '/episodes/' . $episodeId . '/paused/' . $currentTime, 'PUT');
+            $this->makeCurl(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/episodes/' . $episodeId . '/paused/' . $currentTime, 'PUT');
     }
 
     private function makeCurl($url, $method = 'POST')
@@ -288,9 +286,7 @@ class HomeController extends Controller
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_HTTPHEADER => array(
-                "authorization: Basic YnJuYnA6YnJuYnA="
-            ),
+            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
         ));
 
         curl_exec($curl);
