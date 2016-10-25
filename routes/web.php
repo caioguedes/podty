@@ -4,7 +4,7 @@ Auth::routes();
 Route::get('/', 'HomeController@index');
 Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 Route::get('profile/{user?}', 'ProfileController@index');
-Route::get('top', 'HomeController@top');
+Route::get('discover', 'HomeController@top');
 Route::get('feed/{searchInput}', function($searchInput){
 
     $source = env('API_BASE_URL') . 'feeds/name/' . rawurlencode($searchInput);

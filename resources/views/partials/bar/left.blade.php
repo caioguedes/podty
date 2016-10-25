@@ -6,20 +6,20 @@
                     <nav class="nav-primary hidden-xs">
                         <ul class="nav bg">
                             <li>
-                                <a href="/top">
+                                <a href="/discover">
                                     <i class="icon icon-bell text-info"></i>
                                     <span class="font-bold">Discover</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/profile">
                                     <i class="icon-microphone icon text-info"></i>
                                     <b class="badge bg-primary pull-right" id="podcasts-count">-</b>
                                     <span class="font-bold">My Podcasts</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="#">
+                                <a href="/profile">
                                     <i class="icon-users icon text-info"></i>
                                     <b class="badge bg-primary pull-right" id="friends-count">-</b>
                                     <span class="font-bold">Friends</span>
