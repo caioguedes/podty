@@ -54,7 +54,7 @@
                         </div>
 
                         <button type="submit" class="btn btn-lg btn-info btn-block btn-rounded">
-                            <i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Sign up</span>
+                            <i class="icon-arrow-right pull-right"></i><span class="m-r-n-lg">Register</span>
                         </button>
                         <div class="line line-dashed"></div>
                         <p class="text-muted text-center"><small>Already have an account?</small></p>

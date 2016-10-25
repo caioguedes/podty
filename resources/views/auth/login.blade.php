@@ -53,7 +53,7 @@
 
                     <button type="submit" class="btn btn-lg btn-info btn-block btn-rounded">
                         <i class="icon-arrow-right pull-right"></i>
-                        <span class="m-r-n-lg">Sign in</span>
+                        <span class="m-r-n-lg">Login</span>
                     </button>
                     {{--<div class="text-center m-t m-b"><a href="{{ url('password/reset') }}"><small>Forgot password?</small></a></div>--}}
                     <div class="line line-dashed"></div>

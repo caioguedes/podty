@@ -20,13 +20,13 @@
             <span class="hidden-nav-xs m-l-sm">Podty</span>
         </a>
     </div>
-    @unless(Auth::guest())
+
         <ul class="nav navbar-nav hidden-xs">
             <li>
             </li>
         </ul>
 
-        @if(\Illuminate\Support\Facades\Route::getCurrentRoute()->uri() == '/')
+        @if(in_array(Route::getCurrentRoute()->uri(), ['/', 'top']))
             <div class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
                 <div class="form-group">
                     <div class="input-group">
@@ -44,20 +44,20 @@
             </div>
         @endif
 
-    @endunless
+
     @if (Auth::guest())
         <div class="navbar-right">
             <ul class="nav navbar-nav m-n hidden-xs nav-user user">
                 <li class="hidden-xs">
                     <a href="{{ url('login') }}">
                         <i class="fa fa-sign-in text-success" style="padding-right: 5px"></i>
-                         Sign In
+                         Login
                     </a>
                 </li>
                 <li class="hidden-xs">
                     <a href="{{ url('register') }}">
                         <i class="fa fa-users text-success" style="padding-right: 5px"></i>
-                        Sign Up
+                        Register
                     </a>
                 </li>
                 <li class="dropdown">
@@ -65,14 +65,14 @@
                         <li>
                             <a href="{{ url('login') }}">
                                 <i class="fa fa-sign-in text-success"></i>
-                                Sign In
+                                Login
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
                             <a href="{{ url('register') }}">
                                 <i class="fa fa-users text-success"></i>
-                                Sign Up
+                                Register
                             </a>
                         </li>
                     </ul>
