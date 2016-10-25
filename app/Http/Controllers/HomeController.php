@@ -27,7 +27,6 @@ class HomeController extends Controller
         $userFollows = Auth::user()? $this->getUserListensToPodcast($podcastId) : false;
 
         $episodes = $this->getEpisodes($podcastId);
-        $totalPages = (int)round(($this->meta['total_episodes']??0) / 28);
 
         if (!$podcast) {
             return redirect('/404');
@@ -37,7 +36,6 @@ class HomeController extends Controller
             'podcast' => reset($podcast),
             'episodes' => $episodes ? $this->formatEpisodes($episodes) : [],
             'userFollows' => $userFollows,
-            'total_pages' => $totalPages,
         ]);
     }
 

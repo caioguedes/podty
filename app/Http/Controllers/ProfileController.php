@@ -22,6 +22,8 @@ class ProfileController extends Controller
 
     private function getUser($user = null)
     {
+        if (!$user && !Auth::user()) return false;
+
         return $this->getContentFrom(env('API_BASE_URL') . 'users/' . ($user ?? Auth::user()->name));
     }
 
