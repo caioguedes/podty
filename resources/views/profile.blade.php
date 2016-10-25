@@ -77,7 +77,7 @@
 @endsection
 
 @section('footer-scripts')
-    <script type="text/javascript" src="/js/partials/leftbar.js"></script>
-    <script type="text/javascript" src="/js/profile.js"></script>
+    <script async type="text/javascript" src="/js/partials/leftbar.js"></script>
+    <script async type="text/javascript" src="/js/profile.js"></script>
 @endsection
 

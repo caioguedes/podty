@@ -58,5 +58,5 @@
         });
     </script>
 
-    <script type="text/javascript" src="js/partials/leftbar.js"></script>
+    <script async type="text/javascript" src="js/partials/leftbar.js"></script>
 @endsection

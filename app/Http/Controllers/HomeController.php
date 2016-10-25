@@ -225,9 +225,13 @@ class HomeController extends Controller
 
     public function ajaxHome()
     {
+        if (!Auth::user() || Auth::user()->podcasts_count < 1) {
+            return $this->ajaxHomeNoFeeds();
+        }
+
         $data = $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds');
 
-        return array_map(function($feed){
+        $content = array_map(function($feed){
             return [
                 "id" => $feed['id'],
                 "name" => $this->formatPodcastName($feed['name']),
@@ -238,11 +242,19 @@ class HomeController extends Controller
                 "last_episode_at" => $this->formatData($feed['last_episode_at'])
             ];
         }, $data);
+
+        return [
+            'content' => $content,
+            'type' => 'feeds'
+        ];
     }
 
     public function ajaxHomeNoFeeds()
     {
-        return $this->getTopPodcasts();
+        return [
+            'content' => $this->getTopPodcasts(),
+            'type' => 'no-feeds'
+        ];
     }
 
     public function ajaxSidebar()
@@ -254,12 +266,20 @@ class HomeController extends Controller
     {
         $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
 
+        Auth::user()->podcasts_count++;
+
+        Auth::user()->save();
+
         return $this->makeCurl($url);
     }
 
     public function ajaxUnfollowPodcast($feedId)
     {
         $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
+
+        Auth::user()->podcasts_count--;
+
+        Auth::user()->save();
 
         return $this->makeCurl($url, 'DELETE');
     }

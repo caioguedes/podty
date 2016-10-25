@@ -61,7 +61,6 @@
                         </style>
                     </div>
                 </section>
-                {{--@include('partials.player')--}}
             </section>
         </section>
     </section>

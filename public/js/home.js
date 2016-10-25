@@ -78,13 +78,9 @@ function getHome(){
             showLoader(true)
         },
         success: function success(response) {
-            if (!response.length) {
-                showLoader(true);
-                return getHomeNoFeed();
-            }
             showLoader(false);
-            $('#home-title').text('Your Library');
-            return handleViewRenderHome(response);
+            $('#home-title').text(response.type == 'no-feeds' ? 'Top Podcasts' : 'Your Library');
+            return handleViewRenderHome(response.content);
         },
         error: function(){
             findPodcastResults.append('<div class="col-lg-12 col-md-6 col-sm-12"><p>service not available.</p></div>');
@@ -101,24 +97,4 @@ function handleViewRenderHome(response) {
         var e = d + '<a href="/podcast/'+param.id+'" class="text-ellipsis text-xs text-muted"></a></div></div></div>';
         findPodcastResults.append(e);
     });
-}
-
-function getHomeNoFeed(){
-    $.ajax({
-        url: 'ajax/homeNoFeeds',
-        beforeSend: function() {
-            showLoader(true)
-        },
-        complete: function() {
-            showLoader(false)
-        },
-        success: function success(response) {
-            $('#home-title').text('Top Podcasts');
-            return handleViewRenderHome(response);
-        },
-        error: function(){
-            findPodcastResults.append('<div class="col-lg-12 col-md-6 col-sm-12"><p>service not available.</p></div>');
-        }
-    });
-
 }
