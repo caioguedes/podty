@@ -84,7 +84,7 @@ class HomeController extends Controller
 
     private function getPodcastById($id)
     {
-        $data = $this->getContentFrom(env('API_BASE_URL') . "feeds/id/$id");
+        $data = $this->getContentFrom(env('API_BASE_URL') . "feeds/$id");
 
         if(is_null($data)) {
             return [];
@@ -95,7 +95,7 @@ class HomeController extends Controller
 
     private function getEpisodes($feedId, $offset = 0, $limit = 28)
     {
-        $url = env('API_BASE_URL') . "episodes/feed/$feedId?limit=" . $limit;
+        $url = env('API_BASE_URL') . "feeds/$feedId/episodes?limit=" . $limit;
 
         if ($offset) {
             $url .= '&offset=' . $offset;
