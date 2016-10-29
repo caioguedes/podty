@@ -2,9 +2,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index');
-Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 Route::get('profile/{user?}', 'ProfileController@index');
-Route::get('discover', 'HomeController@top');
 Route::get('feed/{searchInput}', function($searchInput){
 
     $source = env('API_BASE_URL') . 'feeds/name/' . rawurlencode($searchInput);
@@ -44,15 +42,18 @@ Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
 
 
 Route::get('ajax/home', 'HomeController@ajaxHome');
-Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
 Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
 Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
 Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
-Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpisodes');
 Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
 Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 Route::get('ajax/allFriends', 'FriendsController@all');
 Route::get('ajax/findUser/{user}', 'FriendsController@find');
 Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
-
 Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptEpisode');
+
+/* Podcast Router */
+Route::get('/podcast/{podcastId}', 'PodcastController@podcast');
+Route::get('/ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
+Route::get('/discover', 'PodcastController@discover');
+Route::get('/ajax/homeNoFeeds', 'PodcastController@getDiscoverWithoutFeeds')->name('podcast.discoverWithoutFeeds');
