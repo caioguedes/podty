@@ -69,7 +69,7 @@ class PodcastController extends Controller
 
         $userFollows = Auth::user() ? $this->getUserFollowPodcast($podcastId) : false;
 
-        $episodes = $this->getEpisodes($podcastId);
+        $episodes = $this->podcastsApi->episodes($podcastId);
 
         if (!$podcast) {
             return redirect('/404');
@@ -92,7 +92,7 @@ class PodcastController extends Controller
         $limit = 28;
         $offset = ($limit * $page);
 
-        $episodes = $this->getEpisodes($podcastId, $offset);
+        $episodes = $this->podcastsApi->episodes($podcastId, $offset);
 
         if (!$episodes) {
             return response()->json([], 404);
@@ -166,25 +166,6 @@ class PodcastController extends Controller
                 "last_episode_at" => $this->formatData($podcast['last_episode_at'])
             ];
         });
-    }
-
-    /**
-     * @param $feedId
-     * @param int $offset
-     * @param int $limit
-     * @return array
-     */
-    private function getEpisodes($feedId, $offset = 0, $limit = 28)
-    {
-        $url = "feeds/$feedId/episodes?limit=" . $limit;
-
-        if ($offset) {
-            $url .= '&offset=' . $offset;
-        }
-
-        $response = $this->api->get($url);
-
-        return ($response['data'] ?? []);
     }
 
     public function discover()
