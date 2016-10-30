@@ -94,41 +94,20 @@ class ProfileController extends Controller
 
     public function ajaxFollowUser($username)
     {
-        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/friends/' . $username;
+        if ($this->apiClient->post('users/' . Auth::user()->name . '/friends/' . $username)) {
+            return response('', 200);
+        }
 
-        return $this->makeCurl($url);
+        return response('', 400);
     }
 
     public function ajaxUnfollowUser($username)
     {
-        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/friends/' . $username;
-
-        return $this->makeCurl($url, 'DELETE');
-    }
-
-    private function makeCurl($url, $method = 'POST')
-    {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_HTTPHEADER => array(
-                "authorization: Basic YnJuYnA6YnJuYnA="
-            ),
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-
-        if ($status_code >= 400) {
-            return response('', 400);
+        if ($this->apiClient->delete('users/' . Auth::user()->name . '/friends/' . $username)) {
+            return response('', 200);
         }
 
-        return response('', 200);
-    }
+        return response('', 400);
 
+    }
 }
