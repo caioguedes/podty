@@ -3,35 +3,34 @@
 namespace App\Http\Controllers;
 
 use App\Podty\ApiClient;
+use App\Podty\Podcasts;
 use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
-    /**
-     * @var ApiClient
-     */
     private $api;
+
+    private $podcastsApi;
 
     /**
      * PodcastController constructor.
      * @param ApiClient $api
      */
-    public function __construct(ApiClient $api)
+    public function __construct(Podcasts $podcastsApi, ApiClient $api)
     {
         $this->api = $api;
+        $this->podcastsApi = $podcastsApi;
     }
 
     /**
      * Get Top Rated Podcasts
      * @return array
      */
-    public function getTopPodcasts()
+    public function top()
     {
-        $podcasts = $this->api->get('feeds/top/24');
+        $podcasts = $this->podcastsApi->top();
 
-        return $this->formatPodcasts(
-            $podcasts['data'] ?? []
-        );
+        return $this->formatPodcasts($podcasts);
     }
 
     /**
@@ -152,30 +151,26 @@ class PodcastController extends Controller
         return explode('-', str_replace($separators, '-', $podcastName))[0];
     }
 
-    /**
-     * @param array $feeds
-     * @return array
-     */
-    private function formatPodcasts($feeds = [])
+    private function formatPodcasts($podcasts = [])
     {
-        return array_map(function ($feed) {
+        if (is_array($podcasts)) {
+            $podcasts = collect($podcasts);
+        }
 
-            $feed = (object) $feed;
-
+        return $podcasts->map(function($podcast) {
             return [
-                "id"              => $feed->id,
-                "name"            => $this->formatPodcastName($feed->name),
-                "url"             => $feed->url,
-                "thumbnail_30"    => $feed->thumbnail_30,
-                "thumbnail_60"    => $feed->thumbnail_60,
-                "thumbnail_100"   => $feed->thumbnail_100,
-                "thumbnail_600"   => $feed->thumbnail_600,
-                "total_episodes"  => $feed->total_episodes,
-                "listeners"       => $feed->listeners,
-                "last_episode_at" => $this->formatData($feed->last_episode_at)
+                "id" => $podcast['id'],
+                "name" => $this->formatPodcastName($podcast['name']),
+                "url" => $podcast['url'],
+                "thumbnail_30" => $podcast['thumbnail_30'],
+                "thumbnail_60" => $podcast['thumbnail_60'],
+                "thumbnail_100" => $podcast['thumbnail_100'],
+                "thumbnail_600" => $podcast['thumbnail_600'],
+                "total_episodes" => $podcast['total_episodes'],
+                "listeners" => $podcast['listeners'],
+                "last_episode_at" => $this->formatData($podcast['last_episode_at'])
             ];
-
-        }, $feeds);
+        });
     }
 
     /**
@@ -205,7 +200,7 @@ class PodcastController extends Controller
     public function getHomeWithoutFeeds()
     {
         return response()->json([
-            'content' => $this->getTopPodcasts(),
+            'content' => $this->top(),
             'type' => 'no-feeds'
         ]);
     }
