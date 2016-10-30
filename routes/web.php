@@ -2,9 +2,7 @@
 
 Auth::routes();
 Route::get('/', 'HomeController@index');
-Route::get('/podcast/{podcastId}', 'HomeController@podcast');
 Route::get('profile/{user?}', 'ProfileController@index');
-Route::get('top', 'HomeController@top');
 Route::get('feed/{searchInput}', function($searchInput){
 
     $source = env('API_BASE_URL') . 'feeds/name/' . rawurlencode($searchInput);
@@ -25,7 +23,7 @@ Route::get('feed/{searchInput}', function($searchInput){
 });
 
 Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
-    $source = env('API_BASE_URL') . 'episodes/feedId/' . $podcastId . '?term=' . $term;
+    $source = env('API_BASE_URL') . 'feeds/'. $podcastId . '/episodes?term=' . $term;
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
@@ -44,15 +42,19 @@ Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
 
 
 Route::get('ajax/home', 'HomeController@ajaxHome');
-Route::get('ajax/homeNoFeeds', 'HomeController@ajaxHomeNoFeeds');
 Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
 Route::get('ajax/followPodcast/{feedId}', 'HomeController@ajaxFollowPodcast');
 Route::get('ajax/unfollowPodcast/{feedId}', 'HomeController@ajaxUnfollowPodcast');
-Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'HomeController@ajaxMoreEpisodes');
 Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');
 Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser');
 Route::get('ajax/allFriends', 'FriendsController@all');
 Route::get('ajax/findUser/{user}', 'FriendsController@find');
 Route::get('ajax/touchUser', 'HomeController@ajaxTouchUser');
-
 Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptEpisode');
+
+/* Podcast Router */
+Route::get('/podcast/{podcastId}', 'PodcastController@podcast');
+Route::get('/ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
+Route::get('/discover', 'PodcastController@discover');
+Route::get('/ajax/homeNoFeeds', 'PodcastController@getDiscoverWithoutFeeds')
+    ->name('podcast.discoverWithoutFeeds');
