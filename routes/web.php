@@ -57,3 +57,5 @@ Route::get('podcast/{podcastId}', 'PodcastController@podcast');
 Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
 Route::get('discover', 'PodcastController@discover');
 Route::get('ajax/discover', 'PodcastController@top');
+
+Route::get('podcasts', 'PodcastController@home');

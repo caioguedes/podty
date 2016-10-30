@@ -21,6 +21,17 @@ class PodcastController extends Controller
         $this->userPodcasts = $userPodcasts;
     }
 
+    public function home()
+    {
+        $response = $this->userPodcasts->all(Auth::user()->name);
+
+        $content = $response->map(function($feed){
+            return $this->formatHomePodcasts($feed);
+        });
+        
+        return view('podcasts')->with(compact('content'));
+    }
+
     /**
      * Get Top Rated Podcasts
      * @return array
