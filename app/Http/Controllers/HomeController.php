@@ -19,7 +19,7 @@ class HomeController extends Controller
     {
         return view('home');
     }
-    
+
     public function getUserListensToPodcast($feedId)
     {
         $url = env('API_BASE_URL') . 'users/'.Auth::user()->name.'/feeds/'.$feedId;
@@ -57,7 +57,7 @@ class HomeController extends Controller
     public function ajaxHome()
     {
         if (!Auth::user() || Auth::user()->podcasts_count < 1) {
-            return redirect()->route('podcast.discoverWithoutFeeds');
+            return redirect('ajax/homeNoFeeds');
         }
 
         $data = $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds');

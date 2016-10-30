@@ -202,10 +202,7 @@ class PodcastController extends Controller
         return view('top');
     }
 
-    /**
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function getDiscoverWithoutFeeds()
+    public function getHomeWithoutFeeds()
     {
         return response()->json([
             'content' => $this->getTopPodcasts(),
