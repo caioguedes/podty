@@ -73,4 +73,18 @@ trait Format
             "last_episode_at" => $this->formatData($podcast['last_episode_at'])
         ];
     }
+
+    public function formatUser($user)
+    {
+        $dateLimit = (new \DateTime())->modify('-6 hour');
+        $last_activity = new \DateTime($user['last_update']);
+        return [
+            'username' => $user['username'],
+            'profile_url' => 'profile/' . $user['username'],
+            'email' => $user['email'],
+            'email_hash' => md5(strtolower(trim($user['email']))),
+            'last_seen' => $this->formatDateForHumans($user['last_update']),
+            'was_recently_active' => ($last_activity > $dateLimit) ? true : false
+        ];
+    }
 }
