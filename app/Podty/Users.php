@@ -19,4 +19,16 @@ class Users
     {
         return $this->api->patch('users/' . $username . '/touch');
     }
+
+    public function friends($username)
+    {
+        return $this->returnDefaultResponse(
+            $this->api->get('users/' . $username . '/friends')
+        );
+    }
+
+    private function returnDefaultResponse($response)
+    {
+        return $response ? collect($response['data']) : collect([]);
+    }
 }

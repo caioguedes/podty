@@ -4,20 +4,24 @@ namespace App\Http\Controllers;
 use App\Format;
 use App\Podty\ApiClient;
 use App\Podty\UserPodcasts;
+use App\Podty\Users;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
     use Format;
-    
+
     private $apiClient;
 
     private $userPodcasts;
 
-    public function __construct(ApiClient $apiClient, UserPodcasts $userPodcasts)
+    private $users;
+
+    public function __construct(ApiClient $apiClient, UserPodcasts $userPodcasts, Users $users)
     {
         $this->apiClient = $apiClient;
         $this->userPodcasts = $userPodcasts;
+        $this->users = $users;
     }
 
     public function index($user = null)
@@ -31,7 +35,7 @@ class ProfileController extends Controller
         return view('profile')->with('data', [
             'user' => $user,
             'podcasts' => $this->getUserPodcasts($user['username']),
-            'isFriend' => !Auth::user() ? false : empty($this->getAreFriends($user)) ? false : true
+            'isFriend' => !Auth::user() ? false : $this->getAreFriends($user)->count()
         ]);
     }
 
@@ -39,16 +43,14 @@ class ProfileController extends Controller
     {
         if (!$user && !Auth::user()) return false;
 
-        return $this->getContentFrom('users/' . ($user ?? Auth::user()->name));
+        return $this->users->get($user ?? Auth::user()->name)['data'];
     }
 
     public function getAreFriends($user)
     {
-        $url = 'users/'.Auth::user()->name.'/friends';
+        $response = $this->users->friends(Auth::user()->name);
 
-        $response = $this->getContentFrom($url);
-
-        return array_filter($response, function($friend) use($user) {
+        return $response->filter(function($friend) use ($user) {
             if ($friend['username'] == $user['username']) {
                 return true;
             }
@@ -73,17 +75,6 @@ class ProfileController extends Controller
         });
     }
 
-    private function getContentFrom($source)
-    {
-        $response = $this->apiClient->get($source);
-
-        if (!$response) {
-            return [];
-        }
-
-        return $response['data'];
-    }
-
     public function ajaxFollowUser($username)
     {
         if ($this->apiClient->post('users/' . Auth::user()->name . '/friends/' . $username)) {
@@ -100,6 +91,5 @@ class ProfileController extends Controller
         }
 
         return response('', 400);
-
     }
 }
