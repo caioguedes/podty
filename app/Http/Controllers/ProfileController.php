@@ -67,18 +67,18 @@ class ProfileController extends Controller
         });
     }
 
-    public function ajaxFollowUser($username)
+    public function follow($username)
     {
-        if ($this->apiClient->post('users/' . Auth::user()->name . '/friends/' . $username)) {
+        if (Auth::user() && $this->users->follow(Auth::user()->name, $username)){
             return response('', 200);
         }
 
         return response('', 400);
     }
 
-    public function ajaxUnfollowUser($username)
+    public function unfollow($username)
     {
-        if ($this->apiClient->delete('users/' . Auth::user()->name . '/friends/' . $username)) {
+        if (Auth::user() && $this->users->unfollow(Auth::user()->name, $username)){
             return response('', 200);
         }
 

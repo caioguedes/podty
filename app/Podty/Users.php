@@ -27,6 +27,16 @@ class Users
         );
     }
 
+    public function follow($authUser, $targetUser)
+    {
+        return $this->api->post('users/' . $authUser . '/friends/' . $targetUser);
+    }
+
+    public function unfollow($authUser, $targetUser)
+    {
+        return $this->api->delete('users/' . $authUser . '/friends/' . $targetUser);
+    }
+
     private function returnDefaultResponse($response)
     {
         return $response ? collect($response['data']) : collect([]);
