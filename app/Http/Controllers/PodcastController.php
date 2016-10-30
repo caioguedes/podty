@@ -92,14 +92,6 @@ class PodcastController extends Controller
         return view('top');
     }
 
-    public function getHomeNoFeeds()
-    {
-        return response()->json([
-            'content' => $this->top(),
-            'type' => 'no-feeds'
-        ]);
-    }
-
     private function getUserFollowPodcast($feedId)
     {
         return $this->userPodcasts->follows(Auth::user()->name, $feedId);

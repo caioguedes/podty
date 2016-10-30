@@ -3,6 +3,7 @@ namespace App\Http\Controllers;
 
 use App\Format;
 use App\Http\Requests;
+use App\Podty\Podcasts;
 use App\Podty\UserPodcasts;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -14,9 +15,12 @@ class HomeController extends Controller
 
     private $userPodcasts;
 
-    public function __construct(UserPodcasts $userPodcasts)
+    private $podcastsApi;
+
+    public function __construct(UserPodcasts $userPodcasts, Podcasts $podcastsApi)
     {
         $this->userPodcasts = $userPodcasts;
+        $this->podcastsApi = $podcastsApi;
     }
 
     public function index()
@@ -27,7 +31,10 @@ class HomeController extends Controller
     public function ajaxHome()
     {
         if (!Auth::user() || Auth::user()->podcasts_count < 1) {
-            return redirect('ajax/homeNoFeeds');
+            return response()->json([
+                'content' => $this->formatPodcasts($this->podcastsApi->top()),
+                'type' => 'no-feeds'
+            ]);
         }
 
         $response = $this->userPodcasts->all(Auth::user()->name);
