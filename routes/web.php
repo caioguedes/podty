@@ -40,8 +40,6 @@ Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
     return $data;
 });
 
-
-Route::get('ajax/home', 'HomeController@ajaxHome');
 Route::get('ajax/sidebar', 'UsersController@get');
 Route::get('ajax/followPodcast/{feedId}', 'UserPodcastsController@follow');
 Route::get('ajax/unfollowPodcast/{feedId}', 'UserPodcastsController@unfollow');

@@ -43,25 +43,4 @@ class HomeController extends Controller
             'title' => 'Your Library'
         ]);
     }
-
-    public function ajaxHome()
-    {
-        if (!Auth::user() || Auth::user()->podcasts_count < 1) {
-            return response()->json([
-                'content' => $this->formatPodcasts($this->podcastsApi->top()),
-                'type' => 'no-feeds'
-            ]);
-        }
-
-        $response = $this->userPodcasts->all(Auth::user()->name);
-
-        $content = $response->map(function($feed){
-            return $this->formatHomePodcasts($feed);
-        });
-
-        return [
-            'content' => $content,
-            'type' => 'feeds'
-        ];
-    }
 }
