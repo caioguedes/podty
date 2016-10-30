@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\ApiClient;
 use Illuminate\Support\Facades\Auth;
-use Datetime;
 
 class PodcastController extends Controller
 {
@@ -55,7 +54,7 @@ class PodcastController extends Controller
      */
     private function getPodcastById($id)
     {
-        $podcast = $this->api->get("feeds/id/{$id}");
+        $podcast = $this->api->get("feeds/{$id}");
 
         return $this->formatPodcasts(
             $podcast['data'] ?? []
@@ -140,7 +139,7 @@ class PodcastController extends Controller
      */
     private function formatData($date)
     {
-        return (new DateTime($date))->format('d/m/Y H:i');
+        return (new \DateTime($date))->format('d/m/Y H:i');
     }
 
     /**
@@ -187,7 +186,7 @@ class PodcastController extends Controller
      */
     private function getEpisodes($feedId, $offset = 0, $limit = 28)
     {
-        $url = "episodes/feed/$feedId?limit=" . $limit;
+        $url = "feeds/$feedId/episodes?limit=" . $limit;
 
         if ($offset) {
             $url .= '&offset=' . $offset;
