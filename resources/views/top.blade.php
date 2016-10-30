@@ -19,7 +19,7 @@
             var findPodcastResults = $('.podcasts-episodes-home');
             function getHomeNoFeed(){
                 $.ajax({
-                    url: 'ajax/homeNoFeeds',
+                    url: 'ajax/discover',
                     beforeSend: function() {
                         showLoader(true)
                     },
@@ -28,7 +28,7 @@
                     },
                     success: function success(response) {
                         $('#home-title').text('Top Podcasts');
-                        return handleViewRenderHome(response.content);
+                        return handleViewRenderHome(response);
                     },
                     error: function(){
                         findPodcastResults.append('<div class="col-lg-12 col-md-6 col-sm-12"><p>service not available.</p></div>');
