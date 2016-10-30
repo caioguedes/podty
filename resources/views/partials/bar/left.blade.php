@@ -12,7 +12,7 @@
                                 </a>
                             </li>
                             <li>
-                                <a href="/profile">
+                                <a href="/podcasts">
                                     <i class="icon-microphone icon text-info"></i>
                                     <b class="badge bg-primary pull-right" id="podcasts-count">-</b>
                                     <span class="font-bold">My Podcasts</span>
