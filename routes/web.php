@@ -42,7 +42,7 @@ Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
 
 
 Route::get('ajax/home', 'HomeController@ajaxHome');
-Route::get('ajax/sidebar', 'HomeController@ajaxSidebar');
+Route::get('ajax/sidebar', 'UsersController@get');
 Route::get('ajax/followPodcast/{feedId}', 'UserPodcastsController@follow');
 Route::get('ajax/unfollowPodcast/{feedId}', 'UserPodcastsController@unfollow');
 Route::get('ajax/followUser/{username}', 'ProfileController@ajaxFollowUser');

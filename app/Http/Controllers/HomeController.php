@@ -54,12 +54,7 @@ class HomeController extends Controller
             'type' => 'feeds'
         ];
     }
-
-    public function ajaxSidebar()
-    {
-        return $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name);
-    }
-
+    
     public function ajaxTouchUser()
     {
         if (Auth::user()) {
