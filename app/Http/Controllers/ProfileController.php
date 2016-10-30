@@ -59,7 +59,7 @@ class ProfileController extends Controller
 
         return $response->map(function($feed){
             return [
-                "id" => $this->getLinkHash($feed['id']),
+                "id" => $feed['id'],
                 "name" => $this->formatPodcastName($feed['name']),
                 "thumbnail_30" => $feed['thumbnail_30'],
                 "thumbnail_600" => $feed['thumbnail_600'],
@@ -85,11 +85,6 @@ class ProfileController extends Controller
     {
         $separators = ['-', '/', '|'];
         return explode('-', str_replace($separators, '-', $podcastName))[0];
-    }
-
-    private function getLinkHash($id)
-    {
-        return  $id . 'p'. rand(15345,94334);
     }
 
     private function formatData($date)
