@@ -54,7 +54,7 @@ function findUsers(user){
         success: function success(user) {
             searchUsersList.append(renderHTML(user));
             searchUsers.attr('hidden', false);
-            $('.friends-list').css('height', '50%').css('overdlow', 'scroll');
+            $('.friends-list').css('height', '70%').css('overdlow', 'scroll');
             canSearchForUsers = true;
         }
     });
@@ -63,4 +63,5 @@ function findUsers(user){
 $('#clear-search-users').click(function(){
     searchUsers.attr('hidden', true);
     searchUsersList.empty();
+    $('.friends-list').css('height', '100%').css('overdlow', 'scroll');
 });

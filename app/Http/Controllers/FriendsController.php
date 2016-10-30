@@ -1,15 +1,30 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Format;
 use App\Podty\ApiClient;
+use App\Podty\Users;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class FriendsController extends Controller
 {
+    use Format;
+
+    private $users;
+
+    public function __construct(Users $users)
+    {
+        $this->users = $users;
+    }
+
     public function all()
     {
-        $response = collect($this->getContentFrom('users/'. Auth::user()->name .'/friends'));
+        if(!Auth::user()) {
+            return [];
+        }
+
+        $response = $this->users->friends(Auth::user()->name);
 
         $dateLimit = (new \DateTime())->modify('-6 hour');
         return $response->map(function($friend) use($dateLimit) {
@@ -19,7 +34,7 @@ class FriendsController extends Controller
                 'profile_url' => 'profile/' . $friend['username'],
                 'email' => $friend['email'],
                 'email_hash' => md5(strtolower(trim($friend['email']))),
-                'last_seen' => Carbon::createFromFormat('Y-m-d H:i:s',$friend['last_update'])->diffForHumans(),
+                'last_seen' => $this->formatDateForHumans($friend['last_update']),
                 'was_recently_active' => ($last_activity > $dateLimit) ? true : false
             ];
         });
@@ -27,7 +42,7 @@ class FriendsController extends Controller
 
     public function find($user)
     {
-        $response = $this->getContentFrom('users/' . $user);
+        $response = $this->users->get($user)['data'];
 
         $dateLimit = (new \DateTime())->modify('-1 day');
 
@@ -38,19 +53,8 @@ class FriendsController extends Controller
             'profile_url' => 'profile/' . $response['username'],
             'email' => $response['email'],
             'email_hash' => md5(strtolower(trim($response['email']))),
-            'last_update' => $response['last_update'] ?? '',
+            'last_seen' => $this->formatDateForHumans($response['last_update']),
             'was_recently_active' => ($last_activity > $dateLimit) ? true : false
         ];
-    }
-
-    private function getContentFrom($source)
-    {
-        $response = (new ApiClient)->get($source);
-
-        if (!$response) {
-            return [];
-        }
-
-        return $response['data'];
     }
 }

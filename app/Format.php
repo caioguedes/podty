@@ -1,6 +1,7 @@
 <?php
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 
 
@@ -9,6 +10,11 @@ trait Format
     public function formatData($date)
     {
         return (new \DateTime($date))->format('d/m/Y H:i');
+    }
+
+    public function formatDateForHumans($date)
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->diffForHumans();
     }
 
     private function formatPodcastName($podcastName)
