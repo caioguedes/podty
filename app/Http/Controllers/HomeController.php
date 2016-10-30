@@ -43,4 +43,12 @@ class HomeController extends Controller
             'title' => 'Your Library'
         ]);
     }
+
+    public function discover()
+    {
+        return view('discover')->with([
+            'content' => $this->podcastsApi->top(),
+            'title' => 'Discover'
+        ]);
+    }
 }
