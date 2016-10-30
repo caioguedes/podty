@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\ApiClient;
+use App\Podty\ApiClient;
 use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
