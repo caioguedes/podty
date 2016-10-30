@@ -1,10 +1,8 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Format;
 use App\Http\Requests;
-use App\Podty\ApiClient;
 use App\Podty\UserPodcasts;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
