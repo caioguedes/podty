@@ -1,10 +1,5 @@
 'use strict';
 
-$(window).load(function(){
-    (function() {$.ajax({url: '/ajax/touchUser'});})()
-});
-
-
 var removeChildren = function(e) {
     return e.children().remove()
 };

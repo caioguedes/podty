@@ -1,5 +1,8 @@
 $(window).load(function(){
     renderSideBar();
+    setInterval(function(){
+        (function() {$.ajax({url: '/ajax/touchUser'});})()
+    }, 20000);
 });
 
 
