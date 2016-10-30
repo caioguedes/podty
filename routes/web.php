@@ -56,4 +56,4 @@ Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptE
 Route::get('podcast/{podcastId}', 'PodcastController@podcast');
 Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
 Route::get('discover', 'PodcastController@discover');
-Route::get('ajax/homeNoFeeds', 'PodcastController@getHomeWithoutFeeds');
+Route::get('ajax/homeNoFeeds', 'PodcastController@getHomeNoFeeds');

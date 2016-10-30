@@ -170,7 +170,7 @@ class PodcastController extends Controller
         return view('top');
     }
 
-    public function getHomeWithoutFeeds()
+    public function getHomeNoFeeds()
     {
         return response()->json([
             'content' => $this->top(),
