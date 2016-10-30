@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Podty')
+@section('title', $title . 'Podty')
 
 @section('content')
     <section class="vbox">

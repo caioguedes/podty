@@ -25,7 +25,23 @@ class HomeController extends Controller
 
     public function index()
     {
-        return view('home');
+        if (!Auth::user() || Auth::user()->podcasts_count < 1) {
+            return view('home')->with([
+                'content' => $this->formatPodcasts($this->podcastsApi->top()),
+                'title' => 'Top Podcasts'
+            ]);
+        }
+
+        $response = $this->userPodcasts->all(Auth::user()->name);
+
+        $content = $response->map(function($feed){
+            return $this->formatHomePodcasts($feed);
+        });
+
+        return view('home')->with([
+            'content' => $content,
+            'title' => 'Your Library'
+        ]);
     }
 
     public function ajaxHome()
