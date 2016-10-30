@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Podty\ApiClient;
+use App\Podty\UserPodcasts;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -10,11 +12,16 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    private $apiClient;
+
+    private $userPodcasts;
+
+    public function __construct(ApiClient $apiClient, UserPodcasts $userPodcasts)
+    {
+        $this->apiClient = $apiClient;
+        $this->userPodcasts = $userPodcasts;
+    }
+
     public function index()
     {
         return view('home');
@@ -95,26 +102,28 @@ class HomeController extends Controller
         return $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name);
     }
 
-    public function ajaxFollowPodcast($feedId)
+    public function ajaxFollowPodcast($podcastId)
     {
-        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
-
         Auth::user()->podcasts_count++;
-
         Auth::user()->save();
+        
+        if ($this->userPodcasts->follow(Auth::user()->name, $podcastId)) {
+            return response('', 200);
+        }
 
-        return $this->makeCurl($url);
+        return response('', 400);
     }
 
-    public function ajaxUnfollowPodcast($feedId)
+    public function ajaxUnfollowPodcast($podcastId)
     {
-        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/' . $feedId;
-
         Auth::user()->podcasts_count--;
-
         Auth::user()->save();
 
-        return $this->makeCurl($url, 'DELETE');
+        if ($this->userPodcasts->unfollow(Auth::user()->name, $podcastId)) {
+            return response('', 200);
+        }
+
+        return response('', 400);
     }
 
     public function ajaxTouchUser()
@@ -132,21 +141,24 @@ class HomeController extends Controller
 
     private function makeCurl($url, $method = 'POST')
     {
-        $curl = curl_init();
+        switch ($method) {
+            case 'POST':
+                $response = $this->apiClient->post($url);
+                break;
+            case 'PUT':
+                $response = $this->apiClient->put($url);
+                break;
+            case 'DELETE':
+                $response = $this->apiClient->delete($url);
+                break;
+            case 'PATCH':
+                $response = $this->apiClient->patch($url);
+                break;
+            default:
+                $response = false;
+        }
 
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => $url,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => $method,
-            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-
-        if ($status_code >= 400) {
+        if ($response) {
             return response('', 400);
         }
 

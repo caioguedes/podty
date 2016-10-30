@@ -30,7 +30,16 @@ class UserPodcasts
         $response = $this->api->get('users/' . $username . '/feeds/' . $podcastID);
 
         return !empty($response['data']);
+    }
 
+    public function follow($username, $podcastId)
+    {
+        return $this->api->post('users/' . $username . '/feeds/' . $podcastId);
+    }
+
+    public function unfollow($username, $podcastId)
+    {
+        return $this->api->delete('users/' . $username . '/feeds/' . $podcastId);
     }
 
     private function returnDefaultResponse($response)

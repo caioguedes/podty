@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Podty\ApiClient;
 use App\Podty\Podcasts;
 use App\Podty\UserPodcasts;
 use Illuminate\Support\Collection;
