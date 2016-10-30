@@ -1,10 +1,22 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Podty\ApiClient;
+use App\Podty\UserPodcasts;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    private $apiClient;
+
+    private $userPodcasts;
+
+    public function __construct(ApiClient $apiClient, UserPodcasts $userPodcasts)
+    {
+        $this->apiClient = $apiClient;
+        $this->userPodcasts = $userPodcasts;
+    }
+
     public function index($user = null)
     {
         $user = $this->getUser($user);
@@ -24,12 +36,12 @@ class ProfileController extends Controller
     {
         if (!$user && !Auth::user()) return false;
 
-        return $this->getContentFrom(env('API_BASE_URL') . 'users/' . ($user ?? Auth::user()->name));
+        return $this->getContentFrom('users/' . ($user ?? Auth::user()->name));
     }
 
     public function getAreFriends($user)
     {
-        $url = env('API_BASE_URL') . 'users/'.Auth::user()->name.'/friends';
+        $url = 'users/'.Auth::user()->name.'/friends';
 
         $response = $this->getContentFrom($url);
 
@@ -43,9 +55,9 @@ class ProfileController extends Controller
 
     public function getUserPodcasts($username)
     {
-        $data = $this->getContentFrom(env('API_BASE_URL') . 'users/' . $username . '/feeds');
+        $response = $this->userPodcasts->all($username);
 
-        return array_map(function($feed){
+        return $response->map(function($feed){
             return [
                 "id" => $this->getLinkHash($feed['id']),
                 "name" => $this->formatPodcastName($feed['name']),
@@ -55,25 +67,18 @@ class ProfileController extends Controller
                 "listen_all" => $feed['listen_all'],
                 "last_episode_at" => $this->formatData($feed['last_episode_at'])
             ];
-        }, $data);
+        });
     }
 
     private function getContentFrom($source)
     {
-        $curl = curl_init($source);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
+        $response = $this->apiClient->get($source);
 
-        $data = curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        if (!$data || $status_code >= 400) {
+        if (!$response) {
             return [];
         }
 
-        return json_decode($data, true)['data'];
+        return $response['data'];
     }
 
     private function formatPodcastName($podcastName)
@@ -91,7 +96,6 @@ class ProfileController extends Controller
     {
         return (new \DateTime($date))->format('d/m/Y H:i');
     }
-
 
     public function ajaxFollowUser($username)
     {
