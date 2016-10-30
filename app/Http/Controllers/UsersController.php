@@ -19,8 +19,13 @@ class UsersController extends Controller
         if (Auth::user()) {
             return $this->usersApi->get(Auth::user()->name)['data'];
         }
+    }
 
-        return response('', 200);
+    public function touch()
+    {
+        if (Auth::user()) {
+            $this->usersApi->touch(Auth::user()->name);
+        }
     }
 
 }

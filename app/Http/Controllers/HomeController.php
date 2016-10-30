@@ -55,13 +55,6 @@ class HomeController extends Controller
         ];
     }
     
-    public function ajaxTouchUser()
-    {
-        if (Auth::user()) {
-            $this->makeCurl(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/touch' , 'PATCH');
-        }
-    }
-
     public function ajaxUptEpisode($episodeId, $currentTime)
     {
         if (Auth::user())

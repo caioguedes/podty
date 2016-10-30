@@ -14,4 +14,9 @@ class Users
     {
         return $this->api->get('users/' . $username);
     }
+
+    public function touch($username)
+    {
+        return $this->api->patch('users/' . $username . '/touch');
+    }
 }
