@@ -29,13 +29,6 @@ class HomeController extends Controller
         return view('home');
     }
 
-    public function getUserListensToPodcast($feedId)
-    {
-        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/'.$feedId;
-
-        return $this->getContentFrom($url) ? true : false;
-    }
-
     public function ajaxHome()
     {
         if (!Auth::user() || Auth::user()->podcasts_count < 1) {

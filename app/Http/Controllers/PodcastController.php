@@ -33,21 +33,6 @@ class PodcastController extends Controller
     }
 
     /**
-     * @param $feedId
-     * @return bool
-     */
-    public function getUserFollowPodcast($feedId)
-    {
-        $user = Auth::user();
-
-        if (!$user) {
-            return false;
-        }
-
-        return $this->userPodcasts->follows($user->name, $feedId);
-    }
-
-    /**
      * @param $id
      * @return array
      */
@@ -113,5 +98,10 @@ class PodcastController extends Controller
             'content' => $this->top(),
             'type' => 'no-feeds'
         ]);
+    }
+
+    private function getUserFollowPodcast($feedId)
+    {
+        return $this->userPodcasts->follows(Auth::user()->name, $feedId);
     }
 }
