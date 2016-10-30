@@ -63,15 +63,7 @@ class ProfileController extends Controller
         $response = $this->userPodcasts->all($username);
 
         return $response->map(function($feed){
-            return [
-                "id" => $feed['id'],
-                "name" => $this->formatPodcastName($feed['name']),
-                "thumbnail_30" => $feed['thumbnail_30'],
-                "thumbnail_600" => $feed['thumbnail_600'],
-                "total_episodes" => $feed['total_episodes'],
-                "listen_all" => $feed['listen_all'],
-                "last_episode_at" => $this->formatData($feed['last_episode_at'])
-            ];
+            return $this->formatHomePodcasts($feed);
         });
     }
 

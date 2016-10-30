@@ -54,4 +54,17 @@ trait Format
             ];
         });
     }
+
+    public function formatHomePodcasts($podcast)
+    {
+        return [
+            "id" => $podcast['id'],
+            "name" => $this->formatPodcastName($podcast['name']),
+            "thumbnail_30" => $podcast['thumbnail_30'],
+            "thumbnail_600" => $podcast['thumbnail_600'],
+            "total_episodes" => $podcast['total_episodes'],
+            "listen_all" => $podcast['listen_all'],
+            "last_episode_at" => $this->formatData($podcast['last_episode_at'])
+        ];
+    }
 }
