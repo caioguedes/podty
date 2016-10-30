@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Format;
 use App\Podty\Podcasts;
 use App\Podty\UserPodcasts;
 use Illuminate\Support\Collection;
@@ -9,6 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
+    use Format;
+    
     private $podcastsApi;
 
     private $userPodcasts;
@@ -122,25 +125,6 @@ class PodcastController extends Controller
             ];
 
         });
-    }
-
-    /**
-     * @param string $date
-     * @return string
-     */
-    private function formatData($date)
-    {
-        return (new \DateTime($date))->format('d/m/Y H:i');
-    }
-
-    /**
-     * @param string $podcastName
-     * @return mixed
-     */
-    private function formatPodcastName($podcastName)
-    {
-        $separators = ['-', '/', '|'];
-        return explode('-', str_replace($separators, '-', $podcastName))[0];
     }
 
     private function formatPodcasts(Collection $podcasts)

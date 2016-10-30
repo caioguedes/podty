@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Format;
 use App\Http\Requests;
 use App\Podty\ApiClient;
 use App\Podty\UserPodcasts;
-use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    use Format;
+
     private $apiClient;
 
     private $userPodcasts;
@@ -32,33 +34,6 @@ class HomeController extends Controller
         $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/'.$feedId;
 
         return $this->getContentFrom($url) ? true : false;
-    }
-
-    private function getContentFrom($source)
-    {
-        $curl = curl_init($source);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
-
-        $data = curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        if (!$data || $status_code >= 400) {
-            return [];
-        }
-
-        $response = json_decode($data, true);
-
-        $this->meta = $response['meta'] ?? [];
-
-        return $response['data'];
-    }
-
-    private function formatData($date)
-    {
-        return (new DateTime($date))->format('d/m/Y H:i');
     }
 
     public function ajaxHome()
@@ -85,16 +60,6 @@ class HomeController extends Controller
             'content' => $content,
             'type' => 'feeds'
         ];
-    }
-
-    /**
-     * @param string $podcastName
-     * @return mixed
-     */
-    private function formatPodcastName($podcastName)
-    {
-        $separators = ['-', '/', '|'];
-        return explode('-', str_replace($separators, '-', $podcastName))[0];
     }
 
     public function ajaxSidebar()
@@ -139,5 +104,27 @@ class HomeController extends Controller
         }
 
         return response('', 200);
+    }
+
+    private function getContentFrom($source)
+    {
+        $curl = curl_init($source);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
+
+        $data = curl_exec($curl);
+        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+
+        if (!$data || $status_code >= 400) {
+            return [];
+        }
+
+        $response = json_decode($data, true);
+
+        $this->meta = $response['meta'] ?? [];
+
+        return $response['data'];
     }
 }

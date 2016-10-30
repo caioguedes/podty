@@ -1,12 +1,15 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Format;
 use App\Podty\ApiClient;
 use App\Podty\UserPodcasts;
 use Illuminate\Support\Facades\Auth;
 
 class ProfileController extends Controller
 {
+    use Format;
+    
     private $apiClient;
 
     private $userPodcasts;
@@ -79,17 +82,6 @@ class ProfileController extends Controller
         }
 
         return $response['data'];
-    }
-
-    private function formatPodcastName($podcastName)
-    {
-        $separators = ['-', '/', '|'];
-        return explode('-', str_replace($separators, '-', $podcastName))[0];
-    }
-
-    private function formatData($date)
-    {
-        return (new \DateTime($date))->format('d/m/Y H:i');
     }
 
     public function ajaxFollowUser($username)
