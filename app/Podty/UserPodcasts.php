@@ -25,6 +25,14 @@ class UserPodcasts
         );
     }
 
+    public function follows($username, $podcastID)
+    {
+        $response = $this->api->get('users/' . $username . '/feeds/' . $podcastID);
+
+        return !empty($response['data']);
+
+    }
+
     private function returnDefaultResponse($response)
     {
         return $response ? collect($response['data']) : collect([]);

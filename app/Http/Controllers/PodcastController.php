@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Podty\ApiClient;
 use App\Podty\Podcasts;
+use App\Podty\UserPodcasts;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
@@ -12,14 +14,13 @@ class PodcastController extends Controller
 
     private $podcastsApi;
 
-    /**
-     * PodcastController constructor.
-     * @param ApiClient $api
-     */
-    public function __construct(Podcasts $podcastsApi, ApiClient $api)
+    private $userPodcasts;
+
+    public function __construct(Podcasts $podcastsApi, UserPodcasts $userPodcasts, ApiClient $api)
     {
         $this->api = $api;
         $this->podcastsApi = $podcastsApi;
+        $this->userPodcasts = $userPodcasts;
     }
 
     /**
@@ -41,10 +42,11 @@ class PodcastController extends Controller
     {
         $user = Auth::user();
 
-        $response = $this->api
-            ->get('users/' . $user->name . '/feeds/' . $feedId);
+        if (!$user) {
+            return false;
+        }
 
-        return !empty($response['data']);
+        return $this->userPodcasts->follows($user->name, $feedId);
     }
 
     /**
@@ -53,11 +55,7 @@ class PodcastController extends Controller
      */
     private function getPodcastById($id)
     {
-        $podcast = $this->api->get("feeds/{$id}");
-
-        return $this->formatPodcasts(
-            $podcast['data'] ?? []
-        );
+        return $this->formatPodcasts($this->podcastsApi->one($id));
     }
 
     /**
@@ -67,6 +65,7 @@ class PodcastController extends Controller
     public function podcast($podcastId)
     {
         $podcast = $this->getPodcastById($podcastId);
+        $podcast = reset($podcast);
 
         $userFollows = Auth::user() ? $this->getUserFollowPodcast($podcastId) : false;
 
@@ -151,12 +150,8 @@ class PodcastController extends Controller
         return explode('-', str_replace($separators, '-', $podcastName))[0];
     }
 
-    private function formatPodcasts($podcasts = [])
+    private function formatPodcasts(Collection $podcasts)
     {
-        if (is_array($podcasts)) {
-            $podcasts = collect($podcasts);
-        }
-
         return $podcasts->map(function($podcast) {
             return [
                 "id" => $podcast['id'],

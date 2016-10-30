@@ -10,6 +10,13 @@ class Podcasts
         $this->api = $apiClient;
     }
 
+    public function one($id)
+    {
+        return $this->returnDefaultResponse(
+            $this->api->get('feeds/' . $id)
+        );
+    }
+
     public function top($quantity = 24)
     {
         return $this->returnDefaultResponse(
