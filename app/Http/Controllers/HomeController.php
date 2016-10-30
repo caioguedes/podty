@@ -83,14 +83,8 @@ class HomeController extends Controller
     private function makeCurl($url, $method = 'POST')
     {
         switch ($method) {
-            case 'POST':
-                $response = $this->apiClient->post($url);
-                break;
             case 'PUT':
                 $response = $this->apiClient->put($url);
-                break;
-            case 'DELETE':
-                $response = $this->apiClient->delete($url);
                 break;
             case 'PATCH':
                 $response = $this->apiClient->patch($url);
