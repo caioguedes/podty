@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Podty\ApiClient;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
@@ -8,7 +9,7 @@ class FriendsController extends Controller
 {
     public function all()
     {
-        $response = collect($this->getContentFrom(env('API_BASE_URL') . 'users/'. Auth::user()->name .'/friends'));
+        $response = collect($this->getContentFrom('users/'. Auth::user()->name .'/friends'));
 
         $dateLimit = (new \DateTime())->modify('-6 hour');
         return $response->map(function($friend) use($dateLimit) {
@@ -26,7 +27,7 @@ class FriendsController extends Controller
 
     public function find($user)
     {
-        $response = $this->getContentFrom(env('API_BASE_URL') . 'users/' . $user);
+        $response = $this->getContentFrom('users/' . $user);
 
         $dateLimit = (new \DateTime())->modify('-1 day');
 
@@ -44,19 +45,12 @@ class FriendsController extends Controller
 
     private function getContentFrom($source)
     {
-        $curl = curl_init($source);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-        curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
+        $response = (new ApiClient)->get($source);
 
-        $data = curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        if (!$data || $status_code >= 400) {
+        if (!$response) {
             return [];
         }
 
-        return json_decode($data, true)['data'];
+        return $response['data'];
     }
 }

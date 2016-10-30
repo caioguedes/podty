@@ -22,7 +22,7 @@ class HomeController extends Controller
 
     public function getUserListensToPodcast($feedId)
     {
-        $url = env('API_BASE_URL') . 'users/'.Auth::user()->name.'/feeds/'.$feedId;
+        $url = env('API_BASE_URL') . 'users/' . Auth::user()->name . '/feeds/'.$feedId;
 
         return $this->getContentFrom($url) ? true : false;
     }
