@@ -55,32 +55,6 @@ class HomeController extends Controller
         ];
     }
     
-    public function ajaxUptEpisode($episodeId, $currentTime)
-    {
-        if (Auth::user())
-            $this->makeCurl(env('API_BASE_URL') . 'users/' . Auth::user()->name . '/episodes/' . $episodeId . '/paused/' . $currentTime, 'PUT');
-    }
-
-    private function makeCurl($url, $method = 'POST')
-    {
-        switch ($method) {
-            case 'PUT':
-                $response = $this->apiClient->put($url);
-                break;
-            case 'PATCH':
-                $response = $this->apiClient->patch($url);
-                break;
-            default:
-                $response = false;
-        }
-
-        if ($response) {
-            return response('', 400);
-        }
-
-        return response('', 200);
-    }
-
     private function getContentFrom($source)
     {
         $curl = curl_init($source);

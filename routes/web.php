@@ -50,7 +50,7 @@ Route::get('ajax/unfollowUser/{username}', 'ProfileController@ajaxUnfollowUser')
 Route::get('ajax/allFriends', 'FriendsController@all');
 Route::get('ajax/findUser/{user}', 'FriendsController@find');
 Route::get('ajax/touchUser', 'UsersController@touch');
-Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptEpisode');
+Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'UserEpisodesController@touch');
 
 /* Podcast Router */
 Route::get('podcast/{podcastId}', 'PodcastController@podcast');
