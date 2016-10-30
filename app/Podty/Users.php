@@ -23,18 +23,18 @@ class Users
     public function friends($username)
     {
         return $this->returnDefaultResponse(
-            $this->api->get('users/' . $username . '/followers')
+            $this->api->get('users/' . $username . '/friends')
         );
     }
 
     public function follow($authUser, $targetUser)
     {
-        return $this->api->post('users/' . $authUser . '/follow/' . $targetUser);
+        return $this->api->post('users/' . $authUser . '/friends/' . $targetUser);
     }
 
     public function unfollow($authUser, $targetUser)
     {
-        return $this->api->delete('users/' . $authUser . '/unfollow/' . $targetUser);
+        return $this->api->delete('users/' . $authUser . '/friends/' . $targetUser);
     }
 
     private function returnDefaultResponse($response)
