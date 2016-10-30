@@ -10,15 +10,12 @@ use Illuminate\Support\Facades\Auth;
 
 class PodcastController extends Controller
 {
-    private $api;
-
     private $podcastsApi;
 
     private $userPodcasts;
 
-    public function __construct(Podcasts $podcastsApi, UserPodcasts $userPodcasts, ApiClient $api)
+    public function __construct(Podcasts $podcastsApi, UserPodcasts $userPodcasts)
     {
-        $this->api = $api;
         $this->podcastsApi = $podcastsApi;
         $this->userPodcasts = $userPodcasts;
     }
