@@ -25,7 +25,7 @@ Route::get('feed/{searchInput}', function($searchInput){
 });
 
 Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
-    $source = env('API_BASE_URL') . 'episodes/feedId/' . $podcastId . '?term=' . $term;
+    $source = env('API_BASE_URL') . 'feeds/'. $podcastId . '/episodes?term=' . $term;
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
