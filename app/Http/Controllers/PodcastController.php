@@ -107,10 +107,8 @@ class PodcastController extends Controller
      */
     private function formatEpisodes($episodes)
     {
-        return array_map(function ($episode) {
-
+        return $episodes->map(function($episode) {
             $episode = (object) $episode;
-
             return [
                 'id'             => $episode->id,
                 'podcast_id'     => $episode->feed_id,
@@ -125,7 +123,7 @@ class PodcastController extends Controller
                 'media_type'     => $episode->media_type,
             ];
 
-        }, $episodes);
+        });
     }
 
     /**
