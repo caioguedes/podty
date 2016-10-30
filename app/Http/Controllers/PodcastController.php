@@ -198,9 +198,6 @@ class PodcastController extends Controller
         return ($response['data'] ?? []);
     }
 
-    /**
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
-     */
     public function discover()
     {
         return view('top');

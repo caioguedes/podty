@@ -23,7 +23,7 @@ Route::get('feed/{searchInput}', function($searchInput){
 });
 
 Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
-    $source = env('API_BASE_URL') . 'episodes/feedId/' . $podcastId . '?term=' . $term;
+    $source = env('API_BASE_URL') . 'feeds/'. $podcastId . '/episodes?term=' . $term;
     $curl = curl_init($source);
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_TIMEOUT, 10);
@@ -56,4 +56,5 @@ Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'HomeController@ajaxUptE
 Route::get('/podcast/{podcastId}', 'PodcastController@podcast');
 Route::get('/ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
 Route::get('/discover', 'PodcastController@discover');
-Route::get('/ajax/homeNoFeeds', 'PodcastController@getDiscoverWithoutFeeds')->name('podcast.discoverWithoutFeeds');
+Route::get('/ajax/homeNoFeeds', 'PodcastController@getDiscoverWithoutFeeds')
+    ->name('podcast.discoverWithoutFeeds');

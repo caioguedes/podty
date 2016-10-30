@@ -3,7 +3,6 @@
 namespace App\Http;
 
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
 
 class ApiClient
 {
@@ -29,7 +28,7 @@ class ApiClient
     {
         try {
             $response = ($this->client->get($resource)->getBody()->getContents());
-        } catch (RequestException $exception) {
+        } catch (\Exception $exception) {
             return [];
         }
 
