@@ -5,7 +5,6 @@ $(window).load(function(){
     }, 20000);
 });
 
-
 function renderSideBar() {
     $.ajax({
         url: '/ajax/sidebar',

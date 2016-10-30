@@ -15,6 +15,6 @@
 @endsection
 
 @section('footer-scripts')
-    <script async type="text/javascript" src="js/home.js"></script>
+    <script async type="text/javascript" src="js/find-podcasts.js"></script>
     <script async type="text/javascript" src="js/partials/leftbar.js"></script>
 @endsection
