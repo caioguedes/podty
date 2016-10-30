@@ -102,30 +102,6 @@ class HomeController extends Controller
         return $this->getContentFrom(env('API_BASE_URL') . 'users/' . Auth::user()->name);
     }
 
-    public function ajaxFollowPodcast($podcastId)
-    {
-        Auth::user()->podcasts_count++;
-        Auth::user()->save();
-        
-        if ($this->userPodcasts->follow(Auth::user()->name, $podcastId)) {
-            return response('', 200);
-        }
-
-        return response('', 400);
-    }
-
-    public function ajaxUnfollowPodcast($podcastId)
-    {
-        Auth::user()->podcasts_count--;
-        Auth::user()->save();
-
-        if ($this->userPodcasts->unfollow(Auth::user()->name, $podcastId)) {
-            return response('', 200);
-        }
-
-        return response('', 400);
-    }
-
     public function ajaxTouchUser()
     {
         if (Auth::user()) {
