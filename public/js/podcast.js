@@ -1,6 +1,8 @@
 'use strict';
 
-function getCurrentUrlId(){return window.location.href.substring(window.location.href.lastIndexOf('/')+1);}
+function getCurrentUrlId(){
+    return window.location.href.substring(window.location.href.lastIndexOf('/')+1).replace('#', '');
+}
 
 (function($){$.fn.clickToggle=function(func1,func2){var funcs=[func1,func2];this.data('toggleclicked',0);this.click(function(){var data=$(this).data();var tc=data.toggleclicked;$.proxy(funcs[tc],this)();data.toggleclicked=(tc+1)%2;});return this;};}(jQuery));
 
@@ -10,11 +12,9 @@ $(document).ready(function() {
 
     $('#podcast-list').on('scroll', function() {
         if(!stopRetrieving && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-            var url = '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++
-            console.log(url)
             $.ajax({
                 method: 'GET',
-                url: url,
+                url: '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++,
                 success: function(res) {
                     renderPodcastView(res);
                     stopRetrieving = false;
