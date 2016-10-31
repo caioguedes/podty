@@ -59,3 +59,8 @@ Route::get('discover', 'HomeController@discover');
 Route::get('ajax/discover', 'PodcastController@top');
 
 Route::get('podcasts', 'PodcastController@home');
+
+
+Route::get('ajax/myPods', function (\App\Podty\UserPodcasts $userPodcasts){
+   return $userPodcasts->all(Auth::user()->name);
+});
