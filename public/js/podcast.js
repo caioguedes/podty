@@ -10,9 +10,11 @@ $(document).ready(function() {
 
     $('#podcast-list').on('scroll', function() {
         if(!stopRetrieving && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+            var url = '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++
+            console.log(url)
             $.ajax({
                 method: 'GET',
-                url: '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++,
+                url: url,
                 success: function(res) {
                     renderPodcastView(res);
                     stopRetrieving = false;
