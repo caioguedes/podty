@@ -43,12 +43,12 @@
             url: '/ajax/myPods',
             success: function(response){
                 response.map(function(podcast){
-                    $('#podcasts-list-left-side').append(render(podcast))
+                    $('#podcasts-list-left-side').append(renderList(podcast))
                 });
             }
         });
 
-        function render(podcast){
+        function renderList(podcast){
             return '<li>' +
                     '<a href="/podcast/' + podcast.id + '">' +
                         '<i><img src="' + podcast.thumbnail_100 + '" width="40" height="40"></i>' +
