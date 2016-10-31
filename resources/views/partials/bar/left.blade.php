@@ -40,13 +40,13 @@
 
     <script>
         $.ajax({
-            url: 'ajax/myPods',
+            url: '/ajax/myPods',
             success: function(response){
                 response.map(function(podcast){
                     $('#podcasts-list-left-side').append(render(podcast))
                 });
             }
-        })
+        });
 
         function render(podcast){
             return '<li>' +
