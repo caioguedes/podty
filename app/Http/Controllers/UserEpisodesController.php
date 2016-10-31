@@ -21,4 +21,19 @@ class UserEpisodesController extends Controller
             $this->userEpisode->touch(Auth::user()->name, $episodeId, $currentTime);
         }
     }
+
+    public function detach($episodeId)
+    {
+        if (Auth::user()) {
+            $this->userEpisode->detach(Auth::user()->name, $episodeId);
+        }
+    }
+
+    public function detachAll($podcastId)
+    {
+        if(Auth::user()) {
+            $this->userEpisode->detachAll(Auth::user()->name, $podcastId);
+        }
+        
+    }
 }

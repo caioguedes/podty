@@ -29,17 +29,17 @@ trait Format
             return [
                 'id' => $episode['id'],
                 'podcast_id' => $episode['feed_id'],
+                'podcast_name' => $episode['feed_name'] ?? '',
                 'title' => strip_tags($episode['title']),
                 'link' => $episode['link'],
                 'published_date' => $this->formatData($episode['published_date']),
                 'content' => $episode['content'],
                 'summary' => $episode['summary'] ?? '',
-                'image' => $episode['image'],
+                'image' => $episode['image'] ? $episode['image'] : $episode['feed_image'] ?? '',
                 'duration' => $episode['duration'],
                 'media_url' => $episode['media_url'],
                 'media_type' => $episode['media_type'],
             ];
-
         });
     }
 

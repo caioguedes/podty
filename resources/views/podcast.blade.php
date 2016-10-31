@@ -12,7 +12,7 @@
           <section class="vbox">
           <section class="w-f-md">
             <section class="hbox stretch bg-light dk">
-              <aside class="col-sm-3 no-padder bg-black" id="sidebar">
+              <aside class="col-sm-2 no-padder bg-black" id="sidebar">
                     <div class="item pos-rlt">
                       <div class="bottom gd bg-info wrapper-md podcast-image-texts">
                         <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>

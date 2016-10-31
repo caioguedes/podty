@@ -45,6 +45,7 @@
         @endif
 
 
+
     @if (Auth::guest())
         <div class="navbar-right">
             <ul class="nav navbar-nav m-n hidden-xs nav-user user">
@@ -113,5 +114,43 @@
 <script>
     $("a#logout-anchor").click(function(){
         $("#logout-form").submit();
+    });
+
+    $(document).ready(function() {
+        var updatingCurrentTimeId = 0;
+        var lastCurrentTime = 0;
+        $(document).on('click', '.play-me', function(){
+
+            var audio = document.getElementById('player');
+            var source = document.getElementById('source');
+            source.src = $(this).find('input').val();
+
+            var inputData = $(this).find('input');
+
+            $('#playing span').text(inputData.attr('data-title'));
+            $('.podcast-image').attr('src', inputData.attr('data-image'));
+            $('.podcast-image-texts').attr('hidden', true);
+            audio.load();
+            $('#div-player').attr('hidden', false);
+            $('.musicbar').addClass('animate');
+            audio.play();
+
+            if (updatingCurrentTimeId) clearInterval(updatingCurrentTimeId);
+            updatingCurrentTimeId = setInterval(function(){
+                var audioTag = document.getElementsByTagName('audio')[0];
+
+                if (!audioTag.currentSrc) return;
+
+                var currentTime = Math.floor(audioTag.currentTime);
+                if (!currentTime) return;
+                if (currentTime == lastCurrentTime) return;
+
+                lastCurrentTime = currentTime;
+
+                $.ajax({
+                    url: '/ajax/uptEpisode/' + inputData.attr('data-id') + '/' + currentTime
+                });
+            }, 25000);
+        });
     });
 </script>

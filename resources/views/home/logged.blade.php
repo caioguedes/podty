@@ -4,10 +4,71 @@
     <section class="hbox stretch">
         <section>
             <section class="vbox">
-                <section class="scrollable padder-lg" id="bjax-target">
+                <section class="scrollable padder-lg" id="bjax-target" style="padding-bottom: 60px;">
                     <h2 class="font-thin m-b" id="home-title">{{$title}}</h2>
                     <div class="row row-sm podcasts-episodes-home">
-                        @include('partials.podcasts')
+
+                        @foreach($episodes as $episode)
+                            <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
+                                <div class="item">
+                                    <div class="pos-rlt">
+                                        <div class="bottom">
+                                            @if($episode['duration'])
+                                                <span class="badge bg-info m-l-sm m-b-sm">
+                                                  {{$episode['duration']}}
+                                              </span>
+                                            @endif
+                                        </div>
+
+                                        <div class="item-overlay opacity r r-2x bg-black">
+                                            <a href="#" class="center text-center play-me m-t-n">
+                                                <input type="hidden"
+                                                       value="{{$episode['media_url']}}"
+                                                       data-title="{{$episode['title']}}"
+                                                       data-id="{{$episode['id']}}"
+                                                       data-image="{{$episode['image']}}"
+                                                >
+                                                <i class="icon-control-play text i-2x"></i>
+                                                <i class="icon-control-pause text-active  i-2x"></i>
+                                            </a>
+                                            <div class="bottom pull-right text-sm">
+                                                <a href="#" class="pull-right text-sm m-r-sm m-b-sm button-rmv-ep">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <a href="#">
+                                            <img src="{{$episode['image']}}" class="r r-2x img-full">
+                                        </a>
+                                    </div>
+                                    <div class="padder-v">
+                                        <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a>
+                                        <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$episode['id']}}">
+                                            {{$episode['published_date']}}
+                                        </a>
+                                        <a href="/podcast/{{$episode['podcast_id']}}" class="text-ellipsis">{{$episode['podcast_name']}}</a>
+                                    </div>
+
+                                    <div class="modal fade" id="myModal{{$episode['id']}}" role="dialog">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content bg-dark">
+                                                <div class="modal-body" style="overflow: scroll; max-height: 300px;">
+                                                    <h4 class="modal-title">{{$episode['title']}}</h4>
+                                                    <hr>
+                                                    <?= !empty($episode['content']) ? $episode['content'] : $episode['summary']?>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">
+                                                        Close
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+
                     </div>
                     <div id="loading" hidden>
                         <div class="row">
@@ -62,9 +123,39 @@
                         </style>
                     </div>
                 </section>
+                @if(Route::getCurrentRoute()->uri() == '/')
+                    <div id="div-player"
+                         style="background-color:#232c32;
+                                position: absolute;
+                                bottom: 0;
+                                width: inherit;
+                                max-height: 60px;"
+                         hidden
+                    >
+                        <div id="audio" style="margin-top: 7px;">
+                            <audio controls id="player" style="width: 60%;margin-left: 5px;">
+                                <source src="" id="source">
+                            </audio>
+                            <div id="playing" style="width: 38%;float: right;">
+                                <span class="center"></span>
+                            </div>
+                        </div>
+                    </div>
+                @endif
             </section>
         </section>
     </section>
 </section>
 
 @include('partials.connected')
+
+
+<script>
+    $(document).on('click', '.button-rmv-ep',function () {
+        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        if (!episodeID) return;
+        $.ajax({url: 'ajax/detachEpisode/' + episodeID});
+        $(this).parent().parent().parent().parent().css('opacity', '0.1')
+        $(this).remove()
+    })
+</script>

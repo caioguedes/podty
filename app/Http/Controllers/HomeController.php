@@ -3,7 +3,9 @@ namespace App\Http\Controllers;
 
 use App\Format;
 use App\Http\Requests;
+use App\Podty\ApiClient;
 use App\Podty\Podcasts;
+use App\Podty\UserEpisodes;
 use App\Podty\UserPodcasts;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
@@ -26,21 +28,15 @@ class HomeController extends Controller
     public function index()
     {
         if (!Auth::user() || Auth::user()->podcasts_count < 1) {
-            return view('home')->with([
-                'content' => $this->formatPodcasts($this->podcastsApi->top()),
-                'title' => 'Top Podcasts'
-            ]);
+            return redirect('/discover');
         }
 
-        $response = $this->userPodcasts->all(Auth::user()->name);
-
-        $content = $response->map(function($feed){
-            return $this->formatHomePodcasts($feed);
-        });
+        $episodes = (new UserEpisodes(new ApiClient))->latests(Auth::user()->name, 0, 100);
+        $episodes = $this->formatEpisodes(collect($episodes['data']));
 
         return view('home')->with([
-            'content' => $content,
-            'title' => 'Your Library'
+            'episodes' => $episodes,
+            'title' => 'Latests Episodes'
         ]);
     }
 
