@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
 
+
     <title>@yield('title')</title>
 
     <meta name="theme-color" content="#232c32">
@@ -22,8 +23,6 @@
     @yield('content')
 
     @yield('footer')
-
-    <script async src="/js/bootstrap.js"></script>
 
     @yield('footer-scripts')
 </body>
