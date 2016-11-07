@@ -87,5 +87,5 @@
 
 @section('footer-scripts')
     <script async type="text/javascript" src="js/find-podcasts.js"></script>
-    <script async type="text/javascript" src="js/partials/leftbar.js"></script>
+    <script async type="text/javascript" src="js/partials/leftbar.js?t={{time()}}"></script>
 @endsection

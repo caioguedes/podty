@@ -77,7 +77,7 @@
 @endsection
 
 @section('footer-scripts')
-    <script async type="text/javascript" src="/js/partials/leftbar.js"></script>
+    <script async type="text/javascript" src="/js/partials/leftbar.js?t={{time()}}"></script>
     <script async type="text/javascript" src="/js/profile.js"></script>
 @endsection
 
