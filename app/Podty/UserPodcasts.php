@@ -2,6 +2,8 @@
 namespace App\Podty;
 
 
+use Illuminate\Support\Collection;
+
 class UserPodcasts
 {
     private $api;
@@ -11,38 +13,38 @@ class UserPodcasts
         $this->api = $apiClient;
     }
 
-    public function all($username)
+    public function all(string $username): Collection
     {
         return $this->returnDefaultResponse(
             $this->api->get('users/' . $username . '/feeds')
         );
     }
 
-    public function one($username, $podcastId)
+    public function one(string $username, int $podcastId): Collection
     {
         return $this->returnDefaultResponse(
             $this->api->get('users/' . $username . '/feeds' . $podcastId)
         );
     }
 
-    public function follows($username, $podcastID)
+    public function follows(string $username, int $podcastID): bool
     {
         $response = $this->api->get('users/' . $username . '/feeds/' . $podcastID);
 
         return !empty($response['data']);
     }
 
-    public function follow($username, $podcastId)
+    public function follow(string $username, int $podcastId): bool
     {
         return $this->api->post('users/' . $username . '/feeds/' . $podcastId);
     }
 
-    public function unfollow($username, $podcastId)
+    public function unfollow(string $username, int $podcastId): bool
     {
         return $this->api->delete('users/' . $username . '/feeds/' . $podcastId);
     }
 
-    private function returnDefaultResponse($response)
+    private function returnDefaultResponse($response): Collection
     {
         return $response ? collect($response['data']) : collect([]);
     }

@@ -1,6 +1,8 @@
 <?php
 namespace App\Podty;
 
+use Illuminate\Support\Collection;
+
 class Podcasts
 {
     private $api;
@@ -10,21 +12,21 @@ class Podcasts
         $this->api = $apiClient;
     }
 
-    public function one($id)
+    public function one(int $id): Collection
     {
         return $this->returnDefaultResponse(
             $this->api->get('feeds/' . $id)
         );
     }
 
-    public function top($quantity = 24)
+    public function top(int $quantity = 24): Collection
     {
         return $this->returnDefaultResponse(
             $this->api->get('feeds/top/' . $quantity)
         );
     }
 
-    public function episodes($podcastId, $offset = 0, $limit = 28)
+    public function episodes(int $podcastId, int $offset = 0, int $limit = 28): Collection
     {
         $url = 'feeds/' . $podcastId . '/episodes?limit=' . $limit;
 
@@ -35,7 +37,7 @@ class Podcasts
         return $this->returnDefaultResponse($this->api->get($url));
     }
 
-    private function returnDefaultResponse($response)
+    private function returnDefaultResponse($response): Collection
     {
         return $response ? collect($response['data']) : collect([]);
     }
