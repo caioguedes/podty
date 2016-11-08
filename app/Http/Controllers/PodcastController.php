@@ -118,4 +118,15 @@ class PodcastController extends Controller
 
         return $response;
     }
+
+    public function findOnEpisodes($podcastId, $searchInput)
+    {
+        $response = $this->podcastsApi->findOnEpisodes($podcastId, $searchInput);
+
+        if (!$response) {
+            return [];
+        }
+
+        return $response;
+    }
 }

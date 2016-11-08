@@ -5,23 +5,7 @@ Route::get('/', 'HomeController@index');
 Route::get('profile/{user?}', 'ProfileController@index');
 Route::get('feed/{searchInput}', 'PodcastController@findByName');
 
-Route::get('episode/{podcastId}/{term}', function($podcastId, $term){
-    $source = env('API_BASE_URL') . 'feeds/'. $podcastId . '/episodes?term=' . $term;
-    $curl = curl_init($source);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($curl, CURLOPT_TIMEOUT, 10);
-    curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    curl_setopt($curl, CURLOPT_USERPWD, env('API_AUTH_USER') . ":" . env('API_AUTH_PASS'));
-
-    $data = curl_exec($curl);
-    $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-    if (!$data || $status_code >= 400) {
-        return [];
-    }
-
-    return $data;
-});
+Route::get('episode/{podcastId}/{term}', 'PodcastController@findOnEpisodes');
 
 Route::get('ajax/sidebar', 'UsersController@get');
 Route::get('ajax/followPodcast/{feedId}', 'UserPodcastsController@follow');

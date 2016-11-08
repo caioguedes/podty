@@ -42,6 +42,11 @@ class Podcasts
         return $this->api->get('feeds/name/' . rawurlencode($name);)
     }
 
+    public function findOnEpisodes($podcastId, $searchFor)
+    {
+        return $this->api->get('feeds/'. $podcastId . '/episodes?term=' . $searchFor);
+    }
+
     private function returnDefaultResponse($response): Collection
     {
         return $response ? collect($response['data']) : collect([]);
