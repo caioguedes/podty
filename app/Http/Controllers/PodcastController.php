@@ -81,9 +81,8 @@ class PodcastController extends Controller
      * @param int $page
      * @return array|\Illuminate\Http\JsonResponse
      */
-    public function getEpisodesPerPage($podcastId, $page = 1)
+    public function getEpisodesPerPage($podcastId, $page = 1, $limit = 28)
     {
-        $limit = 28;
         $offset = ($limit * $page);
 
         $episodes = $this->podcastsApi->episodes($podcastId, $offset);
