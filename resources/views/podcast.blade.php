@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('title', str_limit($data['podcast']['name'], 20) . ' - Podty')
 
+@section('meta')
+  <meta property="og:image" content="{{$data['podcast']['thumbnail_600']}}">
+@endsection
+
 @section('content')
   <section class="vbox">
       @include('header')

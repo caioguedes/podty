@@ -2,12 +2,13 @@
 <html lang="en" class="app bg-dark">
 <head>
     <meta charset="utf-8" />
-
-
-    <title>@yield('title')</title>
-
     <meta name="theme-color" content="#232c32">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+    @yield('meta')
+
+    <title>@yield('title')</title>
+    
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
