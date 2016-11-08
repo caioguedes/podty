@@ -102,9 +102,9 @@ class PodcastController extends Controller
         return view('top');
     }
 
-    private function getUserFollowPodcast($feedId)
+    private function getUserFollowPodcast($podcastId)
     {
-        return $this->userPodcasts->follows(Auth::user()->name, $feedId);
+        return $this->userPodcasts->follows(Auth::user()->name, $podcastId);
     }
 
     public function findByName($searchInput)
