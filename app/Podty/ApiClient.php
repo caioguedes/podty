@@ -24,7 +24,7 @@ class ApiClient
      * @param $resource
      * @return array
      */
-    public function get($resource)
+    public function get(string $resource): array
     {
         try {
             $response = ($this->client->get($resource)->getBody()->getContents());
@@ -37,7 +37,7 @@ class ApiClient
         return $response;
     }
 
-    public function post($resource)
+    public function post(string $resource): bool
     {
         $curl = curl_init();
 
@@ -60,7 +60,7 @@ class ApiClient
         return true;
     }
 
-    public function patch($resource)
+    public function patch(string $resource): bool
     {
         $curl = curl_init();
 
@@ -83,7 +83,7 @@ class ApiClient
         return true;
     }
 
-    public function put($resource)
+    public function put(string $resource): bool
     {
         $curl = curl_init();
 
@@ -106,7 +106,7 @@ class ApiClient
         return true;
     }
 
-    public function delete($resource)
+    public function delete(string $resource): bool 
     {
         $curl = curl_init();
 
