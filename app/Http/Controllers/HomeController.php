@@ -6,7 +6,6 @@ use App\Http\Requests;
 use App\Podty\ApiClient;
 use App\Podty\Podcasts;
 use App\Podty\UserEpisodes;
-use App\Podty\UserPodcasts;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
@@ -15,13 +14,10 @@ class HomeController extends Controller
 {
     use Format;
 
-    private $userPodcasts;
-
     private $podcastsApi;
 
-    public function __construct(UserPodcasts $userPodcasts, Podcasts $podcastsApi)
+    public function __construct(Podcasts $podcastsApi)
     {
-        $this->userPodcasts = $userPodcasts;
         $this->podcastsApi = $podcastsApi;
     }
 
