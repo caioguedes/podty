@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 class PodcastController extends Controller
 {
     use Format;
-    
+
     private $podcastsApi;
 
     private $userPodcasts;
@@ -28,7 +28,7 @@ class PodcastController extends Controller
         $content = $response->map(function($feed){
             return $this->formatHomePodcasts($feed);
         });
-        
+
         return view('podcasts')->with(compact('content'));
     }
 
@@ -106,5 +106,16 @@ class PodcastController extends Controller
     private function getUserFollowPodcast($feedId)
     {
         return $this->userPodcasts->follows(Auth::user()->name, $feedId);
+    }
+
+    public function findByName($searchInput)
+    {
+        $response = $this->podcastsApi->findByName($searchInput);
+
+        if (!$response) {
+            return [];
+        }
+
+        return $response;
     }
 }

@@ -37,6 +37,11 @@ class Podcasts
         return $this->returnDefaultResponse($this->api->get($url));
     }
 
+    public function findByName($name)
+    {
+        return $this->api->get('feeds/name/' . rawurlencode($name);)
+    }
+
     private function returnDefaultResponse($response): Collection
     {
         return $response ? collect($response['data']) : collect([]);
