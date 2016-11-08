@@ -2,7 +2,7 @@
     <aside class="aside-md bg-light dk hidden-xs" id="sidebar">
         <section class="vbox animated fadeInRight">
             <section class="w-f-md scrollable hover friends-list">
-                <h4 class="font-thin m-l-md m-t">Friends</h4>
+                <h4 class="font-thin m-l-md m-t" style="color: #c9d0d7;">Friends</h4>
                 <ul class="list-group no-bg no-borders auto m-t-n-xxs connect-friends-list"></ul>
             </section>
 
