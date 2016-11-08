@@ -15,6 +15,11 @@ class UserPodcastsController extends Controller
         $this->userPodcasts = $userPodcasts;
     }
 
+    public function all()
+    {
+        return $this->userPodcasts->all(Auth::user()->name);
+    }
+
     public function follow($podcastId)
     {
         Auth::user()->podcasts_count++;
