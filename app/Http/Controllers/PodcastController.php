@@ -15,9 +15,9 @@ class PodcastController extends Controller
 
     private $userPodcasts;
 
-    public function __construct(Podcasts $podcastsApi, UserPodcasts $userPodcasts)
+    public function __construct(UserPodcasts $userPodcasts)
     {
-        $this->podcastsApi = $podcastsApi;
+        $this->podcastsApi = new Podcasts;
         $this->userPodcasts = $userPodcasts;
     }
 
