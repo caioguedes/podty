@@ -39,7 +39,7 @@ class Podcasts
 
     public function findByName($name)
     {
-        return $this->api->get('feeds/name/' . rawurlencode($name);)
+        return $this->api->get('feeds/name/' . rawurlencode($name));
     }
 
     public function findOnEpisodes($podcastId, $searchFor)
