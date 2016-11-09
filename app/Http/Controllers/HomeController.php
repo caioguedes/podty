@@ -14,13 +14,6 @@ class HomeController extends Controller
 {
     use Format;
 
-    private $podcastsApi;
-
-    public function __construct(Podcasts $podcastsApi)
-    {
-        $this->podcastsApi = $podcastsApi;
-    }
-
     public function index()
     {
         if (!Auth::user() || Auth::user()->podcasts_count < 1) {
@@ -39,7 +32,7 @@ class HomeController extends Controller
     public function discover()
     {
         return view('discover')->with([
-            'content' => $this->podcastsApi->top(),
+            'content' => (new Podcasts)->top(),
             'title' => 'Discover'
         ]);
     }
