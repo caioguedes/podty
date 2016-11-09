@@ -8,9 +8,9 @@ class UserPodcasts
 {
     private $api;
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct()
     {
-        $this->api = $apiClient;
+        $this->api = new ApiClient;
     }
 
     public function all(string $username): Collection
