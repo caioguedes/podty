@@ -15,10 +15,10 @@ class PodcastController extends Controller
 
     private $userPodcasts;
 
-    public function __construct(UserPodcasts $userPodcasts)
+    public function __construct()
     {
         $this->podcastsApi = new Podcasts;
-        $this->userPodcasts = $userPodcasts;
+        $this->userPodcasts = new UserPodcasts;
     }
 
     public function home()
