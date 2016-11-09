@@ -5,9 +5,9 @@ class UserEpisodes
 {
     private $api;
 
-    public function __construct(ApiClient $apiClient)
+    public function __construct()
     {
-        $this->api = $apiClient;
+        $this->api = new ApiClient;
     }
 
     public function touch(string $username, int $episodeId, int $currentTime): bool
