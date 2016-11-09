@@ -44,7 +44,7 @@ var findPodcast = function(searchInput){
         },
         success: function success(response) {
             canSearchForPodcasts = true;
-            return handleViewRender(JSON.parse(response));
+            return handleViewRender(response);
         },
         error: function(a, b, c){
         }
