@@ -3017,6 +3017,11 @@ a.bg-light:focus {
 .no-padder {
   padding: 0 !important;
 }
+
+.padding-top-50 {
+  padding-top: 50px !important;
+}
+
 .pull-in {
   margin-left: -15px;
   margin-right: -15px;
