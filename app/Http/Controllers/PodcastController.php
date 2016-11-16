@@ -133,4 +133,15 @@ class PodcastController extends Controller
 
         return $response;
     }
+
+    public function episode($episodeId)
+    {
+        $episode = $this->podcastsApi->episode($episodeId);
+
+        if (!$episode->count()) {
+            return redirect('/404');
+        }
+        
+        return view('episode')->with('podcast', $episode);
+    }
 }

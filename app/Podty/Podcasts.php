@@ -26,6 +26,13 @@ class Podcasts
         );
     }
 
+    public function episode(int $episodeId)
+    {
+        $url = 'episodes/' . $episodeId;
+
+        return $this->returnDefaultResponse($this->api->get($url));
+    }
+
     public function episodes(int $podcastId, int $offset = 0, int $limit = 28): Collection
     {
         $url = 'feeds/' . $podcastId . '/episodes?limit=' . $limit;

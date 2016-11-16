@@ -5,6 +5,7 @@ Route::get('/', 'HomeController@index');
 Route::get('profile/{user?}', 'ProfileController@index');
 Route::get('feed/{searchInput}', 'PodcastController@findByName');
 
+Route::get('episodes/{episodeId}', 'PodcastController@episode');
 Route::get('episode/{podcastId}/{term}', 'PodcastController@findOnEpisodes');
 
 Route::get('ajax/sidebar', 'UsersController@get');
