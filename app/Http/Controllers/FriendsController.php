@@ -32,8 +32,12 @@ class FriendsController extends Controller
 
     public function find($user)
     {
-        $response = $this->users->get($user)['data'];
+        $response = $this->users->get($user);
 
-        return $this->formatUser($response);
+        if (!$response) {
+            return response()->json("", 200);
+        }
+
+        return $this->formatUser($response['data']);
     }
 }

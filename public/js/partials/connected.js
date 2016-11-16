@@ -52,9 +52,11 @@ function findUsers(user){
         complete: function() {
         },
         success: function success(user) {
-            searchUsersList.append(renderHTML(user));
-            searchUsers.attr('hidden', false);
-            $('.friends-list').css('height', '70%').css('overdlow', 'scroll');
+            if (user) {
+                searchUsersList.append(renderHTML(user));
+                searchUsers.attr('hidden', false);
+                $('.friends-list').css('height', '70%');
+            }
             canSearchForUsers = true;
         }
     });

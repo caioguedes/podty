@@ -8,14 +8,14 @@
                     <h2 class="font-thin m-b" id="home-title">{{$title}}</h2>
                     <div class="row row-sm podcasts-episodes-home">
 
-                        @foreach($episodes as $episode)
+                        @foreach($podcasts as $podcast)
                             <div class="col-xs-6 col-sm-3 col-md-2 col-lg-2">
                                 <div class="item">
                                     <div class="pos-rlt">
                                         <div class="bottom">
-                                            @if($episode['duration'])
+                                            @if($podcast['episodes'][0]['duration'])
                                                 <span class="badge bg-info m-l-sm m-b-sm">
-                                                  {{$episode['duration']}}
+                                                  {{$podcast['episodes'][0]['duration']}}
                                               </span>
                                             @endif
                                         </div>
@@ -23,10 +23,10 @@
                                         <div class="item-overlay opacity r r-2x bg-black">
                                             <a href="#" class="center text-center play-me m-t-n">
                                                 <input type="hidden"
-                                                       value="{{$episode['media_url']}}"
-                                                       data-title="{{$episode['title']}}"
-                                                       data-id="{{$episode['id']}}"
-                                                       data-image="{{$episode['image']}}"
+                                                       value="{{$podcast['episodes'][0]['media_url']}}"
+                                                       data-title="{{$podcast['episodes'][0]['title']}}"
+                                                       data-id="{{$podcast['episodes'][0]['id']}}"
+                                                       data-image="{{$podcast['episodes'][0]['image']}}"
                                                 >
                                                 <i class="icon-control-play text i-2x"></i>
                                                 <i class="icon-control-pause text-active  i-2x"></i>
@@ -38,24 +38,24 @@
                                             </div>
                                         </div>
                                         <a href="#">
-                                            <img src="{{$episode['image']}}" class="r r-2x img-full">
+                                            <img src="{{$podcast['episodes'][0]['image'] ?: $podcast['thumbnail_600']}}" class="r r-2x img-full">
                                         </a>
                                     </div>
                                     <div class="padder-v">
-                                        <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a>
-                                        <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$episode['id']}}">
-                                            {{$episode['published_date']}}
+                                        <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">{{$podcast['episodes'][0]['title']}}</a>
+                                        <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">
+                                            {{(new \DateTime($podcast['episodes'][0]['published_at']))->format('d/m/Y H:i')}}
                                         </a>
-                                        <a href="/podcast/{{$episode['podcast_id']}}" class="text-ellipsis">{{$episode['podcast_name']}}</a>
+                                        <a href="/podcast/{{$podcast['slug']}}" class="text-ellipsis">{{$podcast['name']}}</a>
                                     </div>
 
-                                    <div class="modal fade" id="myModal{{$episode['id']}}" role="dialog">
+                                    <div class="modal fade" id="myModal{{$podcast['episodes'][0]['id']}}" role="dialog">
                                         <div class="modal-dialog">
                                             <div class="modal-content bg-dark">
                                                 <div class="modal-body" style="overflow: scroll; max-height: 300px;">
-                                                    <h4 class="modal-title">{{$episode['title']}}</h4>
+                                                    <h4 class="modal-title">{{$podcast['episodes'][0]['title']}}</h4>
                                                     <hr>
-                                                    <?= !empty($episode['content']) ? $episode['content'] : $episode['summary']?>
+                                                    <?= !empty($podcast['episodes'][0]['content']) ? $podcast['episodes'][0]['content'] : $podcast['episodes'][0]['summary']?>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">

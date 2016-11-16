@@ -50,7 +50,7 @@
 
         function renderList(podcast){
             return '<li>' +
-                    '<a href="/podcast/' + podcast.id + '">' +
+                    '<a href="/podcast/' + podcast.slug + '">' +
                         '<i><img src="' + podcast.thumbnail_100 + '" width="40" height="40"></i>' +
                         '<span class="font-bold">' + podcast.name + '</span>' +
                     '</a>' +

@@ -83,7 +83,7 @@
                                   <div class="padder-v">
                                       <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a>
                                       <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$episode['id']}}">
-                                          {{$episode['published_date']}}
+                                          {{ (new \DateTime($episode['published_at']))->format('d/m/Y H:i')}}
                                       </a>
                                   </div>
 

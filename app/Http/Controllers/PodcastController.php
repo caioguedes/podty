@@ -44,34 +44,30 @@ class PodcastController extends Controller
     }
 
     /**
-     * @param $id
-     * @return array
-     */
-    private function getPodcastById($id)
-    {
-        return $this->formatPodcasts($this->podcastsApi->one($id));
-    }
-
-    /**
      * @param $podcastId
      * @return mixed
      */
     public function podcast($podcastId)
     {
-        $podcast = $this->getPodcastById($podcastId);
+        $podcastId = explode('-', $podcastId)[0];
+
+        if (!is_numeric($podcastId)) {
+            return redirect('/404');
+        }
+
+        $podcast = $this->podcastsApi->episodes($podcastId);
+
         $podcast = reset($podcast);
-
-        $userFollows = Auth::user() ? $this->getUserFollowPodcast($podcastId) : false;
-
-        $episodes = $this->podcastsApi->episodes($podcastId);
 
         if (!$podcast) {
             return redirect('/404');
         }
 
+        $userFollows = Auth::user() ? $this->getUserFollowPodcast($podcastId) : false;
+
         return view('podcast')->with('data', [
-            'podcast'     => reset($podcast),
-            'episodes'    => $episodes ? $this->formatEpisodes($episodes) : [],
+            'podcast'     => $podcast,
+            'episodes'    => $podcast['episodes'],
             'userFollows' => $userFollows
         ]);
     }
@@ -83,17 +79,26 @@ class PodcastController extends Controller
      */
     public function getEpisodesPerPage($podcastId, $page = 1, $limit = 28)
     {
+        $podcastId = explode('-', $podcastId)[0];
+
+        if (!is_numeric($podcastId)) {
+            return redirect('/404');
+        }
+
         $offset = ($limit * $page);
 
-        $episodes = $this->podcastsApi->episodes($podcastId, $offset);
+        $podcast = $this->podcastsApi->episodes($podcastId, $offset);
 
-        if (!$episodes) {
+        if (!$podcast->count()) {
             return response()->json([], 404);
         }
 
+        $episodes = $podcast['episodes'];
+        unset($podcast['episodes']);
+
         return response()->json( [
-            'podcast'  => array_first($this->getPodcastById($podcastId)),
-            'episodes' => $this->formatEpisodes($episodes),
+            'podcast'  => $podcast,
+            'episodes' => $episodes,
         ]);
     }
 

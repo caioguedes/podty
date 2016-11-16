@@ -65,6 +65,7 @@ trait Format
     {
         return [
             "id" => $podcast['id'],
+            "slug" => $podcast['slug'],
             "name" => $this->formatPodcastName($podcast['name']),
             "thumbnail_30" => $podcast['thumbnail_30'],
             "thumbnail_600" => $podcast['thumbnail_600'],
