@@ -12,7 +12,7 @@
 
         @include('partials.bar.left')
 
-        <section id="content">
+        <section id="content" class="padding-top-50">
           <section class="vbox">
           <section class="w-f-md">
             <section class="hbox stretch bg-light dk">

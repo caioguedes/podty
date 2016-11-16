@@ -8,7 +8,7 @@
     @yield('meta')
 
     <title>@yield('title')</title>
-    
+
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
     <link rel="stylesheet" href="/css/bootstrap.css" type="text/css" />
@@ -20,7 +20,7 @@
 
     @yield('head')
 </head>
-<body class="bg-dark lt body">
+<body class="bg-dark body">
     @yield('content')
 
     @yield('footer')

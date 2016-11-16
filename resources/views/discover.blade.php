@@ -4,7 +4,7 @@
 @section('content')
     <section class="vbox">
         @include('header')
-        <section>
+        <section class="padding-top-50">
             <section class="hbox stretch">
 
                 @include('partials.bar.left')
