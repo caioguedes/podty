@@ -49,7 +49,7 @@
                                     <div class="padder-v">
                                         <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">{{$podcast['episodes'][0]['title']}}</a>
                                         <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">
-                                            {{(new \DateTime($podcast['episodes'][0]['published_at']))->format('d/m/Y H:i')}}
+                                            {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $podcast['episodes'][0]['published_at'])->diffForHumans()}}
                                         </a>
                                         <a href="/podcast/{{$podcast['slug']}}" class="text-ellipsis">{{$podcast['name']}}</a>
                                     </div>
