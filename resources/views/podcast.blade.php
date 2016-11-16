@@ -71,7 +71,7 @@
                                               <i class="icon-control-pause text-active  i-2x"></i>
                                           </a>
                                           <div class="bottom pull-right text-sm">
-                                              <a href="/episodes/{{$episode['id']}}" class="pull-right text-sm m-r-sm m-b-sm">
+                                              <a href="/episodes/{{$episode['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
                                                   <i class="icon-action-redo"></i>
                                               </a>
                                           </div>
