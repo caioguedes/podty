@@ -3018,9 +3018,8 @@ a.bg-light:focus {
   padding: 0 !important;
 }
 
-.padding-top-50 {
-  padding-top: 50px !important;
-}
+
+
 
 .pull-in {
   margin-left: -15px;
@@ -3935,5 +3934,18 @@ fieldset[disabled] .i-checks input + i:before {
   }
   100% {
     height: 65%;
+  }
+}
+
+
+
+
+@media (max-width: 780px) {
+  .padding-top-50 {
+    padding-top: 50px !important;
+  }
+
+  #div-player {
+    width: 100% !important;
   }
 }

@@ -31,13 +31,11 @@
                                                 <i class="icon-control-play text i-2x"></i>
                                                 <i class="icon-control-pause text-active  i-2x"></i>
                                             </a>
-                                            <div class="bottom pull-right text-sm">
-                                                <a href="#" class="pull-left text-sm m-l-sm m-b-sm">
-                                                    <i class="fa fa-times"></i>
-                                                </a>
-                                            </div>
-                                            <div class="bottom pull-left text-sm">
-                                                <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right text-sm m-r-sm m-b-sm button-rmv-ep" target="_blank">
+                                            <div class="bottom">
+                                                <button class="pull-left text-sm m-l-sm m-b-sm button-rmv-ep"><i class="fa fa-times"></i></button>
+
+
+                                                <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
                                                     <i class="icon-action-redo"></i>
                                                 </a>
                                             </div>
@@ -156,7 +154,7 @@
 
 
 <script>
-    $(document).on('click', '.button-rmv-ep',function () {
+    $(document).on('click', '.button-rmv-ep', function () {
         var episodeID = $(this).parent().prev().find('input').attr('data-id');
         if (!episodeID) return;
         $.ajax({url: 'ajax/detachEpisode/' + episodeID});
