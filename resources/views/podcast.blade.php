@@ -70,11 +70,11 @@
                                               <i class="icon-control-play text i-2x"></i>
                                               <i class="icon-control-pause text-active  i-2x"></i>
                                           </a>
-                                          {{--<div class="bottom pull-right text-sm">
-                                              <a href="#" class="pull-right text-sm m-r-sm m-b-sm">
-                                                  <i class="icon-cloud-download"></i>
+                                          <div class="bottom pull-right text-sm">
+                                              <a href="/episodes/{{$episode['id']}}" class="pull-right text-sm m-r-sm m-b-sm">
+                                                  <i class="icon-action-redo"></i>
                                               </a>
-                                          </div>--}}
+                                          </div>
                                       </div>
                                       <a href="#">
                                         <img src="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}" class="r r-2x img-full">

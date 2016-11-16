@@ -19,7 +19,7 @@
                                         <a href="/podcast/{{$podcast['slug']}}">{{$podcast['name']}}</a>
                                     </h2>
 
-                                    <img src="{{$podcast['episodes']['image'] ?: $podcast['thumbnail_600']}}" alt="">
+                                    <img src="{{$podcast['episodes']['image'] ?: $podcast['thumbnail_600']}}" width="300">
                                     <hr>
                                     <h3>{{$podcast['episodes']['title']}}</h3>
                                     <br>
