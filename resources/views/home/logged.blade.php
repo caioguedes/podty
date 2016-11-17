@@ -32,8 +32,9 @@
                                                 <i class="icon-control-pause text-active  i-2x"></i>
                                             </a>
                                             <div class="bottom">
-                                                <button class="pull-left text-sm m-l-sm m-b-sm button-rmv-ep"><i class="fa fa-times"></i></button>
-
+                                                <a href="#" class="pull-left text-sm m-l-sm m-b-sm button-rmv-ep">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
 
                                                 <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
                                                     <i class="icon-action-redo"></i>
