@@ -10,24 +10,37 @@ $(document).ready(function() {
     var page = 1;
     var stopRetrieving = false;
 
-    $('#podcast-list').on('scroll', function() {
-        if(!stopRetrieving && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
-            $.ajax({
-                method: 'GET',
-                url: '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++,
-                success: function(res) {
-                    renderPodcastView(res);
-                    stopRetrieving = false;
-                },
-                beforeSend: function(){
-                    stopRetrieving = true;
-                },
-                error: function(){
-                    stopRetrieving = true;
-                }
-            });
-        }
-    });
+    if (screen.width >= 800) {
+        $('#podcast-list').on('scroll', function() {
+            if(!stopRetrieving && $(this).scrollTop() + $(this).innerHeight() >= $(this)[0].scrollHeight) {
+                getMoreEpisodes()
+            }
+        });
+    } else {
+        var win = $(window);
+        win.scroll(function() {
+            if(!stopRetrieving && $(document).height() - win.height() == win.scrollTop()) {
+                getMoreEpisodes()
+            }
+        });
+    }
+
+    function getMoreEpisodes(){
+        $.ajax({
+            method: 'GET',
+            url: '/ajax/moreEpisodes/' + getCurrentUrlId() + '/' + page++,
+            success: function(res) {
+                renderPodcastView(res);
+                stopRetrieving = false;
+            },
+            beforeSend: function(){
+                stopRetrieving = true;
+            },
+            error: function(){
+                stopRetrieving = true;
+            }
+        });
+    }
 
     var updatingCurrentTimeId = 0;
     var lastCurrentTime = 0;
