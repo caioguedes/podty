@@ -12,7 +12,7 @@ class UserEpisodes
 
     public function touch(string $username, int $episodeId, int $currentTime): bool
     {
-        $this->api->put('users/' . $username . '/episodes/' . $episodeId . '/paused/' . $currentTime);
+        return $this->api->put('users/' . $username . '/episodes/' . $episodeId . '/paused/' . $currentTime);
     }
 
     public function latests(string $username, int $offset = 0, int $limit = 50): array 
