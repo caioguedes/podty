@@ -20,12 +20,12 @@ class HomeController extends Controller
             return redirect('/discover');
         }
 
-        $podcasts = (new UserEpisodes(new ApiClient))->latests(Auth::user()->name, 0, 100);
+        $podcasts = (new UserEpisodes(new ApiClient))->latests(Auth::user()->name, 0, 150);
         $podcasts = collect($podcasts['data']);
 
         return view('home')->with([
             'podcasts' => $podcasts,
-            'title' => 'Latests Episodes'
+            'title' => 'Latests Episodes (' . $podcasts->count() . ')'
         ]);
     }
 
