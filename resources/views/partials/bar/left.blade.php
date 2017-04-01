@@ -29,7 +29,7 @@
                     </nav>
                 </div>
                 <div style="height: 70%;overflow: auto;">
-                    <nav class="nav-primary hidden-xs">
+                    <nav class="nav-primary hidden-xs" style="margin-top: 5px;">
                         <ul class="nav" id="podcasts-list-left-side">
                         </ul>
                     </nav>
@@ -51,8 +51,7 @@
         function renderList(podcast){
             return '<li>' +
                     '<a href="/podcast/' + podcast.slug + '">' +
-                        '<i><img src="' + podcast.thumbnail_100 + '" width="40" height="40"></i>' +
-                        '<span class="font-bold">' + podcast.name + '</span>' +
+                        '<img src="' + podcast.thumbnail_100 + '" class="img-circle" width="40" height="40">' +
                     '</a>' +
                 '</li>';
         }

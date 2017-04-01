@@ -916,7 +916,7 @@ body.container {
     vertical-align: middle;
     height: 50px;
     width: 70px;
-    padding: 0 5px;
+    padding: 0 2px;
   }
   .nav-xs .nav-primary > ul > li > a span.pull-right {
     display: none !important;
