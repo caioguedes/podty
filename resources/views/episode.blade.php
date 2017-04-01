@@ -1,11 +1,12 @@
 @extends('layouts.app')
-@section('title', $podcast['episodes']['title'] . 'Podty')
+@section('title', $podcast['episodes']['title'] . ' - Podty')
 
 @section('content')
     <section class="vbox">
         @include('header')
         <section class="padding-top-50">
             <section class="hbox stretch">
+                @include('partials.bar.left')
                 <section id="content">
                     <section class="hbox stretch">
                         <section class="scrollable">
@@ -43,4 +44,3 @@
         </section>
     </section>
 @endsection
-
