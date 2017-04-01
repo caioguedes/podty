@@ -18,11 +18,17 @@
                                     <h2>
                                         <a href="/podcast/{{$podcast['slug']}}">{{$podcast['name']}}</a>
                                     </h2>
+                                    <h3>
+                                        {{$podcast['episodes']['title']}}
+                                        <small>
+                                            <br>
+                                            {{(new \DateTime($podcast['episodes']['published_at']))->format('d/m/Y H:i')}}
+                                        </small>
+                                    </h3>
 
-                                    <img src="{{$podcast['episodes']['image'] ?: $podcast['thumbnail_600']}}" width="300">
-                                    <hr>
-                                    <h3>{{$podcast['episodes']['title']}}</h3>
                                     <br>
+                                    <img src="{{$podcast['episodes']['image'] ?: $podcast['thumbnail_600']}}" width="250">
+                                    <hr>
                                     <audio controls id="player" style="width: 100%">
                                         <source src="{{$podcast['episodes']['media_url']}}" id="source">
                                     </audio>
@@ -30,9 +36,11 @@
                                 </div>
                             </div>
                         </section>
+                        @include('partials.connected')
                     </section>
                 </section>
             </section>
         </section>
     </section>
 @endsection
+
