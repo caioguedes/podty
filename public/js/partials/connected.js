@@ -6,6 +6,7 @@ function renderConnections() {
     $.ajax({
         url: '/ajax/allFriends',
         success: function success(response) {
+            $('#friends-title').append(' <small>(' + response.length + ')</small>');
             response.forEach(function(friend){
                 $('.connect-friends-list').append(renderHTML(friend));
             });

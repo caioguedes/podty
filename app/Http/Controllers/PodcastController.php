@@ -141,7 +141,7 @@ class PodcastController extends Controller
         if (!$episode->count()) {
             return redirect('/404');
         }
-        
+
         return view('episode')->with('podcast', $episode);
     }
 }
