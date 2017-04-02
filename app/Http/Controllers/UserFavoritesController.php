@@ -17,6 +17,9 @@ class UserFavoritesController extends Controller
 
     public function all()
     {
+        if (!Auth::user()) {
+            return redirect('/');
+        }
         $favorites = $this->userFavorites->all(Auth::user()->name);
         $favorites = collect($favorites['data'] ?? []);
 
