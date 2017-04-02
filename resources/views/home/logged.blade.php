@@ -13,9 +13,9 @@
                                 <div class="item">
                                     <div class="pos-rlt">
                                         <div class="bottom">
-                                            @if($podcast['episodes'][0]['duration'])
+                                            @if($podcast['episode']['duration'])
                                                 <span class="badge bg-info m-l-sm m-b-sm">
-                                                  {{$podcast['episodes'][0]['duration']}}
+                                                  {{$podcast['episode']['duration']}}
                                               </span>
                                             @endif
                                         </div>
@@ -23,10 +23,11 @@
                                         <div class="item-overlay opacity r r-2x bg-black">
                                             <a href="#" class="center text-center play-me m-t-n active" data-toggle="class">
                                                 <input type="hidden"
-                                                       value="{{$podcast['episodes'][0]['media_url']}}"
-                                                       data-title="{{$podcast['episodes'][0]['title']}}"
-                                                       data-id="{{$podcast['episodes'][0]['id']}}"
-                                                       data-image="{{$podcast['episodes'][0]['image']}}"
+                                                       value="{{$podcast['episode']['media_url']}}"
+                                                       data-title="{{$podcast['episode']['title']}}"
+                                                       data-id="{{$podcast['episode']['id']}}"
+                                                       data-image="{{$podcast['episode']['image']}}"
+                                                       data-pause-at="{{$podcast['episode']['paused_at']}}"
                                                 >
                                                 <i class="icon-control-play text-active i-2x"></i>
                                                 <i class="icon-control-pause text i-2x"></i>
@@ -42,30 +43,30 @@
                                                 <a href="#" class="pull-left m-l-sm m-b-sm button-rmv-ep">
                                                     <i class="fa fa-times"></i>
                                                 </a>
-                                                <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right m-r-sm m-b-sm" target="_blank">
+                                                <a href="/episodes/{{$podcast['episode']['id']}}" class="pull-right m-r-sm m-b-sm" target="_blank">
                                                     <i class="icon-action-redo"></i>
                                                 </a>
                                             </div>
                                         </div>
                                         <a href="#">
-                                            <img src="{{$podcast['episodes'][0]['image'] ?: $podcast['thumbnail_100']}}" class="r r-2x img-full">
+                                            <img src="{{$podcast['episode']['image'] ?: $podcast['thumbnail_100']}}" class="r r-2x img-full">
                                         </a>
                                     </div>
                                     <div class="padder-v">
-                                        <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">{{$podcast['episodes'][0]['title']}}</a>
-                                        <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">
-                                            {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $podcast['episodes'][0]['published_at'])->diffForHumans()}}
+                                        <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$podcast['episode']['id']}}">{{$podcast['episode']['title']}}</a>
+                                        <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$podcast['episode']['id']}}">
+                                            {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $podcast['episode']['published_at'])->diffForHumans()}}
                                         </a>
                                         <a href="/podcasts/{{$podcast['slug']}}" class="text-ellipsis">{{$podcast['name']}}</a>
                                     </div>
 
-                                    <div class="modal fade" id="myModal{{$podcast['episodes'][0]['id']}}" role="dialog">
+                                    <div class="modal fade" id="myModal{{$podcast['episode']['id']}}" role="dialog">
                                         <div class="modal-dialog">
                                             <div class="modal-content bg-dark">
                                                 <div class="modal-body" style="overflow: scroll; max-height: 300px;">
-                                                    <h4 class="modal-title">{{$podcast['episodes'][0]['title']}}</h4>
+                                                    <h4 class="modal-title">{{$podcast['episode']['title']}}</h4>
                                                     <hr>
-                                                    <?= !empty($podcast['episodes'][0]['content']) ? $podcast['episodes'][0]['content'] : $podcast['episodes'][0]['summary']?>
+                                                    <?= !empty($podcast['episode']['content']) ? $podcast['episode']['content'] : $podcast['episode']['summary']?>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">
