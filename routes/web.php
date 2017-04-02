@@ -20,8 +20,8 @@ Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'UserEpisodesController@
 
 Route::get('ajax/detachEpisode/{episodeId}', 'UserEpisodesController@detach');
 
-Route::get('ajax/favoriteEpisode/{episodeId}', 'UserEpisodesController@favorite');
-Route::get('ajax/unfavoriteEpisode/{episodeId}', 'UserEpisodesController@unfavorite');
+Route::get('ajax/favoriteEpisode/{episodeId}', 'UserFavoritesController@create');
+Route::get('ajax/unfavoriteEpisode/{episodeId}', 'UserFavoritesController@delete');
 
 /* Podcast Router */
 Route::get('podcast/{podcastId}', 'PodcastController@podcast');
@@ -30,6 +30,8 @@ Route::get('discover', 'HomeController@discover');
 Route::get('ajax/discover', 'PodcastController@top');
 
 Route::get('podcasts', 'PodcastController@home');
+
+Route::get('favorites', 'UserFavoritesController@all');
 
 
 Route::get('ajax/myPods', 'UserPodcastsController@all');

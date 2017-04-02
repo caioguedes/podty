@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Podty')
+@section('title', 'Discover - Podty')
 
 @section('content')
     <section class="vbox">
@@ -77,8 +77,6 @@
                 </section>
 
                 @include('partials.connected')
-
-
 
             </section>
         </section>

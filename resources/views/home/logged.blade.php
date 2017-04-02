@@ -5,7 +5,7 @@
         <section>
             <section class="vbox">
                 <section class="scrollable padder-lg" id="bjax-target" style="padding-bottom: 60px;">
-                    <h2 class="font-thin m-b" id="home-title">{{$title}}</h2>
+                    <h2 class="font-thin m-b" id="home-title">Latests Episodes <small>({{$podcasts->count()}})</small></h2>
                     <div class="row row-sm podcasts-episodes-home">
 
                         @foreach($podcasts as $podcast)

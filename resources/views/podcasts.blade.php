@@ -14,7 +14,7 @@
                         <section>
                             <section class="vbox">
                                 <section class="scrollable padder-lg" id="bjax-target">
-                                    <h2 class="font-thin m-b" id="home-title">Your Podcasts</h2>
+                                    <h2 class="font-thin m-b" id="home-title">My Podcasts <small>({{$podcasts->count()}})</small></h2>
                                     <div class="row row-sm podcasts-episodes-home">
                                         @include('partials.podcasts')
                                     </div>

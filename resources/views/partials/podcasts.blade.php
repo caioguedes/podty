@@ -1,4 +1,4 @@
-@foreach($content as $podcast)
+@foreach($podcasts as $podcast)
     <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2">
         <div class="item">
             <div class="pos-rlt">

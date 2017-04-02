@@ -32,7 +32,7 @@ class HomeController extends Controller
     public function discover()
     {
         return view('discover')->with([
-            'content' => (new Podcasts)->top(),
+            'podcasts' => (new Podcasts)->top(),
             'title' => 'Discover'
         ]);
     }

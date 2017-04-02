@@ -25,11 +25,11 @@ class PodcastController extends Controller
     {
         $response = $this->userPodcasts->all(Auth::user()->name);
 
-        $content = $response->map(function($feed){
+        $podcasts = $response->map(function($feed){
             return $this->formatHomePodcasts($feed);
         });
 
-        return view('podcasts')->with(compact('content'));
+        return view('podcasts')->with(compact('podcasts'));
     }
 
     /**
