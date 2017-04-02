@@ -54,6 +54,11 @@ class Podcasts
         return $this->api->get('feeds/'. $podcastId . '/episodes?term=' . $searchFor);
     }
 
+    public function listeners($podcastId)
+    {
+        return $this->returnDefaultResponse($this->api->get('feeds/' . $podcastId . '/listeners'));
+    }
+
     private function returnDefaultResponse($response): Collection
     {
         return $response ? collect($response['data']) : collect([]);

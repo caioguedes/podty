@@ -63,12 +63,19 @@ class PodcastController extends Controller
             return redirect('/404');
         }
 
-        $userFollows = Auth::user() ? $this->getUserFollowPodcast($podcastId) : false;
+        $listeners = $this->podcastsApi->listeners($podcastId);
+        
+        $listeners = $listeners->map(function($listener){
+           return $this->formatUser($listener);
+        });
+
+        $userFollows = $this->getUserFollowPodcast($podcastId);
 
         return view('podcast')->with('data', [
             'podcast'     => $podcast,
             'episodes'    => $podcast['episodes'],
-            'userFollows' => $userFollows
+            'userFollows' => $userFollows,
+            'listeners'   => $listeners
         ]);
     }
 
@@ -109,6 +116,10 @@ class PodcastController extends Controller
 
     private function getUserFollowPodcast($podcastId)
     {
+        if (!Auth::user()) {
+            return false;
+        }
+
         return $this->userPodcasts->follows(Auth::user()->name, $podcastId);
     }
 

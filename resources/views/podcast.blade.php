@@ -42,6 +42,17 @@
                       <br>
                     @endif
 
+                  <div style="margin-left: 5px;">
+                      <h4>People who listen:</h4>
+                      @foreach($data['listeners'] as $listener)
+                          <a href="/profile/{{$listener['username']}}" style="margin-left:5px">
+                              <img src="https://www.gravatar.com/avatar/{{$listener['email_hash']}}?d=retro"
+                                   alt="{{$listener['username']}}" class="img-circle"
+                                   width="40" height="40" style="margin-bottom: 5px;">
+                          </a>
+                      @endforeach
+                  </div>
+
               </aside>
 
               <section class="col-sm-6 no-padder bg-light dk" style="padding-top: 10px !important;">
