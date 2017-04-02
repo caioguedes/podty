@@ -81,12 +81,14 @@
                                               <i class="icon-control-play text-active i-2x"></i>
                                               <i class="icon-control-pause text  i-2x"></i>
                                           </a>
-                                          <div class="top m-r-sm m-t-sm">
-                                              <a href="#" class="pull-right btn-fav-ep" data-toggle="class">
-                                                  <i class="fa fa-heart-o text"></i>
-                                                  <i class="fa fa-heart text-active text-danger"></i>
-                                              </a>
-                                          </div>
+                                          @if(Auth::user())
+                                              <div class="top m-r-sm m-t-sm">
+                                                  <a href="#" class="pull-right btn-fav-ep" data-toggle="class">
+                                                      <i class="fa fa-heart-o text"></i>
+                                                      <i class="fa fa-heart text-active text-danger"></i>
+                                                  </a>
+                                              </div>
+                                          @endif
                                           <div class="bottom pull-right text-sm">
                                               <a href="/episodes/{{$episode['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
                                                   <i class="icon-action-redo"></i>
@@ -150,7 +152,6 @@
     });
 </script>
 @endsection
-
 
 @section('footer-scripts')
     <script async type="text/javascript" src="/js/partials/leftbar.js?t={{time()}}"></script>
