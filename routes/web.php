@@ -24,12 +24,12 @@ Route::get('ajax/favoriteEpisode/{episodeId}', 'UserFavoritesController@create')
 Route::get('ajax/unfavoriteEpisode/{episodeId}', 'UserFavoritesController@delete');
 
 /* Podcast Router */
-Route::get('podcast/{podcastId}', 'PodcastController@podcast');
 Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');
 Route::get('discover', 'HomeController@discover');
 Route::get('ajax/discover', 'PodcastController@top');
 
 Route::get('podcasts', 'PodcastController@home');
+Route::get('podcasts/{podcastId}', 'PodcastController@podcast');
 
 Route::get('favorites', 'UserFavoritesController@all');
 

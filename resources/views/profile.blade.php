@@ -49,7 +49,7 @@
                                     <div class="pos-rlt">
                                         <div class="item-overlay opacity r r-2x bg-black">
                                             <div class="center text-center m-t-n">
-                                                <a href="/podcast/{{$podcast['slug']}}"><i class="icon-action-redo i-2x"></i></a>
+                                                <a href="/podcasts/{{$podcast['slug']}}"><i class="icon-action-redo i-2x"></i></a>
                                             </div>
                                         </div>
                                         <a href="#">

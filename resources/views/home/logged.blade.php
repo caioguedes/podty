@@ -56,7 +56,7 @@
                                         <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$podcast['episodes'][0]['id']}}">
                                             {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $podcast['episodes'][0]['published_at'])->diffForHumans()}}
                                         </a>
-                                        <a href="/podcast/{{$podcast['slug']}}" class="text-ellipsis">{{$podcast['name']}}</a>
+                                        <a href="/podcasts/{{$podcast['slug']}}" class="text-ellipsis">{{$podcast['name']}}</a>
                                     </div>
 
                                     <div class="modal fade" id="myModal{{$podcast['episodes'][0]['id']}}" role="dialog">

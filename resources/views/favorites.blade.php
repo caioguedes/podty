@@ -42,15 +42,12 @@
                                                           </a>
 
                                                           <div class="top m-r-sm m-t-sm">
-                                                              <a href="#" class="pull-right btn-fav-ep" data-toggle="class">
-                                                                  <i class="fa fa-heart-o text"></i>
-                                                                  <i class="fa fa-heart text-active text-danger"></i>
+                                                              <a href="#" class="pull-right btn-unfav-ep" data-toggle="class">
+                                                                  <i class="fa fa-heart-o text-active"></i>
+                                                                  <i class="fa fa-heart text text-danger"></i>
                                                               </a>
                                                           </div>
                                                           <div class="bottom">
-                                                              <a href="#" class="pull-left m-l-sm m-b-sm button-rmv-ep">
-                                                                  <i class="fa fa-times"></i>
-                                                              </a>
                                                               <a href="/episodes/{{$favorite['episode']['id']}}" class="pull-right m-r-sm m-b-sm" target="_blank">
                                                                   <i class="icon-action-redo"></i>
                                                               </a>
@@ -65,7 +62,7 @@
                                                       <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$favorite['episode']['id']}}">
                                                           {{\Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $favorite['episode']['published_date'])->diffForHumans()}}
                                                       </a>
-                                                      <a href="/podcast/{{$favorite['feed']['slug']}}" class="text-ellipsis">{{$favorite['feed']['name']}}</a>
+                                                      <a href="/podcasts/{{$favorite['feed']['slug']}}" class="text-ellipsis">{{$favorite['feed']['name']}}</a>
                                                   </div>
 
                                                   <div class="modal fade" id="myModal{{$favorite['episode']['id']}}" role="dialog">
@@ -89,25 +86,23 @@
                                       @endforeach
                                   </div>
                               </section>
-                              @if(Route::getCurrentRoute()->uri() == '/')
-                                  <div id="div-player"
-                                       style="background-color:#232c32;
-                                position: absolute;
-                                bottom: 0;
-                                width: inherit;
-                                max-height: 60px;"
-                                       hidden
-                                  >
-                                      <div id="audio" style="margin-top: 7px;">
-                                          <audio controls id="player" style="width: 60%;margin-left: 5px;">
-                                              <source src="" id="source">
-                                          </audio>
-                                          <div id="playing" style="width: 38%;float: right;">
-                                              <span class="center"></span>
-                                          </div>
+                              <div id="div-player"
+                                   style="background-color:#232c32;
+                            position: absolute;
+                            bottom: 0;
+                            width: inherit;
+                            max-height: 60px;"
+                                   hidden
+                              >
+                                  <div id="audio" style="margin-top: 7px;">
+                                      <audio controls id="player" style="width: 60%;margin-left: 5px;">
+                                          <source src="" id="source">
+                                      </audio>
+                                      <div id="playing" style="width: 38%;float: right;">
+                                          <span class="center"></span>
                                       </div>
                                   </div>
-                              @endif
+                              </div>
                           </section>
                       </section>
                   </section>
@@ -130,6 +125,7 @@
                       $.ajax({url: 'ajax/unfavoriteEpisode/' + episodeID});
                       $(this).removeClass('btn-unfav-ep');
                       $(this).addClass('btn-fav-ep');
+                      $(this).parent().parent().parent().parent().css('opacity', '0.1')
                   });
               </script>
           </section>

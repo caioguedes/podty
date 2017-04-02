@@ -148,7 +148,7 @@ function render(episode, podcast) {
                             + episode.title
                         + '</a>'
                         + '<a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal'+episode.id+'">'
-                            + episode.published_at
+                            + formatDate(episode.published_at)
                         + '</a>'
                     + '</div>'
                     + '<div class="modal fade" id="myModal'+episode.id+'" role="dialog">'
@@ -156,4 +156,16 @@ function render(episode, podcast) {
                 + '</div>'
             + '</div>'
         + '</div>';
+}
+
+
+function formatDate(data)
+{
+    var dateSplited = data.split(' ')
+
+    var date = dateSplited[0].split('-')
+    var time = dateSplited[1].split(':')
+
+    console.log(time)
+    return date[2] + '/' + date[1] + '/' + date[0] + ' ' + time[0] + ':' + time[1]
 }
