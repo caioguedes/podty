@@ -132,7 +132,7 @@ function render(episode, podcast) {
                             + episode.title
                         + '</a>'
                         + '<a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal'+episode.id+'">'
-                            + episode.published_date
+                            + episode.published_at
                         + '</a>'
                     + '</div>'
                     + '<div class="modal fade" id="myModal'+episode.id+'" role="dialog">'

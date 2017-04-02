@@ -65,7 +65,7 @@
                                                      value="{{$episode['media_url']}}"
                                                      data-title="{{$episode['title']}}"
                                                      data-id="{{$episode['id']}}"
-                                                     data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}"
+                                                     data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_100']}}"
                                               >
                                               <i class="icon-control-play text-active i-2x"></i>
                                               <i class="icon-control-pause text  i-2x"></i>
