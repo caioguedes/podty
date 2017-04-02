@@ -117,15 +117,31 @@ function render(episode, podcast) {
                             (!episode.duration ? '' : '<span class="badge bg-info m-l-sm m-b-sm">' + episode.duration + '</span>' )
                         + '</div>'
                         + '<div class="item-overlay opacity r r-2x bg-black">'
-                            + '<a href="#" class="center text-center play-me m-t-n">'
-                                + '<input type="hidden" value="' + episode.media_url + '" data-title="' + episode.title + '" data-id="'+ episode.id +'" data-image="' + (episode.image ? episode.image : podcast.thumbnail_600) + '">'
-                                + '<i class="icon-control-play text i-2x"></i>'
-                                + '<i class="icon-control-pause text-active  i-2x"></i>'
+                            + '<a href="#" class="center text-center play-me m-t-n active" data-toggle="class">'
+                                + '<input type="hidden" ' +
+                                            'value="' + episode.media_url + '" ' +
+                                            'data-title="' + episode.title + '" ' +
+                                            'data-id="'+ episode.id +'" ' +
+                                            'data-image="' + (episode.image ? episode.image : podcast.thumbnail_600)
+                                    + '">'
+                                + '<i class="icon-control-play text-active i-2x"></i>'
+                                + '<i class="icon-control-pause text  i-2x"></i>'
                             + '</a>'
                         + '</div>'
                         + '<a href="#">'
                             + '<img src="' + (episode.image ? episode.image: podcast.thumbnail_600) + '" class="r r-2x img-full">'
                         + '</a>'
+                        + '<div class="top m-r-sm m-t-sm">'
+                            + '<a href="#" class="pull-right btn-fav-ep" data-toggle="class">'
+                                + '<i class="fa fa-heart-o text"></i>'
+                                + '<i class="fa fa-heart text-active text-danger"></i>'
+                            + '</a>'
+                        + '</div>'
+                        + '<div class="bottom pull-right text-sm">'
+                            + '<a href="/episodes/'+ episode.id +'" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">'
+                                + '<i class="icon-action-redo"></i>'
+                            + '</a>'
+                        + '</div>'
                     + '</div>'
                     + '<div class="padder-v">'
                         + '<a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal'+episode.id+'">'

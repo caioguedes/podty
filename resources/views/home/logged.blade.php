@@ -161,7 +161,7 @@
 
 <script>
     $(document).on('click', '.button-rmv-ep', function () {
-        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        var episodeID = $(this).parent().prev().prev().find('input').attr('data-id');
         if (!episodeID) return;
         $.ajax({url: 'ajax/detachEpisode/' + episodeID});
         $(this).parent().parent().parent().parent().css('opacity', '0.1')
