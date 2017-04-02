@@ -20,6 +20,9 @@ Route::get('ajax/uptEpisode/{episodeId}/{currentTime}', 'UserEpisodesController@
 
 Route::get('ajax/detachEpisode/{episodeId}', 'UserEpisodesController@detach');
 
+Route::get('ajax/favoriteEpisode/{episodeId}', 'UserEpisodesController@favorite');
+Route::get('ajax/unfavoriteEpisode/{episodeId}', 'UserEpisodesController@unfavorite');
+
 /* Podcast Router */
 Route::get('podcast/{podcastId}', 'PodcastController@podcast');
 Route::get('ajax/moreEpisodes/{podcastId}/{page?}', 'PodcastController@getEpisodesPerPage');

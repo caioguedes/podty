@@ -36,4 +36,18 @@ class UserEpisodesController extends Controller
         }
         
     }
+
+    public function favorite($episodeId)
+    {
+        if (Auth::user()) {
+            $this->userEpisode->favorite(Auth::user()->name, $episodeId);
+        }   
+    }
+
+    public function unfavorite($episodeId)
+    {
+        if (Auth::user()) {
+            $this->userEpisode->unfavorite(Auth::user()->name, $episodeId);
+        }
+    }
 }

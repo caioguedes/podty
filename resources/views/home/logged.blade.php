@@ -21,28 +21,34 @@
                                         </div>
 
                                         <div class="item-overlay opacity r r-2x bg-black">
-                                            <a href="#" class="center text-center play-me m-t-n">
+                                            <a href="#" class="center text-center play-me m-t-n active" data-toggle="class">
                                                 <input type="hidden"
                                                        value="{{$podcast['episodes'][0]['media_url']}}"
                                                        data-title="{{$podcast['episodes'][0]['title']}}"
                                                        data-id="{{$podcast['episodes'][0]['id']}}"
                                                        data-image="{{$podcast['episodes'][0]['image']}}"
                                                 >
-                                                <i class="icon-control-play text i-2x"></i>
-                                                <i class="icon-control-pause text-active  i-2x"></i>
+                                                <i class="icon-control-play text-active i-2x"></i>
+                                                <i class="icon-control-pause text i-2x"></i>
                                             </a>
+
+                                            <div class="top m-r-sm m-t-sm">
+                                                <a href="#" class="pull-right btn-fav-ep" data-toggle="class">
+                                                    <i class="fa fa-heart-o text"></i>
+                                                    <i class="fa fa-heart text-active text-danger"></i>
+                                                </a>
+                                            </div>
                                             <div class="bottom">
-                                                <a href="#" class="pull-left text-sm m-l-sm m-b-sm button-rmv-ep">
+                                                <a href="#" class="pull-left m-l-sm m-b-sm button-rmv-ep">
                                                     <i class="fa fa-times"></i>
                                                 </a>
-
-                                                <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
+                                                <a href="/episodes/{{$podcast['episodes'][0]['id']}}" class="pull-right m-r-sm m-b-sm" target="_blank">
                                                     <i class="icon-action-redo"></i>
                                                 </a>
                                             </div>
                                         </div>
                                         <a href="#">
-                                            <img src="{{$podcast['episodes'][0]['image'] ?: $podcast['thumbnail_600']}}" class="r r-2x img-full">
+                                            <img src="{{$podcast['episodes'][0]['image'] ?: $podcast['thumbnail_100']}}" class="r r-2x img-full">
                                         </a>
                                     </div>
                                     <div class="padder-v">
@@ -153,7 +159,6 @@
 
 @include('partials.connected')
 
-
 <script>
     $(document).on('click', '.button-rmv-ep', function () {
         var episodeID = $(this).parent().prev().find('input').attr('data-id');
@@ -161,5 +166,21 @@
         $.ajax({url: 'ajax/detachEpisode/' + episodeID});
         $(this).parent().parent().parent().parent().css('opacity', '0.1')
         $(this).remove()
-    })
+    });
+
+    $(document).on('click', '.btn-fav-ep', function () {
+        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        if (!episodeID) return;
+        $.ajax({url: 'ajax/favoriteEpisode/' + episodeID});
+        $(this).removeClass('btn-fav-ep');
+        $(this).addClass('btn-unfav-ep');
+    });
+
+    $(document).on('click', '.btn-unfav-ep', function () {
+        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        if (!episodeID) return;
+        $.ajax({url: 'ajax/unfavoriteEpisode/' + episodeID});
+        $(this).removeClass('btn-unfav-ep');
+        $(this).addClass('btn-fav-ep');
+    });
 </script>

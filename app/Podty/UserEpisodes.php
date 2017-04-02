@@ -35,4 +35,15 @@ class UserEpisodes
     {
         return $this->api->put('users/' . $username . '/feeds/' . $podcastId . '/listenAll');
     }
+
+    public function favorite(string $username, int $episodeId): bool
+    {
+        return $this->api->post('users/' . $username . '/episodes/' . $episodeId . '/favorite');
+    }
+
+    public function unfavorite(string $username, int $episodeId): bool
+    {
+        return $this->api->delete('users/' . $username . '/episodes/' . $episodeId . '/favorite');
+    }
+
 }

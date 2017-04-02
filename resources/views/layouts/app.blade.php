@@ -24,6 +24,7 @@
     @yield('content')
 
     @yield('footer')
+    <script async src="/js/app.js"></script>
     <script async src="/js/bootstrap.js"></script>
     @yield('footer-scripts')
 </body>

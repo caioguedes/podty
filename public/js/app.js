@@ -196,13 +196,6 @@ Date.now = Date.now || function() { return +new Date; };
   	// placeholder
   	$('input[placeholder], textarea[placeholder]').placeholder();
 
-    // popover
-    $("[data-toggle=popover]").popover();
-    $(document).on('click', '.popover-title .close', function(e){
-    	var $target = $(e.target), $popover = $target.closest('.popover').prev();
-    	$popover && $popover.popover('hide');
-    });
-
     // ajax modal
     $(document).on('click', '[data-toggle="ajaxModal"]',
       function(e) {
@@ -216,42 +209,6 @@ Date.now = Date.now || function() { return +new Date; };
         $modal.load($remote);
       }
     );
-
-    // dropdown menu
-    $.fn.dropdown.Constructor.prototype.change = function(e){
-      e.preventDefault();
-      var $item = $(e.target), $select, $checked = false, $menu, $label;
-      !$item.is('a') && ($item = $item.closest('a'));
-      $menu = $item.closest('.dropdown-menu');
-      $label = $menu.parent().find('.dropdown-label');
-      $labelHolder = $label.text();
-      $select = $item.parent().find('input');
-      $checked = $select.is(':checked');
-      if($select.is(':disabled')) return;
-      if($select.attr('type') == 'radio' && $checked) return;
-      if($select.attr('type') == 'radio') $menu.find('li').removeClass('active');
-      $item.parent().removeClass('active');
-      !$checked && $item.parent().addClass('active');
-      $select.prop("checked", !$select.prop("checked"));
-
-      $items = $menu.find('li > input:checked');
-      if ($items.length) {
-          $text = [];
-          $items.each(function () {
-              var $str = $(this).parent().text();
-              $str && $text.push($.trim($str));
-          });
-
-          $text = $text.length < 4 ? $text.join(', ') : $text.length + ' selected';
-          $label.html($text);
-      }else{
-        $label.html($label.data('placeholder'));
-      }
-    }
-    $(document).on('click.dropdown-menu', '.dropdown-select > li > a', $.fn.dropdown.Constructor.prototype.change);
-
-  	// tooltip
-    $("[data-toggle=tooltip]").tooltip();
 
     // class
   	$(document).on('click', '[data-toggle^="class"]', function(e){
@@ -292,10 +249,7 @@ Date.now = Date.now || function() { return +new Date; };
         $target.find('.panel-body').toggleClass($class);
         $this.toggleClass('active');
     });
-
-  	// carousel
-  	$('.carousel.auto').carousel();
-
+    
   	// button loading
   	$(document).on('click.button.data-api', '[data-loading-text]', function (e) {
   	    var $this = $(e.target);
