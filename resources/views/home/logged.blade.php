@@ -27,7 +27,7 @@
                                                        data-title="{{$podcast['episode']['title']}}"
                                                        data-id="{{$podcast['episode']['id']}}"
                                                        data-image="{{$podcast['episode']['image']}}"
-                                                       data-pause-at="{{$podcast['episode']['paused_at']}}"
+                                                       data-paused-at="{{$podcast['episode']['paused_at']}}"
                                                 >
                                                 <i class="icon-control-play text-active i-2x"></i>
                                                 <i class="icon-control-pause text i-2x"></i>
