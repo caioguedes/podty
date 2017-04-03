@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Format;
 use App\Podty\Podcasts;
+use App\Podty\UserEpisodes;
 use App\Podty\UserPodcasts;
 use Illuminate\Support\Facades\Auth;
 
@@ -148,6 +149,9 @@ class PodcastController extends Controller
     public function episode($episodeId)
     {
         $episode = $this->podcastsApi->episode($episodeId);
+        if (Auth::user()) {
+            $episode['episodes'] = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
+        }
 
         if (!$episode->count()) {
             return redirect('/404');

@@ -33,7 +33,6 @@
                                     <audio controls id="player" style="width: 100%">
                                         <source src="{{$podcast['episodes']['media_url']}}" id="source">
                                     </audio>
-
                                 </div>
                             </div>
                         </section>
@@ -43,4 +42,29 @@
             </section>
         </section>
     </section>
+
+    <script>
+        var updatingCurrentTimeId = 0;
+        var lastCurrentTime = 0;
+        var episodeId = '{{$podcast['episodes']['id']}}';
+
+        $('#player')[0].currentTime = '{{$podcast['episodes']['paused_at'] ?? 0}}';
+
+        if (updatingCurrentTimeId) clearInterval(updatingCurrentTimeId);
+        updatingCurrentTimeId = setInterval(function(){
+            var audioTag = document.getElementsByTagName('audio')[0];
+
+            if (!audioTag.currentSrc) return;
+
+            var currentTime = Math.floor(audioTag.currentTime);
+            if (!currentTime) return;
+            if (currentTime == lastCurrentTime) return;
+
+            lastCurrentTime = currentTime;
+            $.ajax({
+                url: '/ajax/uptEpisode/' + episodeId + '/' + currentTime
+            });
+        }, 25000);
+    </script>
+
 @endsection

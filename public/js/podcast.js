@@ -60,7 +60,7 @@ $(document).ready(function() {
         $('.musicbar').addClass('animate')
         audio.play();
 
-        if (updatingCurrentTimeId) clearInterval(updatingCurrentTimeId);
+        /*if (updatingCurrentTimeId) clearInterval(updatingCurrentTimeId);
         updatingCurrentTimeId = setInterval(function(){
             var audioTag = document.getElementsByTagName('audio')[0];
 
@@ -77,7 +77,7 @@ $(document).ready(function() {
             $.ajax({
                 url: '/ajax/uptEpisode/' + inputData.attr('data-id') + '/' + currentTime
             });
-        }, 25000);
+        }, 25000);*/
     });
 });
 
