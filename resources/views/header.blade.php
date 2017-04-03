@@ -128,7 +128,7 @@
             var inputData = $(this).find('input');
 
 
-            audio.currentTime = inputData.attr('data-paused-at');
+            audio.currentTime = inputData.attr('data-paused-at') || 0;
 
             $('#playing span').text(inputData.attr('data-title'));
             $('.podcast-image').attr('src', inputData.attr('data-image'));
