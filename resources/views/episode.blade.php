@@ -17,7 +17,7 @@
                                         col-sm-6 col-sm-offset-4
                                         ">
                                     <h2>
-                                        <a href="/podcast/{{$podcast['slug']}}">{{$podcast['name']}}</a>
+                                        <a href="/podcasts/{{$podcast['slug']}}">{{$podcast['name']}}</a>
                                     </h2>
                                     <h3>
                                         {{$podcast['episodes']['title']}}
