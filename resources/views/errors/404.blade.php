@@ -1,6 +1,8 @@
 
 @extends('layouts.app')
 
+@section('title', '404 - Not Found')
+
 @section('content')
     <body class="bg-info dker">
     <section id="content">
