@@ -9,6 +9,7 @@ use App\Podty\UserEpisodes;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller
 {
@@ -30,8 +31,11 @@ class HomeController extends Controller
 
     public function discover()
     {
+        $podcasts = Cache::remember('home_guest', 360, function(){
+            return (new Podcasts)->top();
+        });
         return view('discover')->with([
-            'podcasts' => (new Podcasts)->top(),
+            'podcasts' => $podcasts,
             'title' => 'Discover'
         ]);
     }
