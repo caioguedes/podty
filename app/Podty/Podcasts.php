@@ -48,7 +48,6 @@ class Podcasts
 
         $hash = md5($podcastId . 'episodes' . $offset . $limit);
         $episodes = Cache::remember($hash, 60, function() use ($url) {
-            dd('hit');
             return $this->api->get($url);
         });
 
