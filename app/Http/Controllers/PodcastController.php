@@ -149,16 +149,18 @@ class PodcastController extends Controller
     public function episode($episodeId)
     {
         $episode = $this->podcastsApi->episode($episodeId);
+
         if (Auth::user()) {
- 	    $userEpisode = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
-	    if($userEpisode->count())
-           	$episode['episodes'] = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
+ 	        $userEpisode = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
+	        if ($userEpisode->count()){
+                $episode['episodes'] = $userEpisode;
+            }
         }
 
         if (!$episode->count()) {
             return redirect('/404');
         }
-        
-	return view('episode')->with('podcast', $episode);
+
+	    return view('episode')->with('podcast', $episode);
     }
 }

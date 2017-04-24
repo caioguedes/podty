@@ -29,9 +29,11 @@ class Podcasts
 
     public function episode(int $episodeId)
     {
-        $url = 'episodes/' . $episodeId;
+        $response = Cache::remember('episodes_' . $episodeId, 1000, function() use ($episodeId) {
+            return $this->api->get('episodes/' . $episodeId);
+        });
 
-        return $this->returnDefaultResponse($this->api->get($url));
+        return $this->returnDefaultResponse($response);
     }
 
     public function episodes(int $podcastId, int $offset = 0, int $limit = 28): Collection
