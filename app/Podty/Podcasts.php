@@ -2,6 +2,7 @@
 namespace App\Podty;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Cache;
 
 class Podcasts
 {
@@ -41,7 +42,11 @@ class Podcasts
             $url .= '&offset=' . $offset;
         }
 
-        return $this->returnDefaultResponse($this->api->get($url));
+        $episodes = Cache::remember('podcast_' . $podcastId . '_episodes', 60, function() use ($url) {
+            return $this->api->get($url);
+        });
+
+        return $this->returnDefaultResponse($episodes);
     }
 
     public function findByName($name)
@@ -56,7 +61,11 @@ class Podcasts
 
     public function listeners($podcastId)
     {
-        return $this->returnDefaultResponse($this->api->get('feeds/' . $podcastId . '/listeners'));
+        $response = Cache::remember('podcast_' . $podcastId . '_listeners', 60, function() use ($podcastId) {
+            return $this->api->get('feeds/' . $podcastId . '/listeners');
+        });
+
+        return $this->returnDefaultResponse($response);
     }
 
     private function returnDefaultResponse($response): Collection
