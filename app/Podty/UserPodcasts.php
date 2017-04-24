@@ -16,7 +16,7 @@ class UserPodcasts
 
     public function all(string $username): Collection
     {
-        $response = Cache::remember('user_podcasts_' . $username, 30, function() use ($username) {
+        $response = Cache::remember('user_podcasts_' . $username, 60, function() use ($username) {
             return $this->api->get('users/' . $username . '/feeds');
         });
 
