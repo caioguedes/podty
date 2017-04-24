@@ -22,9 +22,11 @@ class Podcasts
 
     public function top(int $quantity = 24): Collection
     {
-        return $this->returnDefaultResponse(
-            $this->api->get('feeds/top/' . $quantity)
-        );
+        $podcasts = Cache::remember('podcasts_top', 360, function() use ($quantity) {
+            return $this->api->get('feeds/top/' . $quantity);
+        });
+
+        return $this->returnDefaultResponse($podcasts);
     }
 
     public function episode(int $episodeId)
@@ -44,7 +46,9 @@ class Podcasts
             $url .= '&offset=' . $offset;
         }
 
-        $episodes = Cache::remember('podcast_' . $podcastId . '_episodes', 60, function() use ($url) {
+        $hash = md5($podcastId . 'episodes' . $offset . $limit);
+        $episodes = Cache::remember($hash, 60, function() use ($url) {
+            dd('hit');
             return $this->api->get($url);
         });
 

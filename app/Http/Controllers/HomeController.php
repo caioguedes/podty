@@ -31,11 +31,8 @@ class HomeController extends Controller
 
     public function discover()
     {
-        $podcasts = Cache::remember('home_guest', 360, function(){
-            return (new Podcasts)->top();
-        });
         return view('discover')->with([
-            'podcasts' => $podcasts,
+            'podcasts' => (new Podcasts)->top(),
             'title' => 'Discover'
         ]);
     }
