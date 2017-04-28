@@ -21,26 +21,26 @@
                                     <div id="loading" hidden>
                                         <div class="row">
                                             <div class="col-md-12">
-                                                <div class="header-title">
+                                                <div class="header-title pulse-effect">
 
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="row">
                                             <div class="col-md-2 col-xs-5" style="margin-right: 50px;">
-                                                <div class="image-shadow"></div>
-                                                <div class="subtitle"></div>
-                                                <div class="title"></div>
+                                                <div class="image-shadow pulse-effect"></div>
+                                                <div class="subtitle pulse-effect"></div>
+                                                <div class="title pulse-effect"></div>
                                             </div>
                                             <div class="col-md-2 col-xs-4" style="margin-right: 50px;">
-                                                <div class="image-shadow"></div>
-                                                <div class="subtitle"></div>
-                                                <div class="title"></div>
+                                                <div class="image-shadow pulse-effect"></div>
+                                                <div class="subtitle pulse-effect"></div>
+                                                <div class="title pulse-effect"></div>
                                             </div>
                                             <div class="col-md-2 hidden-xs" style="margin-right: 20px;">
-                                                <div class="image-shadow"></div>
-                                                <div class="subtitle"></div>
-                                                <div class="title"></div>
+                                                <div class="image-shadow pulse-effect"></div>
+                                                <div class="subtitle pulse-effect"></div>
+                                                <div class="title pulse-effect"></div>
                                             </div>
                                             <div class="col-md-2 hidden-xs"></div>
                                             <div class="col-md-2 hidden-xs"></div>
@@ -67,6 +67,23 @@
                                                 height: 15px;
                                                 margin: 5px 0 0 5px;
                                                 border-radius: 4%;
+                                            }
+                                            .pulse-effect {
+                                                background: linear-gradient(to right, #a9a9a9 8%, #9c9c9c 18%, #a9a9a9 33%);
+                                                animation-duration: 1s;
+                                                animation-fill-mode: forwards;
+                                                animation-iteration-count: infinite;
+                                                animation-name: pulse;
+                                                animation-timing-function: linear;
+                                                background-size: 800px 104px;
+                                            }
+                                            @keyframes pulse {
+                                                0%{
+                                                    background-position: -468px 0;
+                                                }
+                                                100%{
+                                                    background-position: 468px 0;
+                                                }
                                             }
                                         </style>
                                     </div>
