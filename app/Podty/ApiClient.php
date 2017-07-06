@@ -12,7 +12,7 @@ class ApiClient
     public function __construct()
     {
         $this->client = new Client([
-            'base_uri' => env('API_BASE_URL'),
+            'base_uri' => 'http://'.env('API_BASE_URL') . '/v1/',
             'auth' => [
                 env('API_AUTH_USER'),
                 env('API_AUTH_PASS')
@@ -106,7 +106,7 @@ class ApiClient
         return true;
     }
 
-    public function delete(string $resource): bool 
+    public function delete(string $resource): bool
     {
         $curl = curl_init();
 
