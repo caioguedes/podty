@@ -5,6 +5,5 @@ Homestead.yaml
 Homestead.json
 .env
 .DS_Store
-.elasticbeanstalk
 .idea
 circle.yml
