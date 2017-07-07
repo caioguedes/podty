@@ -7,7 +7,7 @@
 
     @yield('meta')
 
-    <title>- @yield('title')</title>
+    <title>@yield('title')</title>
 
     <link rel="shortcut icon" type="image/png" href="/img/favicon.png"/>
     <script src="/js/jquery.min.js"></script>
