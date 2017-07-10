@@ -51,7 +51,7 @@
                                    width="40" height="40" style="margin-bottom: 5px;">
                           </a>
                       @empty
-                          <h3>Be the first to follow this podcast!</h3>
+                          <h4 class="text-sm">Be the first to follow this podcast!</h4>
                       @endforelse
                   </div>
 
