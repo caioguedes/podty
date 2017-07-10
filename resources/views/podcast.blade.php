@@ -20,7 +20,7 @@
                     <div class="item pos-rlt">
                       <div class="bottom gd bg-info wrapper-md podcast-image-texts">
                         <span class="pull-right text-sm">{{$data['podcast']['total_episodes']}} <br>Episodes</span>
-                        <span class="text-sm">{{$data['podcast']['listeners']}} <br> Listeners</span>
+                        <span class="text-sm">{{count($data['listeners'])}} <br> Listeners</span>
                       </div>
                       <img class="img-full podcast-image" src="{{$data['podcast']['thumbnail_600']}}">
                     </div>
