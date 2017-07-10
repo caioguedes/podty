@@ -105,57 +105,47 @@ function unfollowCurrentPodcast(){
 
 function renderPodcastView(data) {
     data.episodes.map(function(episode){
-        $('#podcast-list').append(render(episode, data.podcast));
+        $('#podcast-ul').append(render(episode, data.podcast));
     });
 }
 
 function render(episode, podcast) {
-    return '<div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">'
-                + '<div class="item">'
-                    + '<div class="pos-rlt">'
-                        + '<div class="bottom">' +
-                            (!episode.duration ? '' : '<span class="badge bg-info m-l-sm m-b-sm">' + episode.duration + '</span>' )
-                        + '</div>'
-                        + '<div class="item-overlay opacity r r-2x bg-black">'
-                            + '<a href="#" class="center text-center play-me m-t-n active" data-toggle="class">'
-                                + '<input type="hidden" ' +
-                                            'value="' + episode.media_url + '" ' +
-                                            'data-title="' + episode.title + '" ' +
-                                            'data-id="'+ episode.id +'" ' +
-                                            'data-image="' + (episode.image ? episode.image : podcast.thumbnail_600)
-                                    + '">'
-                                + '<i class="icon-control-play text-active i-2x"></i>'
-                                + '<i class="icon-control-pause text  i-2x"></i>'
-                            + '</a>'
-                        + '</div>'
-                        + '<div class="top m-r-sm m-t-sm">'
-                          + '<a href="#" class="pull-right btn-fav-ep" data-toggle="class">'
-                            + '<i class="fa fa-heart-o text"></i>'
-                            + '<i class="fa fa-heart text-active text-danger"></i>'
-                          + '</a>'
-                        + '</div>'
-                        + '<a href="#">'
-                            + '<img src="' + (episode.image ? episode.image: podcast.thumbnail_600) + '" class="r r-2x img-full">'
-                        + '</a>'
-                        + '<div class="bottom pull-right text-sm">'
-                            + '<a href="/episodes/'+ episode.id +'" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">'
-                                + '<i class="icon-action-redo"></i>'
-                            + '</a>'
-                        + '</div>'
-                    + '</div>'
-                    + '<div class="padder-v">'
-                        + '<a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal'+episode.id+'">'
-                            + episode.title
-                        + '</a>'
-                        + '<a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal'+episode.id+'">'
-                            + formatDate(episode.published_at)
-                        + '</a>'
-                    + '</div>'
-                    + '<div class="modal fade" id="myModal'+episode.id+'" role="dialog">'
-                    + '</div>'
-                + '</div>'
+    return '<li class="list-group-item">'
+            + '<div class="pull-right m-l">'
+                + '<a href="#" class="m-r-sm m-b-sm btn-fav-ep" data-toggle="class">'
+                    + '<i class="fa fa-heart-o text"></i>'
+                    + '<i class="fa fa-heart text-active text-danger"></i>'
+                + '</a>'
+                + '<a href="/episodes/'+ episode.id +'" target="_blank">'
+                    + '<i class="icon-action-redo"></i>'
+                + '</a>'
             + '</div>'
-        + '</div>';
+
+            + '<a href="#" class="play-me active m-r-sm pull-left" data-toggle="class">'
+                + '<input type="hidden" ' +
+                    'value="' + episode.media_url + '" ' +
+                    'data-title="' + episode.title + '" ' +
+                    'data-id="'+ episode.id +'" ' +
+                    'data-image="' + (episode.image ? episode.image : podcast.thumbnail_600)
+                + '">'
+                + '<i class="icon-control-play text-active i-2x"></i>'
+                + '<i class="icon-control-pause text  i-2x"></i>'
+            + '</a>'
+
+            + '<div class="clear text-ellipsis m-l-xl">'
+                + '<span>'
+                    + '<a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal'+episode.id+'">'
+                    + episode.title
+                    + '</a>'
+                + '</span>'
+                + '<span class="text-muted pull-right m-r-lg">'
+                    + (!episode.duration ? '' :  episode.duration)
+                + '</span>'
+            + '</div>'
+            + '<div class="m-l-xl m-t-n-sm">'
+                + formatDate(episode.published_at)
+            + '</div>'
+        + '</li>';
 }
 
 

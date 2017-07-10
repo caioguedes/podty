@@ -57,76 +57,64 @@
 
               </aside>
 
-              <section class="col-sm-6 no-padder bg-light dk" style="padding-top: 10px !important;">
+              <section class="col-sm-5 no-padder bg-black dk" style="padding-top: 10px !important;">
                 <section class="vbox">
                   <section class="scrollable hover" id="podcast-list" style="padding-bottom: 10px;">
-                        @foreach($data['episodes'] as $episode)
-                          <div class="col-xs-6 col-sm-4 col-md-3 col-lg-3">
-                              <div class="item">
-                                  <div class="pos-rlt">
-                                      <div class="bottom">
-                                          @if($episode['duration'])
-                                              <span class="badge bg-info m-l-sm m-b-sm">
-                                                  {{$episode['duration']}}
-                                              </span>
-                                          @endif
-                                      </div>
-
-                                      <div class="item-overlay opacity r r-2x bg-black">
-                                          <a href="#" class="center text-center play-me m-t-n active" data-toggle="class">
-                                              <input type="hidden"
-                                                     value="{{$episode['media_url']}}"
-                                                     data-title="{{$episode['title']}}"
-                                                     data-id="{{$episode['id']}}"
-                                                     data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_100']}}"
-                                              >
-                                              <i class="icon-control-play text-active i-2x"></i>
-                                              <i class="icon-control-pause text  i-2x"></i>
-                                          </a>
+                      <div class="m-t-n-xxs item pos-rlt">
+                          <ul id="podcast-ul" class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
+                              @foreach($data['episodes'] as $episode)
+                                  <li class="list-group-item">
+                                      <div class="pull-right m-l">
                                           @if(Auth::user())
-                                              <div class="top m-r-sm m-t-sm">
-                                                  <a href="#" class="pull-right btn-fav-ep" data-toggle="class">
-                                                      <i class="fa fa-heart-o text"></i>
-                                                      <i class="fa fa-heart text-active text-danger"></i>
-                                                  </a>
-                                              </div>
-                                          @endif
-                                          <div class="bottom pull-right text-sm">
-                                              <a href="/episodes/{{$episode['id']}}" class="pull-right text-sm m-r-sm m-b-sm" target="_blank">
-                                                  <i class="icon-action-redo"></i>
+                                              <a href="#" class="m-r-sm m-b-sm btn-fav-ep" data-toggle="class">
+                                                  <i class="fa fa-heart-o text"></i>
+                                                  <i class="fa fa-heart text-active text-danger"></i>
                                               </a>
+                                          @endif
+                                          <a href="/episodes/{{$episode['id']}}" target="_blank">
+                                              <i class="icon-action-redo"></i>
+                                          </a>
+                                      </div>
+                                  
+                                      <a href="#" class="play-me active m-r-sm pull-left" data-toggle="class">
+                                          <input type="hidden"
+                                                 value="{{$episode['media_url']}}"
+                                                 data-title="{{$episode['title']}}"
+                                                 data-id="{{$episode['id']}}"
+                                                 data-image="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_100']}}"
+                                          >
+                                          <i class="icon-control-play text-active i-2x"></i>
+                                          <i class="icon-control-pause text i-2x"></i>
+                                      </a>
+                                     
+                                      <div class="clear text-ellipsis m-l-xl">
+                                          <span><a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a></span>
+                                          <span class="text-muted pull-right m-r-lg">{{$episode['duration']}}</span>
+                                      </div>
+                                      <div class="m-l-xl m-t-n-sm">
+                                              {{ (new \DateTime($episode['published_at']))->format('d/m/Y H:i')}}
+                                      </div>
+                                      
+                                      <div class="modal fade" id="myModal{{$episode['id']}}" role="dialog">
+                                          <div class="modal-dialog">
+                                              <div class="modal-content bg-dark">
+                                                  <div class="modal-body" style="overflow: scroll; max-height: 300px;">
+                                                      <h4 class="modal-title">{{$episode['title']}}</h4>
+                                                      <hr>
+                                                      <?= !empty($episode['content']) ? $episode['content'] : $episode['summary']?>
+                                                  </div>
+                                                  <div class="modal-footer">
+                                                      <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">
+                                                          Close
+                                                      </button>
+                                                  </div>
+                                              </div>
                                           </div>
                                       </div>
-                                      <a href="#">
-                                        <img src="{{($episode['image']) ?$episode['image']: $data['podcast']['thumbnail_600']}}" class="r r-2x img-full">
-                                      </a>
-                                  </div>
-                                  <div class="padder-v">
-                                      <a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a>
-                                      <a href="#" class="text-ellipsis text-xs text-muted" data-toggle="modal" data-target="#myModal{{$episode['id']}}">
-                                          {{ (new \DateTime($episode['published_at']))->format('d/m/Y H:i')}}
-                                      </a>
-                                  </div>
-
-                                  <div class="modal fade" id="myModal{{$episode['id']}}" role="dialog">
-                                      <div class="modal-dialog">
-                                          <div class="modal-content bg-dark">
-                                              <div class="modal-body" style="overflow: scroll; max-height: 300px;">
-                                                  <h4 class="modal-title">{{$episode['title']}}</h4>
-                                                  <hr>
-                                                  <?= !empty($episode['content']) ? $episode['content'] : $episode['summary']?>
-                                              </div>
-                                              <div class="modal-footer">
-                                                  <button type="button" class="btn btn-info btn-rounded" data-dismiss="modal">
-                                                      Close
-                                                  </button>
-                                              </div>
-                                          </div>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                        @endforeach
+                                </li>
+                              @endforeach
+                          </ul>
+                      </div>
                   </section>
                 </section>
               </section>
@@ -138,7 +126,7 @@
   </section>
 <script>
     $(document).on('click', '.btn-fav-ep', function () {
-        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        var episodeID = $(this).parent().next().find('input').attr('data-id');
         if (!episodeID) return;
         $.ajax({url: '/ajax/favoriteEpisode/' + episodeID});
         $(this).removeClass('btn-fav-ep');
@@ -146,7 +134,7 @@
     });
 
     $(document).on('click', '.btn-unfav-ep', function () {
-        var episodeID = $(this).parent().prev().find('input').attr('data-id');
+        var episodeID = $(this).parent().next().find('input').attr('data-id');
         if (!episodeID) return;
         $.ajax({url: '/ajax/unfavoriteEpisode/' + episodeID});
         $(this).removeClass('btn-unfav-ep');

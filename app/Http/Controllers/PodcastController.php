@@ -35,7 +35,6 @@ class PodcastController extends Controller
 
     /**
      * Get Top Rated Podcasts
-     * @return array
      */
     public function top()
     {
