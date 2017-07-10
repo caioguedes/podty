@@ -39,91 +39,45 @@ class ApiClient
 
     public function post(string $resource): bool
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-        
-        if ($status_code >= 400) {
+        try {
+            $response = ($this->client->post($resource));
+        } catch (\Exception $exception) {
             return false;
         }
-
-        return true;
+        
+        return !!($response->getStatusCode() < 400);
     }
 
     public function patch(string $resource): bool
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => 'PATCH',
-            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-        if ($status_code >= 400) {
+        try {
+            $response = ($this->client->patch($resource));
+        } catch (\Exception $exception) {
             return false;
         }
-
-        return true;
+    
+        return !!($response->getStatusCode() < 400);
     }
 
     public function put(string $resource): bool
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => 'PUT',
-            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-
-        if ($status_code >= 400) {
+        try {
+            $response = ($this->client->put($resource));
+        } catch (\Exception $exception) {
             return false;
         }
-
-        return true;
+    
+        return !!($response->getStatusCode() < 400);
     }
 
     public function delete(string $resource): bool
     {
-        $curl = curl_init();
-
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_TIMEOUT => 30,
-            CURLOPT_CUSTOMREQUEST => 'DELETE',
-            CURLOPT_USERPWD => env('API_AUTH_USER') . ":" . env('API_AUTH_PASS')
-        ));
-
-        curl_exec($curl);
-        $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-
-        if ($status_code >= 400) {
+        try {
+            $response = ($this->client->delete($resource));
+        } catch (\Exception $exception) {
             return false;
         }
-
-        return true;
+    
+        return !!($response->getStatusCode() < 400);
     }
 }
