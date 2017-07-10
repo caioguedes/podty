@@ -44,13 +44,15 @@
 
                   <div style="margin-left: 5px;">
                       <h4>People who listen:</h4>
-                      @foreach($data['listeners'] as $listener)
+                      @forelse($data['listeners'] as $listener)
                           <a href="/profile/{{$listener['username']}}" style="margin-left:5px">
                               <img src="https://www.gravatar.com/avatar/{{$listener['email_hash']}}?d=retro"
                                    alt="{{$listener['username']}}" class="img-circle"
                                    width="40" height="40" style="margin-bottom: 5px;">
                           </a>
-                      @endforeach
+                      @empty
+                          <h3>Be the first to follow this podcast!</h3>
+                      @endforelse
                   </div>
 
               </aside>
