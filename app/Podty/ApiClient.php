@@ -42,7 +42,7 @@ class ApiClient
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . $resource,
+            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => 'POST',
@@ -51,8 +51,7 @@ class ApiClient
 
         curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
-
+        
         if ($status_code >= 400) {
             return false;
         }
@@ -65,7 +64,7 @@ class ApiClient
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . $resource,
+            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => 'PATCH',
@@ -74,7 +73,6 @@ class ApiClient
 
         curl_exec($curl);
         $status_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
-
 
         if ($status_code >= 400) {
             return false;
@@ -88,7 +86,7 @@ class ApiClient
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . $resource,
+            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => 'PUT',
@@ -111,7 +109,7 @@ class ApiClient
         $curl = curl_init();
 
         curl_setopt_array($curl, array(
-            CURLOPT_URL => env('API_BASE_URL') . $resource,
+            CURLOPT_URL => env('API_BASE_URL') . '/v1/' . $resource,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_TIMEOUT => 30,
             CURLOPT_CUSTOMREQUEST => 'DELETE',
