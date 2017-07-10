@@ -40,12 +40,16 @@ class UserPodcasts
     public function follow(string $username, int $podcastId): bool
     {
         Cache::forget('user_podcasts_' . $username);
+        Cache::forget('user_home_' . $username);
+        Cache::forget('podcast_' . $podcastId . '_listeners');
         return $this->api->post('users/' . $username . '/feeds/' . $podcastId);
     }
 
     public function unfollow(string $username, int $podcastId): bool
     {
         Cache::forget('user_podcasts_' . $username);
+        Cache::forget('user_home_' . $username);
+        Cache::forget('podcast_' . $podcastId . '_listeners');
         return $this->api->delete('users/' . $username . '/feeds/' . $podcastId);
     }
 
