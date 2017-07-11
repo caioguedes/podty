@@ -139,7 +139,7 @@ function render(episode, podcast) {
                     + '</a>'
                 + '</span>'
                 + '<span class="text-muted pull-right m-r-lg">'
-                    + (!episode.duration ? '' :  episode.duration)
+                    + (episode.duration === '' ? '00:00:00' :  episode.duration)
                 + '</span>'
             + '</div>'
             + '<div class="m-l-xl m-t-n-sm">'
