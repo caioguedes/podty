@@ -89,7 +89,7 @@
                                      
                                       <div class="clear text-ellipsis m-l-xl">
                                           <span><a href="#" class="text-ellipsis" data-toggle="modal" data-target="#myModal{{$episode['id']}}">{{$episode['title']}}</a></span>
-                                          <span class="text-muted pull-right m-r-lg">{{$episode['duration']}}</span>
+                                          <span class="text-muted pull-right m-r-lg">{{$episode['duration'] == '' ? '00:00:00' : $episode['duration']}}</span>
                                       </div>
                                       <div class="m-l-xl m-t-n-sm">
                                               {{ (new \DateTime($episode['published_at']))->format('d/m/Y H:i')}}
