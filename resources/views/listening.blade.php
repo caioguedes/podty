@@ -36,6 +36,7 @@
                                                                      data-title="{{$episode['episode']['title']}}"
                                                                      data-id="{{$episode['episode']['id']}}"
                                                                      data-image="{{$episode['episode']['image']}}"
+                                                                     data-paused-at="{{$episode['episode']['paused_at']}}"
                                                               >
                                                               <i class="icon-control-play text-active i-2x"></i>
                                                               <i class="icon-control-pause text i-2x"></i>

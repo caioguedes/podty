@@ -36,6 +36,7 @@
                                                                      data-title="{{$favorite['episode']['title']}}"
                                                                      data-id="{{$favorite['episode']['id']}}"
                                                                      data-image="{{$favorite['episode']['image']}}"
+                                                                     data-paused-at="{{$favorite['episode']['paused_at']}}"
                                                               >
                                                               <i class="icon-control-play text-active i-2x"></i>
                                                               <i class="icon-control-pause text i-2x"></i>
