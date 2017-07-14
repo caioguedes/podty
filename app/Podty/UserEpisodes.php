@@ -38,7 +38,7 @@ class UserEpisodes
 
     public function episodes(string $username, int $podcastId): array
     {
-        return $this->api->get('users/' . $username . 'feeds/' . $podcastId . '/episodes');
+        return $this->api->get('users/' . $username . '/feeds/' . $podcastId . '/episodes');
     }
     
     public function listening(string $username): Collection
