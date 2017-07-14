@@ -40,7 +40,14 @@ class UserEpisodes
     {
         return $this->api->get('users/' . $username . 'feeds/' . $podcastId . '/episodes');
     }
-
+    
+    public function listening(string $username): Collection
+    {
+        return $this->returnDefaultResponse(
+            $this->api->get('users/' . $username . '/episodes/listening')
+        );
+    }
+    
     public function detach(string $username, int $episodeId): bool
     {
         Cache::forget('user_home_' . $username);

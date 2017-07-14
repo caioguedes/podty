@@ -34,6 +34,18 @@ class UserEpisodesController extends Controller
         if(Auth::user()) {
             $this->userEpisode->detachAll(Auth::user()->name, $podcastId);
         }
+    }
+    
+    public function listening()
+    {
+        if (!Auth::user()) {
+            return redirect('/');
+        }
         
+        $episodes = $this->userEpisode->listening(Auth::user()->name);
+    
+        return view('listening')->with([
+            'episodes' => $episodes
+        ]);
     }
 }

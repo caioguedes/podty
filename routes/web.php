@@ -32,6 +32,7 @@ Route::get('podcasts', 'PodcastController@home');
 Route::get('podcasts/{podcastId}', 'PodcastController@podcast');
 
 Route::get('favorites', 'UserFavoritesController@all');
+Route::get('listening', 'UserEpisodesController@listening');
 
 
 Route::get('ajax/myPods', 'UserPodcastsController@all');

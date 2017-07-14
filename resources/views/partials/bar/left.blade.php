@@ -23,6 +23,12 @@
                                     <span class="font-bold">Favorites</span>
                                 </a>
                             </li>
+                            <li>
+                                <a href="/listening">
+                                    <i class="icon-clock icon text-info"></i>
+                                    <span class="font-bold">Listening</span>
+                                </a>
+                            </li>
                         </ul>
                     </nav>
                 </div>
