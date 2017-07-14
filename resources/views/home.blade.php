@@ -15,6 +15,9 @@
 @endsection
 
 @section('footer-scripts')
+    @if (\Illuminate\Support\Facades\Auth::user())
+        <script async type="text/javascript" src="js/partials/leftbar.js"></script>
+    @endif
+    
     <script async type="text/javascript" src="js/find-podcasts.js"></script>
-    <script async type="text/javascript" src="js/partials/leftbar.js?t={{time()}}"></script>
 @endsection

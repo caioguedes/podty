@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\AjaxAuth;
 use App\Podty\UserEpisodes;
 use App\Podty\UserFavorites;
 use Illuminate\Support\Collection;
@@ -12,6 +13,7 @@ class UserFavoritesController extends Controller
 
     public function __construct(UserFavorites $userFavorites)
     {
+        $this->middleware(AjaxAuth::class)->except('all');
         $this->userFavorites = $userFavorites;
     }
 
@@ -30,15 +32,11 @@ class UserFavoritesController extends Controller
 
     public function create($episodeId)
     {
-        if (Auth::user()) {
-            $this->userFavorites->create(Auth::user()->name, $episodeId);
-        }
+        $this->userFavorites->create(Auth::user()->name, $episodeId);
     }
 
     public function delete($episodeId)
     {
-        if (Auth::user()) {
-            $this->userFavorites->delete(Auth::user()->name, $episodeId);
-        }
+        $this->userFavorites->delete(Auth::user()->name, $episodeId);
     }
 }

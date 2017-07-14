@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\AjaxAuth;
 use App\Podty\UserEpisodes;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
@@ -12,28 +13,23 @@ class UserEpisodesController extends Controller
 
     public function __construct(UserEpisodes $userEpisode)
     {
+        $this->middleware(AjaxAuth::class)->except('listening');
         $this->userEpisode = $userEpisode;
     }
 
     public function touch($episodeId, $currentTime)
     {
-        if (Auth::user()) {
-            $this->userEpisode->touch(Auth::user()->name, $episodeId, $currentTime);
-        }
+        $this->userEpisode->touch(Auth::user()->name, $episodeId, $currentTime);
     }
 
     public function detach($episodeId)
     {
-        if (Auth::user()) {
-            $this->userEpisode->detach(Auth::user()->name, $episodeId);
-        }
+        $this->userEpisode->detach(Auth::user()->name, $episodeId);
     }
 
     public function detachAll($podcastId)
     {
-        if(Auth::user()) {
-            $this->userEpisode->detachAll(Auth::user()->name, $podcastId);
-        }
+        $this->userEpisode->detachAll(Auth::user()->name, $podcastId);
     }
     
     public function listening()
