@@ -19,6 +19,11 @@ class AjaxAuth
         if (Auth::user()) {
             return $next($request);
         }
+        
+        if ($request->expectsJson()) {
+            return redirect('/');
+        }
+    
         return response('', 403);
     }
 }

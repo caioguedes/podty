@@ -150,8 +150,8 @@ class PodcastController extends Controller
         $episode = $this->podcastsApi->episode($episodeId);
 
         if (Auth::user()) {
- 	        $userEpisode = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
-	        if ($userEpisode->count()){
+            $userEpisode = (new UserEpisodes)->one(Auth::user()->name, $episodeId);
+            if ($userEpisode->count()){
                 $episode['episodes'] = $userEpisode;
             }
         }

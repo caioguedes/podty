@@ -22,11 +22,11 @@ class UserPodcastsController extends Controller
 
     public function follow($podcastId)
     {
-	$podcastId = $this->normalizePodcastId($podcastId);
-	
-	if (!$podcastId) {
-	    return response('', 400);
-	}
+        $podcastId = $this->normalizePodcastId($podcastId);
+        
+        if (!$podcastId) {
+            return response('', 400);
+        }
 
         Auth::user()->podcasts_count++;
         Auth::user()->save();
@@ -40,7 +40,7 @@ class UserPodcastsController extends Controller
 
     public function unfollow($podcastId)
     {
-	$podcastId = $this->normalizePodcastId($podcastId);
+        $podcastId = $this->normalizePodcastId($podcastId);
 
         if (!$podcastId) {
             return response('', 400);
@@ -55,12 +55,12 @@ class UserPodcastsController extends Controller
 
         return response('', 400);
     }
-	
+
     private function normalizePodcastId($podcastId)
     {
-	$podcastId = explode('-', $podcastId)[0];
-
-	return is_numeric($podcastId) ? $podcastId : false;
+        $podcastId = explode('-', $podcastId)[0];
+    
+        return is_numeric($podcastId) ? $podcastId : false;
     }
 
 

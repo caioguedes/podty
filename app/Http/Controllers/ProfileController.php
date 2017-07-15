@@ -29,7 +29,7 @@ class ProfileController extends Controller
         $user = $this->getUser($user);
 
         if (!$user) {
-            return redirect('/404');
+            return redirect('/');
         }
 
         return view('profile')->with('data', [
