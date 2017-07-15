@@ -5,8 +5,8 @@
                 <div class="bottom">
                     @if($episode['episode']['duration'])
                         <span class="badge bg-info m-l-sm m-b-sm">
-                                                  {{$episode['episode']['duration']}}
-                                                                  </span>
+                              {{$episode['episode']['duration']}}
+                          </span>
                     @endif
                 </div>
                 
@@ -37,6 +37,11 @@
                         @endif
                     </div>
                     <div class="bottom">
+                        @if(isset($removable))
+                            <a href="#" class="pull-left m-l-sm m-b-sm button-rmv-ep">
+                                <i class="fa fa-times"></i>
+                            </a>
+                        @endif
                         <a href="/episodes/{{$episode['episode']['id']}}" class="pull-right m-r-sm m-b-sm" target="_blank">
                             <i class="icon-action-redo"></i>
                         </a>
