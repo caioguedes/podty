@@ -10,7 +10,7 @@
     
                         @include('partials.episodes', [
                             'removable' => true
-                        ]);
+                        ])
 
                     </div>
                     <div id="loading" hidden>
