@@ -59,7 +59,7 @@
 
               <section class="col-sm-5 no-padder bg-black dk" style="padding-top: 10px !important;">
                 <section class="vbox">
-                  <section class="scrollable hover" id="podcast-list" style="padding-bottom: 10px;">
+                  <section class="scrollable" id="podcast-list" style="padding-bottom: 10px;">
                       <div class="m-t-n-xxs item pos-rlt">
                           <ul id="podcast-ul" class="list-group list-group-lg no-radius no-border no-bg m-t-n-xxs m-b-none auto">
                               @foreach($data['episodes'] as $episode)
