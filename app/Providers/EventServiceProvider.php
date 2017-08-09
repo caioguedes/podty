@@ -1,8 +1,10 @@
 <?php
-
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Event;
+use App\Events\AnalyticsEvent;
+use App\Events\AnalyticsPageView;
+use App\Listeners\GAEvent;
+use App\Listeners\GAPageView;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -13,8 +15,11 @@ class EventServiceProvider extends ServiceProvider
      * @var array
      */
     protected $listen = [
-        'App\Events\SomeEvent' => [
-            'App\Listeners\EventListener',
+        AnalyticsEvent::class => [
+            GAEvent::class,
+        ],
+        AnalyticsPageView::class => [
+            GAPageView::class,
         ],
     ];
 

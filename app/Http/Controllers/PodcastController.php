@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\AnalyticsPageView;
 use App\Format;
 use App\Podty\Podcasts;
 use App\Podty\UserEpisodes;
@@ -70,7 +71,9 @@ class PodcastController extends Controller
         });
 
         $userFollows = $this->getUserFollowPodcast($podcastId);
-
+        
+        event(new AnalyticsPageView('/podcasts.' . $podcastId, 'BE - Podcast - ' . $podcast['name']));
+        
         return view('podcast')->with('data', [
             'podcast'     => $podcast,
             'episodes'    => $podcast['episodes'],
