@@ -42,7 +42,7 @@
                         <input type="password" class="form-control rounded input-lg text-center no-border" name="password" placeholder="password" required>
                     </div>
                     <div class="form-group">
-                        <div class="col-md-6 col-md-offset-4">
+                        <div class="col-md-6 col-md-offset-4 col-xs-offset-4">
                             <div class="checkbox">
                                 <label>
                                     <input type="checkbox" name="remember" @if(old('remember')) checked @endif> Remember Me
