@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index()
     {
         if (!Auth::user()) {
+            event(new AnalyticsPageView('/', 'BE - Landing Page'));
             return view('home.guest');
         }
         
