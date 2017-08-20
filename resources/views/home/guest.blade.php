@@ -1,3 +1,5 @@
+@extends('layouts.app')
+
 @section('head')
     <style>
         .body {
@@ -25,24 +27,37 @@
     </style>
 @endsection
 
-<div class="text-center" style="padding-top: 10%; height: 100%;">
-    <h1 class="hidden-xs" style="padding-bottom: 2%;">Podty</h1>
+@section('content')
+    <section class="vbox">
+        @include('header')
+        <section class="padding-top-50">
+            <section class="hbox stretch">
 
-    <h2>Welcome to the worldwide <br> podcast community </h2>
+                <div class="text-center" style="padding-top: 5%; height: 100%;">
+                    <h1 class="hidden-xs" style="padding-bottom: 2%;">Podty.co</h1>
+        
+                    <h2>Welcome to the worldwide <br> podcast community </h2>
+        
+                    <h3 style="padding-top: 1%;">Discover new podcasts</h3>
+        
+                    <h3 style="margin-top: 1%">Find out what your friends are listening</h3>
+        
+                    <h3 style="margin-top: -5px;">stay in touch with them</h3>
+    
+                    <a href="/discover" class="btn btn-lg btn-info btn-rounded">Explore</a>
+                    
+                    <div class="buttons">
+                        <a href="login" class="sign-in btn btn-lg btn-info btn-rounded">
+                            Sign in
+                        </a>
+            
+                        <a href="register" class="sign-up btn btn-lg btn-info btn-rounded">
+                            Sign up
+                        </a>
+                    </div>
+                </div>
 
-    <h3 style="padding-top: 1%;">Discover new podcasts</h3>
-
-    <h3 style="margin-top: 1%">Find out what your friends are listening</h3>
-
-    <h3 style="margin-top: -5px;">stay in touch with them</h3>
-
-    <div class="buttons">
-        <a href="login" class="sign-in btn btn-lg btn-info btn-rounded">
-            Sign in
-        </a>
-
-        <a href="register" class="sign-up btn btn-lg btn-info btn-rounded">
-            Sign up
-        </a>
-    </div>
-</div>
+            </section>
+        </section>
+    </section>
+@endsection

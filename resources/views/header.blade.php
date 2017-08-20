@@ -26,7 +26,7 @@
             </li>
         </ul>
 
-        @if(in_array(Route::getCurrentRoute()->uri(), ['/', 'discover']))
+        @if(Auth::user() && in_array(Route::getCurrentRoute()->uri(), ['/', 'discover']))
             <div class="navbar-form navbar-left input-s-lg m-t m-l-n-xs hidden-xs" role="search">
                 <div class="form-group">
                     <div class="input-group">

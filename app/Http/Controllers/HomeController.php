@@ -14,11 +14,17 @@ class HomeController extends Controller
 
     public function index()
     {
-        if (!Auth::user() || Auth::user()->podcasts_count < 1) {
+        if (!Auth::user()) {
+            return view('home.guest');
+        }
+        
+        if (!Auth::user()->podcasts_count) {
             return redirect('/discover');
         }
+        
         event(new AnalyticsPageView('/home', 'BE - Latests Episodes'));
-        $episodes = (new UserEpisodes(new ApiClient))->latests(Auth::user()->name, 0, 150);
+        $episodes = (new UserEpisodes(new ApiClient))
+                        ->latests(Auth::user()->name, 0, 150);
 
         return view('home')->with([
             'episodes' => $episodes,
