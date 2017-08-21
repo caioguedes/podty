@@ -44,15 +44,15 @@
         
                     <h3 style="margin-top: -5px;">stay in touch with them</h3>
     
-                    <a href="/discover" class="btn btn-lg btn-info btn-rounded">Explore</a>
+                    <a href="/discover" class="btn btn-lg btn-info lt btn-rounded">Explore</a>
                     
                     <div class="buttons">
                         <a href="login" class="sign-in btn btn-lg btn-info btn-rounded">
-                            Sign in
+                            Login
                         </a>
             
                         <a href="register" class="sign-up btn btn-lg btn-info btn-rounded">
-                            Sign up
+                            Register
                         </a>
                     </div>
                 </div>

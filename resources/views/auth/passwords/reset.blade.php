@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Podty - Sign In')
+@section('title', 'Podty - Reset Password')
 
 @section('head')
     <style>
@@ -16,6 +16,7 @@
 @endsection
 
 @section('content')
+    @include('header')
     <section id="content" class="m-t-lg wrapper-md animated fadeInDown">
         <div class="container aside-xl">
             <a class="navbar-brand block" href="/"><span class="h1 font-bold">Podty</span></a>
@@ -66,11 +67,4 @@
             </section>
         </div>
     </section>
-    <!-- footer -->
-    <footer id="footer">
-        <div class="text-center padder clearfix">
-            <p>
-            </p>
-        </div>
-    </footer>
 @endsection

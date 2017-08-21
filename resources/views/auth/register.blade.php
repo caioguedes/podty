@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Podty - Sign Up')
+@section('title', 'Podty - Register')
 
 @section('head')
     <style>
@@ -16,6 +16,7 @@
 @endsection
 
 @section('content')
+    @include('header')
     <section id="content" class="m-t-lg wrapper-md animated fadeInDown">
         <div class="container aside-xl">
             <a class="navbar-brand block" href="/"><span class="h1 font-bold">Podty</span></a>
@@ -58,7 +59,7 @@
                         </button>
                         <div class="line line-dashed"></div>
                         <p class="text-muted text-center"><small>Already have an account?</small></p>
-                        <a href="login" class="btn btn-lg btn-info lt  btn-block btn-rounded">Sign in</a>
+                        <a href="login" class="btn btn-lg btn-info lt  btn-block btn-rounded">Login</a>
 
                     </form>
             </section>

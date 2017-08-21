@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Podty - Sign In')
+@section('title', 'Podty - Reset Password')
 
 @section('head')
     <style>
@@ -16,10 +16,11 @@
 @endsection
 
 @section('content')
+    @include('header')
     <section id="content" class="m-t-lg wrapper-md animated fadeInUp">
         <div class="container aside-xl">
             <a class="navbar-brand block" href="/"><span class="h1 font-bold">Podty.co</span></a>
-            <section class="m-b-lg">
+            <section class="m-b-lg m-t-lg">
                 <header class="wrapper text-center">
                     <strong>Reset Password</strong>
                 </header>
@@ -35,26 +36,29 @@
                         </div>
                     @endif
 
-                    <form class="form-horizontal" method="POST" action="{{ url('/password/email') }}">
+                    <form method="POST" action="{{ url('/password/email') }}">
                         {!! csrf_field() !!}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            
-                            <div class="col-md-12">
-                                <input type="email" class="form-control rounded input-lg text-center no-border" name="email" value="{{ old('email') }}" placeholder="E-Mail">
-
-                                
+                            <input type="email" class="form-control rounded input-lg text-center no-border" name="email" value="{{ old('email') }}" placeholder="E-Mail">
+                        </div>
+                        
+                        <div class="col-md-10 col-md-offset-1">
+                            <button class="btn btn-lg btn-info btn-block btn-rounded">
+                                <span class="m-r-n-md" style="padding-right: 25px">Reset Password</span>
+                                <i class="fa fa-btn fa-envelope"></i>
+                            </button>
+                        </div>
+                        
+                        <div class="col-md-12" style="margin-top:60px;">
+                            <div class="col-md-6">
+                                <a href="/login" class="btn btn-md btn-info lt  btn-block btn-rounded">Login</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/register" class="btn btn-md btn-info lt  btn-block btn-rounded">Register</a>
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <div class="col-md-10 col-md-offset-1">
-                                <button class="btn btn-lg btn-info btn-block btn-rounded">
-                                    <i class="fa fa-btn fa-envelope"></i>
-                                    <span class="m-r-n-md">Reset Password</span>
-                                </button>
-                            </div>
-                        </div>
                     </form>
                 </div>
             </section>
